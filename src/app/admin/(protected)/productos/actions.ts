@@ -11,6 +11,7 @@ function readProductForm(formData: FormData) {
   return {
     slug: String(formData.get("slug") ?? "").trim(),
     locale: String(formData.get("locale") ?? "es"),
+    category: String(formData.get("category") ?? "energia-limpia"),
     title: String(formData.get("title") ?? "").trim(),
     description: String(formData.get("description") ?? "").trim(),
     specs: String(formData.get("specs") ?? "") || null,

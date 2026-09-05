@@ -124,8 +124,11 @@
 - El schema de Drizzle ya está aplicado en la base de Neon real (5 tablas creadas)
 - Subida de imágenes desde `/admin` (productos y testimonios) ya sube el archivo a Vercel Blob y guarda la URL pública — probado con un archivo real de punta a punta
 
+- **Las páginas públicas ya leen del mini-CMS:** `/productos/energia-limpia|electromovilidad|financiamiento` muestran los productos reales de esa categoría e idioma (o el estado "pendiente" si no hay ninguno todavía); `/blog` y `/blog/[slug]` renderizan los posts reales (con Markdown); `/casos-de-exito` muestra los testimonios reales; `/contacto` toma los teléfonos y el email de `site_settings` en vez de tenerlos escritos en el código. Probado de punta a punta: contenido cargado desde `/admin` aparece de inmediato en el sitio público, en el idioma correcto, sin filtrarse al otro idioma.
+- Se agregó una columna `category` a `products` (energia-limpia / electromovilidad / financiamiento) para poder listar cada producto bajo su pilar correspondiente
+
 **Todavía no está conectado (siguiente tramo):**
-- Las páginas públicas (home, productos, blog, etc.) **todavía leen contenido estático** de los archivos de traducción (`messages/es.json` / `en.json`), no de las tablas `products`/`posts`/`testimonials` — falta conectar esa lectura una vez que haya contenido real cargado desde `/admin`
+- El home (hero, diferenciadores, estadísticas) y el índice `/productos` siguen usando el copy estático de `messages/es.json` / `en.json` — es contenido de marca fijo, no se planea moverlo al mini-CMS por ahora
 - Notificación por email de leads nuevos (Resend) — todavía no está conectada
 - Blog (`posts`) no tiene campo de imagen de portada todavía; solo productos y testimonios suben imagen
 
@@ -386,8 +389,8 @@ En vez de un CMS externo (Sanity/Strapi/Payload), Karla y Juan Carlos editan con
 ### Panel `/admin` — ✅ implementado (2026-09-05)
 - Rutas protegidas bajo `/admin`, login con usuario/contraseña vía variables de entorno (`ADMIN_USERNAME`/`ADMIN_PASSWORD`) — por ahora una sola cuenta compartida, no 2 cuentas separadas; pasar a multiusuario es un fast-follow, no bloquea el lanzamiento
 - CRUD completo (crear/editar/borrar) para productos, posts de blog y testimonios, más un formulario de configuración para datos de contacto
-- Editor de texto simple (textarea en Markdown) para el cuerpo del blog
-- **Pendiente:** conectar las páginas públicas para que lean de estas tablas en vez del contenido estático actual (ver "Avance del proyecto")
+- Editor de texto simple (textarea en Markdown, renderizado en el sitio público) para el cuerpo del blog
+- Las páginas públicas ya leen de estas tablas — lo que se carga en `/admin` aparece de inmediato en el sitio (ver "Avance del proyecto")
 
 ### Almacenamiento de imágenes (dos fases) — ✅ fase 1 implementada
 - **Mientras el sitio esté en Vercel:** el disco es efímero, no sirve para guardar uploads del panel — se usa **Vercel Blob** (store `blvckstone-media`, integración nativa, sin cuenta aparte) para las imágenes subidas desde `/admin`. Ya está provisionado y probado con productos y testimonios.
@@ -563,8 +566,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 1. **Contenido bilingüe es el cuello de botella más probable.** Copy, imágenes y video deben entregarse en ES (y EN si aplica antes del lanzamiento) — si no llegan a tiempo, el timeline de Fase 3 se corre.
 2. **Video Hero:** si el material propio no está listo, definir banco de imágenes/video temporal para no bloquear Fase 2.
 3. **Simulador de financiamiento:** requiere reglas de negocio (tasas, plazos, requisitos de elegibilidad) del área financiera antes de poder programarse — confirmar si entra en v1 o se mueve a v2.
-4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito.
-5. **Las páginas públicas todavía no leen del mini-CMS** — el panel `/admin` ya guarda en Postgres, pero home/productos/blog siguen mostrando el contenido estático de `messages/*.json`. Es el siguiente tramo de trabajo antes de que cargar contenido desde `/admin` tenga efecto visible en el sitio.
+4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito — mientras tanto, esa sección se ve vacía en producción (correcto, no hay que inventar contenido).
+5. ~~Las páginas públicas todavía no leen del mini-CMS~~ — **resuelto:** productos, blog, casos de éxito y contacto ya leen de Postgres en vivo.
 6. ~~Mientras el sitio esté en Vercel, las imágenes subidas desde `/admin` necesitan un storage externo temporal~~ — **resuelto:** Vercel Blob ya está provisionado y el upload de archivo funciona en productos y testimonios.
 
 ---
@@ -590,8 +593,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [ ] Redes sociales activas a enlazar (LinkedIn confirmado, ¿Instagram?)
 - [ ] Proveedor de DNS/dominio y correo corporativo
 - [x] ~~Provisionar Postgres y storage de imágenes, setear `DATABASE_URL`/`ADMIN_USERNAME`/`ADMIN_PASSWORD`/`SESSION_SECRET`/`BLOB_READ_WRITE_TOKEN` en Vercel~~ — resuelto con Neon + Vercel Blob, ambos nativos de Vercel
+- [x] ~~Conectar las páginas públicas a las tablas del mini-CMS~~ — resuelto: productos, blog, casos de éxito y contacto ya leen contenido real
 - [ ] Alta de cuentas de servicio restantes: Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
-- [ ] Conectar las páginas públicas a las tablas del mini-CMS (hoy leen contenido estático)
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 
 ---
@@ -642,7 +645,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **v2.1 (2026-09-05):** Se reemplaza Sanity por un panel de administración propio (Next.js + Postgres) para minimizar dependencias de terceros y facilitar la futura migración a un VPS propio. Se agrega la sección "Panel de administración propio (mini-CMS)" con el modelo de contenido, el enfoque de `/admin` y la estrategia de almacenamiento de imágenes en dos fases (Vercel → VPS). Hosting definido como plan en dos fases: Vercel ahora, VPS propio más adelante. Se registra el repositorio en GitHub ([ElBeDev/theBlvckStone](https://github.com/ElBeDev/theBlvckStone)) con el scaffold inicial ya pusheado.
 - **v2.2 (2026-09-05):** Se agrega la sección "Avance del proyecto" para llevar el estado real del desarrollo. Se implementa y prueba de punta a punta el esquema de base de datos (Drizzle) y el panel `/admin` completo: login, y CRUD de productos/blog/testimonios + configuración de contacto. Se deja explícito que las páginas públicas todavía no leen de estas tablas (siguen usando contenido estático) — se agrega como pendiente prioritario junto con la conexión real a la base de datos y el upload de imágenes.
 - **v2.3 (2026-09-05):** Se reemplaza Supabase por **Neon**, instalado como integración nativa dentro del mismo proyecto de Vercel (un tercero menos que administrar por separado). Se provisiona **Vercel Blob** para el almacenamiento de imágenes y se conecta el upload de archivo real en los formularios de productos y testimonios (antes solo aceptaban una URL). Todo probado de punta a punta contra la base de datos y el storage reales: login, CRUD completo, subida de imagen, y dashboard con conteos en vivo. `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `SESSION_SECRET` ya están seteados en Vercel (production/preview/development).
+- **v2.4 (2026-09-05):** Se conectan las páginas públicas al mini-CMS: productos (por categoría e idioma), blog (índice + detalle con Markdown), casos de éxito y los datos de contacto ahora se leen de Postgres en vivo en vez del copy estático. Se agrega la columna `category` a `products` para asociar cada producto a uno de los 3 pilares. El home y el índice `/productos` se mantienen con el copy de marca fijo a propósito. Probado de punta a punta: contenido cargado desde `/admin` aparece de inmediato en el sitio, respetando el idioma.
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.3
+**Versión:** 2.4

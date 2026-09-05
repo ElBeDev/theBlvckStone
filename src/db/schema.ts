@@ -14,6 +14,7 @@ export const products = pgTable("products", {
   id: serial("id").primaryKey(),
   slug: text("slug").notNull().unique(),
   locale: text("locale").notNull().default("es"),
+  category: text("category").notNull().default("energia-limpia"),
   title: text("title").notNull(),
   description: text("description").notNull(),
   specs: text("specs"),

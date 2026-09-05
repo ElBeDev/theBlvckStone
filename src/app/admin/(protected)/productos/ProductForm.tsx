@@ -1,3 +1,5 @@
+import { PRODUCT_CATEGORIES } from "@/lib/product-categories";
+
 const inputClasses =
   "mt-1 w-full rounded-lg border border-stone/30 px-4 py-2 focus:border-turquoise focus:outline-none";
 const labelClasses = "block text-sm font-bold";
@@ -11,6 +13,7 @@ export function ProductForm({
   defaultValues?: {
     slug: string;
     locale: string;
+    category: string;
     title: string;
     description: string;
     specs: string | null;
@@ -49,19 +52,38 @@ export function ProductForm({
         </div>
       </div>
 
-      <div>
-        <label htmlFor="locale" className={labelClasses}>
-          Idioma
-        </label>
-        <select
-          id="locale"
-          name="locale"
-          defaultValue={defaultValues?.locale ?? "es"}
-          className={inputClasses}
-        >
-          <option value="es">Español</option>
-          <option value="en">English</option>
-        </select>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="locale" className={labelClasses}>
+            Idioma
+          </label>
+          <select
+            id="locale"
+            name="locale"
+            defaultValue={defaultValues?.locale ?? "es"}
+            className={inputClasses}
+          >
+            <option value="es">Español</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="category" className={labelClasses}>
+            Categoría
+          </label>
+          <select
+            id="category"
+            name="category"
+            defaultValue={defaultValues?.category ?? "energia-limpia"}
+            className={inputClasses}
+          >
+            {PRODUCT_CATEGORIES.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div>

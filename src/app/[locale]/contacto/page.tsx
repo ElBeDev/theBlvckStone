@@ -1,5 +1,15 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { db } from "@/db";
+import { siteSettings } from "@/db/schema";
 import { ContactForm } from "@/components/ContactForm";
+
+export const dynamic = "force-dynamic";
+
+const DEFAULTS = {
+  contact_phone_karla: "+52 442 790 8598",
+  contact_phone_juan_carlos: "+52 442 809 9488",
+  contact_email: "contacto@the-blvckstone.com",
+};
 
 export default async function ContactoPage({
   params,
@@ -11,8 +21,13 @@ export default async function ContactoPage({
 
   const t = await getTranslations("contact");
 
+  const rows = db ? await db.select().from(siteSettings) : [];
+  const values = { ...DEFAULTS, ...Object.fromEntries(
+    rows.map((row) => [row.key, row.value]),
+  ) };
+
   return (
-    <section className="bg-gradient-to-b from-petrol to-black-base px-6 py-20 text-ivory">
+    <section className="bg-linear-to-b from-petrol to-black-base px-6 py-20 text-ivory">
       <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
         <div>
           <h1 className="text-3xl font-black md:text-4xl">{t("title")}</h1>
@@ -21,19 +36,19 @@ export default async function ContactoPage({
               <span className="block text-sm font-bold text-turquoise">
                 Karla Arizmendi
               </span>
-              +52 442 790 8598
+              {values.contact_phone_karla}
             </p>
             <p>
               <span className="block text-sm font-bold text-turquoise">
                 Juan Carlos Meza
               </span>
-              +52 442 809 9488
+              {values.contact_phone_juan_carlos}
             </p>
             <p>
               <span className="block text-sm font-bold text-turquoise">
                 Email
               </span>
-              contacto@the-blvckstone.com
+              {values.contact_email}
             </p>
             <p>
               <span className="block text-sm font-bold text-turquoise">

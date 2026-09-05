@@ -40,7 +40,7 @@ export default async function AdminProductsPage() {
               <p className="font-bold text-carbon">
                 {product.title}{" "}
                 <span className="text-xs font-normal text-stone">
-                  /{product.locale}
+                  /{product.locale} · {product.category}
                 </span>
               </p>
               <p className="text-sm text-stone">{product.slug}</p>

@@ -1,6 +1,12 @@
+import { and, eq } from "drizzle-orm";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { db } from "@/db";
+import { products } from "@/db/schema";
 import { PageHeading } from "@/components/PageHeading";
 import { PendingSection } from "@/components/PendingSection";
+import { ProductGrid } from "@/components/ProductGrid";
+
+export const dynamic = "force-dynamic";
 
 export default async function ElectromovilidadPage({
   params,
@@ -17,6 +23,18 @@ export default async function ElectromovilidadPage({
     description: string;
   };
 
+  const items = db
+    ? await db
+        .select()
+        .from(products)
+        .where(
+          and(
+            eq(products.category, "electromovilidad"),
+            eq(products.locale, locale),
+          ),
+        )
+    : [];
+
   return (
     <>
       <PageHeading
@@ -24,7 +42,11 @@ export default async function ElectromovilidadPage({
         title={service.title}
         description={service.description}
       />
-      <PendingSection text={tCommon("pendingContent")} />
+      {items.length === 0 ? (
+        <PendingSection text={tCommon("pendingContent")} />
+      ) : (
+        <ProductGrid items={items} />
+      )}
     </>
   );
 }
