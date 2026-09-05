@@ -23,10 +23,11 @@
 | **Framework** | Next.js 14+ (App Router) + TypeScript + Tailwind CSS | SSR/SSG para SEO, rutas de archivo natural para multi-página, i18n routing nativo |
 | **CMS** | Panel de administración propio (Next.js + Postgres) | Sin CMS externo, ni SaaS (Sanity) ni servicio aparte que mantener (Strapi/Payload). Tablas propias (`products`, `posts`, `testimonials`, `site_settings`) + panel `/admin` con login para Karla/Juan Carlos. Vive en el mismo repo y el mismo deploy — al migrar al VPS es la misma pieza, no hay nada aparte que mover |
 | **Internacionalización** | Rutas `/es/...` y `/en/...` (next-intl) | Cada fila de contenido tiene campos localizados; fallback a español si falta traducción |
-| **Backend / Leads** | Next.js Route Handlers, sin servidor aparte | El formulario de contacto guarda el lead en Postgres (Supabase) y dispara un email (Resend) — sin CRM todavía |
+| **Backend / Leads** | Next.js Route Handlers, sin servidor aparte | El formulario de contacto guarda el lead en Postgres (Neon) — falta el email de notificación (Resend) — sin CRM todavía |
 | **CRM** | Ninguno en v1 | El payload del lead se diseña genérico (`leads` con nombre/email/teléfono/mensaje/industria/utm) para poder conectar HubSpot/Zoho/Salesforce después sin rehacer el formulario |
 | **Hosting** | Vercel ahora → VPS propio más adelante | Vercel para lanzar rápido y validar con el cliente sin infraestructura que mantener. Cuando el proyecto madure, se migra a un VPS propio (Docker) para tener todo autoalojado: Next.js, Postgres y almacenamiento de imágenes |
-| **Base de datos** | Postgres (Supabase por ahora) | Guarda leads y todo el contenido del mini-CMS (productos, blog, testimonios, configuración). Es Postgres estándar: migrar a un Postgres autoalojado en el VPS más adelante no cambia código, solo mueve los datos |
+| **Base de datos** | Postgres — Neon, instalado como integración nativa de Vercel (no una cuenta aparte) | Guarda leads y todo el contenido del mini-CMS (productos, blog, testimonios, configuración). Es Postgres estándar: migrar a un Postgres autoalojado en el VPS más adelante no cambia código, solo mueve los datos |
+| **Storage de imágenes** | Vercel Blob (store `blvckstone-media`, plan gratuito) | Nativo de Vercel, sin cuenta aparte que administrar. El panel `/admin` sube el archivo directo a Blob y guarda la URL pública resultante |
 
 ---
 
@@ -118,12 +119,15 @@
 - Formulario de contacto funcional, con validación y consentimiento de privacidad
 - Esquema de base de datos (Drizzle + Postgres) para `leads`, `products`, `posts`, `testimonials` y `site_settings`
 - Panel `/admin` con login (usuario/contraseña) y CRUD completo (crear/editar/borrar) para productos, blog y testimonios, más un formulario de configuración para datos de contacto — probado de punta a punta en navegador
-- `/api/leads` ya inserta en la tabla `leads` cuando hay `DATABASE_URL` configurada (por ahora sigue cayendo a solo log si no la hay)
+- `/api/leads` ya inserta en la tabla `leads` en Postgres
+- **Neon (Postgres) y Vercel Blob ya están provisionados** como integraciones nativas del proyecto en Vercel (plan gratuito de cada uno), conectados a `the-blvck-stone` en producción/preview/desarrollo — `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `SESSION_SECRET` ya están seteados ahí
+- El schema de Drizzle ya está aplicado en la base de Neon real (5 tablas creadas)
+- Subida de imágenes desde `/admin` (productos y testimonios) ya sube el archivo a Vercel Blob y guarda la URL pública — probado con un archivo real de punta a punta
 
 **Todavía no está conectado (siguiente tramo):**
-- No existe un proyecto de Supabase real todavía — sin `DATABASE_URL`, el panel funciona pero no persiste nada
 - Las páginas públicas (home, productos, blog, etc.) **todavía leen contenido estático** de los archivos de traducción (`messages/es.json` / `en.json`), no de las tablas `products`/`posts`/`testimonials` — falta conectar esa lectura una vez que haya contenido real cargado desde `/admin`
-- Subida de imágenes desde el panel: por ahora los formularios solo aceptan una URL de imagen (no hay upload de archivo todavía; ver "Almacenamiento de imágenes" más abajo)
+- Notificación por email de leads nuevos (Resend) — todavía no está conectada
+- Blog (`posts`) no tiene campo de imagen de portada todavía; solo productos y testimonios suben imagen
 
 ---
 
@@ -365,7 +369,7 @@ El footer de 4 columnas del brief original (Servicios / Productos / Empresa / Le
 - **Aviso de Privacidad** conforme a la **LFPDPPP** (Ley Federal de Protección de Datos Personales en Posesión de los Particulares) — obligatorio al recolectar Nombre/Email/Teléfono en el formulario de contacto. No basta con una "Privacy Policy" genérica.
 - **Banner de consentimiento de cookies**, ya que el sitio usa GA4, GTM y un heatmap (Hotjar/Clarity) — necesario tanto para tráfico mexicano como si se recibe tráfico internacional vía la versión en inglés.
 - **SSL/TLS forzado (HTTPS)** en todo el sitio — formalizado aquí como requisito técnico, no solo nota de lanzamiento.
-- **Retención y uso de leads:** definir con el cliente cuánto tiempo se guardan los datos del formulario y quién tiene acceso al panel de Supabase.
+- **Retención y uso de leads:** definir con el cliente cuánto tiempo se guardan los datos del formulario y quién tiene acceso al dashboard de Neon.
 
 ---
 
@@ -385,9 +389,9 @@ En vez de un CMS externo (Sanity/Strapi/Payload), Karla y Juan Carlos editan con
 - Editor de texto simple (textarea en Markdown) para el cuerpo del blog
 - **Pendiente:** conectar las páginas públicas para que lean de estas tablas en vez del contenido estático actual (ver "Avance del proyecto")
 
-### Almacenamiento de imágenes (dos fases)
-- **Mientras el sitio esté en Vercel:** el disco es efímero, no sirve para guardar uploads del panel — usar un storage externo mínimo (Vercel Blob o un bucket S3-compatible) solo para las imágenes subidas desde `/admin`
-- **Al migrar al VPS:** las imágenes se guardan directo en disco local (o un volumen Docker); ya no se necesita el bucket externo
+### Almacenamiento de imágenes (dos fases) — ✅ fase 1 implementada
+- **Mientras el sitio esté en Vercel:** el disco es efímero, no sirve para guardar uploads del panel — se usa **Vercel Blob** (store `blvckstone-media`, integración nativa, sin cuenta aparte) para las imágenes subidas desde `/admin`. Ya está provisionado y probado con productos y testimonios.
+- **Al migrar al VPS:** las imágenes se guardan directo en disco local (o un volumen Docker); en ese momento se retira la dependencia de Blob
 
 ### Por qué esta ruta y no Strapi/Payload
 Menos piezas que mantener: un solo repo, un solo deploy, una sola base de datos. El costo es construir el panel a mano (formularios CRUD no vienen gratis de fábrica), pero se gana control total del dato y una migración al VPS sin piezas sueltas que mover.
@@ -397,7 +401,7 @@ Menos piezas que mantener: un solo repo, un solo deploy, una sola base de datos.
 ## 🔧 ESPECIFICACIONES TÉCNICAS
 
 ### Stack Definido
-Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (TS) + Tailwind + panel `/admin` propio + Postgres (Supabase) + Vercel → VPS**.
+Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (TS) + Tailwind + panel `/admin` propio + Postgres (Neon) + Vercel Blob + Vercel → VPS**.
 
 ### Requisitos Funcionales
 
@@ -436,7 +440,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 #### Formularios & Leads
 - Validación client-side (Zod/react-hook-form) y server-side (Route Handler)
 - CAPTCHA (hCaptcha o similar)
-- Al enviarse: guarda en Postgres (Supabase), envía email de notificación (Resend) a contacto@the-blvckstone.com, redirige a `/gracias`
+- Al enviarse: guarda en Postgres (Neon), redirige a `/gracias` — falta agregar el email de notificación (Resend) a contacto@the-blvckstone.com
 - Payload genérico y versionado para poder conectar HubSpot/Zoho/Salesforce más adelante sin cambiar el formulario
 
 #### Analytics & Tracking
@@ -561,7 +565,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 3. **Simulador de financiamiento:** requiere reglas de negocio (tasas, plazos, requisitos de elegibilidad) del área financiera antes de poder programarse — confirmar si entra en v1 o se mueve a v2.
 4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito.
 5. **Las páginas públicas todavía no leen del mini-CMS** — el panel `/admin` ya guarda en Postgres, pero home/productos/blog siguen mostrando el contenido estático de `messages/*.json`. Es el siguiente tramo de trabajo antes de que cargar contenido desde `/admin` tenga efecto visible en el sitio.
-6. **Mientras el sitio esté en Vercel**, las imágenes subidas desde `/admin` necesitan un storage externo temporal (Vercel Blob o bucket S3-compatible) hasta la migración al VPS — hoy los formularios solo aceptan una URL de imagen, no hay upload de archivo.
+6. ~~Mientras el sitio esté en Vercel, las imágenes subidas desde `/admin` necesitan un storage externo temporal~~ — **resuelto:** Vercel Blob ya está provisionado y el upload de archivo funciona en productos y testimonios.
 
 ---
 
@@ -571,7 +575,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 1. **Fase 0 (Semana 1):** Kickoff, wireframes de páginas clave, setup de repo/proyecto (Next.js + Vercel), modelado de datos del mini-CMS en Postgres
 2. **Fase 1 (Semana 2-3):** Diseño UI (mockups) de Home + páginas de producto + Nosotros, aprobación de cliente
-3. **Fase 2 (Semana 4-7):** Desarrollo frontend, panel `/admin` (CRUD + login), i18n ES/EN, formulario de leads + Supabase + email
+3. **Fase 2 (Semana 4-7):** Desarrollo frontend, panel `/admin` (CRUD + login), i18n ES/EN, formulario de leads + Neon + email
 4. **Fase 3 (Semana 8-9):** Carga de contenido real (ambos idiomas), testing cross-browser/responsive/accesibilidad, QA
 5. **Fase 4 (Semana 10):** UAT con cliente, correcciones finales, deploy a producción, configuración DNS/SSL/GA4/GTM
 6. **Post-launch:** Manual de uso del CMS para Karla/Juan Carlos, monitoreo, ajustes SEO continuos
@@ -585,10 +589,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [ ] Confirmar si el simulador de financiamiento entra en v1 o v2
 - [ ] Redes sociales activas a enlazar (LinkedIn confirmado, ¿Instagram?)
 - [ ] Proveedor de DNS/dominio y correo corporativo
-- [ ] Alta de cuentas de servicio: Vercel, Supabase, Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
-- [ ] Provisionar el proyecto de Supabase real y setear `DATABASE_URL` (+ `ADMIN_USERNAME`/`ADMIN_PASSWORD`/`SESSION_SECRET`) en Vercel
+- [x] ~~Provisionar Postgres y storage de imágenes, setear `DATABASE_URL`/`ADMIN_USERNAME`/`ADMIN_PASSWORD`/`SESSION_SECRET`/`BLOB_READ_WRITE_TOKEN` en Vercel~~ — resuelto con Neon + Vercel Blob, ambos nativos de Vercel
+- [ ] Alta de cuentas de servicio restantes: Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
 - [ ] Conectar las páginas públicas a las tablas del mini-CMS (hoy leen contenido estático)
-- [ ] Storage de imágenes: definir Vercel Blob vs bucket S3-compatible y agregar upload de archivo al panel (hoy solo acepta URL)
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 
 ---
@@ -637,8 +640,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **v1.0 (2026-09-03):** Documento inicial — identidad visual, secciones de contenido, specs técnicas generales, timeline.
 - **v2.0 (2026-09-05):** Se cierran las decisiones de arquitectura abiertas en v1 (multi-página, Next.js + Sanity + Supabase + Vercel, bilingüe ES/EN, sin CRM en v1). Se agregan: mapa del sitio, secciones de Nosotros/Testimonios/Blog, sección de privacidad y cumplimiento (LFPDPPP, cookies), soporte de navegadores, entornos y flujo de trabajo, riesgos/dependencias, y lista de pendientes abiertos. Timeline ajustado de 9 a 10 semanas para reflejar el alcance real.
 - **v2.1 (2026-09-05):** Se reemplaza Sanity por un panel de administración propio (Next.js + Postgres) para minimizar dependencias de terceros y facilitar la futura migración a un VPS propio. Se agrega la sección "Panel de administración propio (mini-CMS)" con el modelo de contenido, el enfoque de `/admin` y la estrategia de almacenamiento de imágenes en dos fases (Vercel → VPS). Hosting definido como plan en dos fases: Vercel ahora, VPS propio más adelante. Se registra el repositorio en GitHub ([ElBeDev/theBlvckStone](https://github.com/ElBeDev/theBlvckStone)) con el scaffold inicial ya pusheado.
-- **v2.2 (2026-09-05):** Se agrega la sección "Avance del proyecto" para llevar el estado real del desarrollo. Se implementa y prueba de punta a punta el esquema de base de datos (Drizzle) y el panel `/admin` completo: login, y CRUD de productos/blog/testimonios + configuración de contacto. Se deja explícito que las páginas públicas todavía no leen de estas tablas (siguen usando contenido estático) — se agrega como pendiente prioritario junto con la conexión real a Supabase y el upload de imágenes.
+- **v2.2 (2026-09-05):** Se agrega la sección "Avance del proyecto" para llevar el estado real del desarrollo. Se implementa y prueba de punta a punta el esquema de base de datos (Drizzle) y el panel `/admin` completo: login, y CRUD de productos/blog/testimonios + configuración de contacto. Se deja explícito que las páginas públicas todavía no leen de estas tablas (siguen usando contenido estático) — se agrega como pendiente prioritario junto con la conexión real a la base de datos y el upload de imágenes.
+- **v2.3 (2026-09-05):** Se reemplaza Supabase por **Neon**, instalado como integración nativa dentro del mismo proyecto de Vercel (un tercero menos que administrar por separado). Se provisiona **Vercel Blob** para el almacenamiento de imágenes y se conecta el upload de archivo real en los formularios de productos y testimonios (antes solo aceptaban una URL). Todo probado de punta a punta contra la base de datos y el storage reales: login, CRUD completo, subida de imagen, y dashboard con conteos en vivo. `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `SESSION_SECRET` ya están seteados en Vercel (production/preview/development).
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.2
+**Versión:** 2.3

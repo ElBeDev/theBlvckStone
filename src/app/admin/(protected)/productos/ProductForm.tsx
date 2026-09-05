@@ -92,15 +92,35 @@ export function ProductForm({
       </div>
 
       <div>
-        <label htmlFor="imageUrl" className={labelClasses}>
-          URL de imagen
+        <label htmlFor="imageFile" className={labelClasses}>
+          Imagen
         </label>
+        {defaultValues?.imageUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={defaultValues.imageUrl}
+            alt=""
+            className="mb-2 h-24 w-24 rounded-lg object-cover"
+          />
+        )}
+        <input
+          id="imageFile"
+          name="imageFile"
+          type="file"
+          accept="image/*"
+          className={inputClasses}
+        />
+        <p className="mt-1 text-xs text-stone">
+          Sube un archivo para reemplazar la imagen actual, o pega una URL
+          abajo.
+        </p>
         <input
           id="imageUrl"
           name="imageUrl"
           type="text"
+          placeholder="https://..."
           defaultValue={defaultValues?.imageUrl ?? ""}
-          className={inputClasses}
+          className={`${inputClasses} mt-2`}
         />
       </div>
 

@@ -75,15 +75,35 @@ export function TestimonialForm({
       </div>
 
       <div>
-        <label htmlFor="photoUrl" className={labelClasses}>
-          URL de foto
+        <label htmlFor="photoFile" className={labelClasses}>
+          Foto
         </label>
+        {defaultValues?.photoUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={defaultValues.photoUrl}
+            alt=""
+            className="mb-2 h-20 w-20 rounded-full object-cover"
+          />
+        )}
+        <input
+          id="photoFile"
+          name="photoFile"
+          type="file"
+          accept="image/*"
+          className={inputClasses}
+        />
+        <p className="mt-1 text-xs text-stone">
+          Sube un archivo para reemplazar la foto actual, o pega una URL
+          abajo.
+        </p>
         <input
           id="photoUrl"
           name="photoUrl"
           type="text"
+          placeholder="https://..."
           defaultValue={defaultValues?.photoUrl ?? ""}
-          className={inputClasses}
+          className={`${inputClasses} mt-2`}
         />
       </div>
 
