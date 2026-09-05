@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1f2a2a;
+
+  /* The Blvck Stone brand palette */
+  --color-teal: #10767c;
+  --color-turquoise: #1bbcb4;
+  --color-petrol: #0e2e30;
+  --color-mint: #37e6c4;
+  --color-amber: #ffb43d;
+  --color-coral: #ff6a4b;
+  --color-carbon: #1f2a2a;
+  --color-stone: #6b7a80;
+  --color-mist: #e7f2f1;
+  --color-ivory: #f5f8f7;
+  --color-black-base: #0b0f10;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-teal: var(--color-teal);
+  --color-turquoise: var(--color-turquoise);
+  --color-petrol: var(--color-petrol);
+  --color-mint: var(--color-mint);
+  --color-amber: var(--color-amber);
+  --color-coral: var(--color-coral);
+  --color-carbon: var(--color-carbon);
+  --color-stone: var(--color-stone);
+  --color-mist: var(--color-mist);
+  --color-ivory: var(--color-ivory);
+  --color-black-base: var(--color-black-base);
+
+  /* Helvetica Now Display is a licensed font (not on Google Fonts).
+     Falls back to Helvetica Neue/Arial until the licensed font files
+     are added via @font-face. */
+  --font-sans: "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

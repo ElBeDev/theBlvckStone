@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Home",
+    "productos": "Products",
+    "energiaLimpia": "Clean Energy",
+    "electromovilidad": "Electromobility",
+    "financiamiento": "Financing",
+    "soluciones": "Solutions",
+    "nosotros": "About",
+    "casosDeExito": "Success Stories",
+    "blog": "Blog",
+    "contacto": "Contact"
+  },
+  "footer": {
+    "servicios": "Services",
+    "productos": "Products",
+    "empresa": "Company",
+    "legal": "Legal",
+    "avisoDePrivacidad": "Privacy Notice",
+    "terminos": "Terms of Service",
+    "cookies": "Cookies",
+    "rights": "All rights reserved."
+  },
+  "home": {
+    "heroHeadline": "Smart solutions for your energy transition",
+    "heroSubheadline": "Clean Energy • Electromobility • Strategic Financing",
+    "ctaPrimary": "Discover our solutions",
+    "ctaSecondary": "Get in touch"
+  },
+  "services": {
+    "eyebrow": "Our business lines",
+    "items": [
+      {
+        "title": "Clean Energy & Storage",
+        "description": "End-to-end generation, storage and distribution solutions for renewable energy. BESS, utility-scale inverters, residential and commercial infrastructure.",
+        "cta": "Explore energy solutions",
+        "href": "/productos/energia-limpia"
+      },
+      {
+        "title": "Electric Vehicles & Charging Infrastructure",
+        "description": "Distribution of next-generation electric trucks plus AC/DC charging infrastructure. Complete solutions for fleets.",
+        "cta": "View vehicle catalog",
+        "href": "/productos/electromovilidad"
+      },
+      {
+        "title": "Smart Business Financing",
+        "description": "Loans and financial products designed for energy projects and industrial transformation. Flexible options with specialized support.",
+        "cta": "Explore financing options",
+        "href": "/productos/financiamiento"
+      }
+    ]
+  },
+  "differentiators": {
+    "title": "Why choose The Blvck Stone?",
+    "items": [
+      "Internationally certified technology (UL, KEMA, ANSI, IEC)",
+      "Local technical support in Mexico (CDMX + logistics hubs)",
+      "Remote commissioning included",
+      "Incident resolution in under 48 hours",
+      "Extended warranties (10-10-2/3 years)",
+      "Pre-sale and after-sale support",
+      "Specialized, tailor-made engineering",
+      "Custom technical-economic proposals"
+    ]
+  },
+  "solutions": {
+    "title": "Solutions for every industry",
+    "items": [
+      { "title": "Residential", "description": "Inverters, BESS, AC Chargers" },
+      { "title": "Commercial (C&I)", "description": "Mid-size solutions, DC Multicharger" },
+      { "title": "Industrial/Utility", "description": "350kW+ inverters, 261-418 kWh BESS" },
+      { "title": "Enterprise Fleets", "description": "EV trucks + charging stations" }
+    ]
+  },
+  "stats": {
+    "title": "Backed by AUX Group",
+    "items": [
+      { "value": "39", "label": "years in the market" },
+      { "value": "$9.6M", "label": "in assets" },
+      { "value": "$300M", "label": "in revenue (MXN 2025)" },
+      { "value": "6+", "label": "operating factories" },
+      { "value": "40,000+", "label": "employees worldwide" }
+    ]
+  },
+  "ctaFinal": {
+    "title": "Transform your business today",
+    "primary": "Request a demo",
+    "secondary": "Download catalog"
+  },
+  "contact": {
+    "title": "Transform your business today",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "industry": "Industry",
+    "message": "Message",
+    "consent": "I accept the",
+    "privacyLink": "Privacy Notice",
+    "submit": "Request a demo",
+    "downloadCatalog": "Download catalog",
+    "sending": "Sending...",
+    "success": "Thanks! We'll be in touch soon.",
+    "error": "Something went wrong sending the form. Please try again."
+  },
+  "pages": {
+    "productos": {
+      "eyebrow": "Catalog",
+      "title": "Our solutions",
+      "description": "Clean energy, electromobility and financing in one place."
+    },
+    "nosotros": {
+      "eyebrow": "Who we are",
+      "title": "More than a supplier, your innovation partner",
+      "description": "Strategic integration of industrial projects, backed by AUX Group."
+    },
+    "casosDeExito": {
+      "eyebrow": "Real results",
+      "title": "Companies that already transformed their energy",
+      "empty": "We're documenting our first success stories. Check back soon."
+    },
+    "blog": {
+      "eyebrow": "Resources",
+      "title": "Blog",
+      "description": "News and content about energy, electromobility and financing.",
+      "empty": "No articles published yet."
+    },
+    "gracias": {
+      "title": "Thanks for reaching out!",
+      "description": "We received your message and will get back to you shortly.",
+      "backHome": "Back to home"
+    },
+    "legal": {
+      "privacidad": { "title": "Privacy Notice" },
+      "terminos": { "title": "Terms of Service" },
+      "cookies": { "title": "Cookie Policy" },
+      "pending": "This document is under legal review and will be published before launch."
+    }
+  },
+  "common": {
+    "pendingContent": "Content in progress."
+  }
+}

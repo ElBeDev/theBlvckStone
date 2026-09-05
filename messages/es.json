@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "productos": "Productos",
+    "energiaLimpia": "Energía Limpia",
+    "electromovilidad": "Electromovilidad",
+    "financiamiento": "Financiamiento",
+    "soluciones": "Soluciones",
+    "nosotros": "Nosotros",
+    "casosDeExito": "Casos de Éxito",
+    "blog": "Blog",
+    "contacto": "Contacto"
+  },
+  "footer": {
+    "servicios": "Servicios",
+    "productos": "Productos",
+    "empresa": "Empresa",
+    "legal": "Legal",
+    "avisoDePrivacidad": "Aviso de Privacidad",
+    "terminos": "Términos de servicio",
+    "cookies": "Cookies",
+    "rights": "Todos los derechos reservados."
+  },
+  "home": {
+    "heroHeadline": "Soluciones inteligentes para tu transición energética",
+    "heroSubheadline": "Energía limpia • Electromovilidad • Financiamiento Estratégico",
+    "ctaPrimary": "Descubre nuestras soluciones",
+    "ctaSecondary": "Contacta con nosotros"
+  },
+  "services": {
+    "eyebrow": "Nuestras líneas de negocio",
+    "items": [
+      {
+        "title": "Energía Limpia & Almacenamiento",
+        "description": "Soluciones integrales de generación, almacenamiento y distribución de energía renovable. BESS, inversores utility-scale, infraestructura residencial y comercial.",
+        "cta": "Explorar soluciones energéticas",
+        "href": "/productos/energia-limpia"
+      },
+      {
+        "title": "Vehículos Eléctricos & Infraestructura de Carga",
+        "description": "Distribución de camionetas eléctricas de última generación + infraestructura de carga AC/DC. Soluciones completas para flotas.",
+        "cta": "Ver catálogo de vehículos",
+        "href": "/productos/electromovilidad"
+      },
+      {
+        "title": "Financiamiento Empresarial Inteligente",
+        "description": "Préstamos y productos financieros diseñados para proyectos de energía y transformación industrial. Opciones flexibles con soporte especializado.",
+        "cta": "Consultar opciones de financiamiento",
+        "href": "/productos/financiamiento"
+      }
+    ]
+  },
+  "differentiators": {
+    "title": "¿Por qué elegir The Blvck Stone?",
+    "items": [
+      "Tecnología certificada internacionalmente (UL, KEMA, ANSI, IEC)",
+      "Soporte técnico local en México (CDMX + centros logísticos)",
+      "Comisionamiento remoto incluido",
+      "Resolución de incidencias < 48 horas",
+      "Garantías extendidas (10-10-2/3 años)",
+      "Acompañamiento preventa y postventa",
+      "Ingeniería especializada a medida",
+      "Propuestas técnico-económicas personalizadas"
+    ]
+  },
+  "solutions": {
+    "title": "Soluciones para cada industria",
+    "items": [
+      { "title": "Residencial", "description": "Inversores, BESS, AC Chargers" },
+      { "title": "Comercial (C&I)", "description": "Soluciones medianas, DC Multicharger" },
+      { "title": "Industrial/Utility", "description": "Inversores +350kW, BESS 261-418 kWh" },
+      { "title": "Flotas Empresariales", "description": "Camionetas EV + estaciones de carga" }
+    ]
+  },
+  "stats": {
+    "title": "Respaldados por AUX Group",
+    "items": [
+      { "value": "39", "label": "años de historia en el mercado" },
+      { "value": "$9.6M", "label": "en activos" },
+      { "value": "$300M", "label": "en ingresos (MXN 2025)" },
+      { "value": "6+", "label": "fábricas operativas" },
+      { "value": "40,000+", "label": "empleados globalmente" }
+    ]
+  },
+  "ctaFinal": {
+    "title": "Transforma tu negocio hoy",
+    "primary": "Solicitar demostración",
+    "secondary": "Descargar catálogo"
+  },
+  "contact": {
+    "title": "Transforma tu negocio hoy",
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "industry": "Industria",
+    "message": "Mensaje",
+    "consent": "Acepto el",
+    "privacyLink": "Aviso de Privacidad",
+    "submit": "Solicitar demostración",
+    "downloadCatalog": "Descargar catálogo",
+    "sending": "Enviando...",
+    "success": "¡Gracias! Te contactaremos pronto.",
+    "error": "Hubo un error al enviar el formulario. Intenta de nuevo."
+  },
+  "pages": {
+    "productos": {
+      "eyebrow": "Catálogo",
+      "title": "Nuestras soluciones",
+      "description": "Energía limpia, electromovilidad y financiamiento en un solo lugar."
+    },
+    "nosotros": {
+      "eyebrow": "Quiénes somos",
+      "title": "Más que un proveedor, tu socio en innovación",
+      "description": "Integración estratégica de proyectos industriales, respaldados por AUX Group."
+    },
+    "casosDeExito": {
+      "eyebrow": "Resultados reales",
+      "title": "Empresas que ya transformaron su energía",
+      "empty": "Estamos documentando nuestros primeros casos de éxito. Vuelve pronto."
+    },
+    "blog": {
+      "eyebrow": "Recursos",
+      "title": "Blog",
+      "description": "Noticias y contenido sobre energía, electromovilidad y financiamiento.",
+      "empty": "Aún no hay artículos publicados."
+    },
+    "gracias": {
+      "title": "¡Gracias por contactarnos!",
+      "description": "Recibimos tu mensaje y te contactaremos a la brevedad.",
+      "backHome": "Volver al inicio"
+    },
+    "legal": {
+      "privacidad": { "title": "Aviso de Privacidad" },
+      "terminos": { "title": "Términos de Servicio" },
+      "cookies": { "title": "Política de Cookies" },
+      "pending": "Este documento está en revisión legal y se publicará antes del lanzamiento."
+    }
+  },
+  "common": {
+    "pendingContent": "Contenido en construcción."
+  }
+}
