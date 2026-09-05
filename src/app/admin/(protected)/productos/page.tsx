@@ -6,7 +6,7 @@ import { deleteProduct } from "./actions";
 export default async function AdminProductsPage() {
   if (!db) {
     return (
-      <p className="text-stone">
+      <p className="text-carbon/75">
         Base de datos no configurada. Define <code>DATABASE_URL</code> para
         activar esta sección.
       </p>
@@ -29,7 +29,7 @@ export default async function AdminProductsPage() {
 
       <div className="mt-6 space-y-3">
         {items.length === 0 && (
-          <p className="text-stone">Todavía no hay productos cargados.</p>
+          <p className="text-carbon/75">Todavía no hay productos cargados.</p>
         )}
         {items.map((product) => (
           <div
@@ -39,11 +39,11 @@ export default async function AdminProductsPage() {
             <div>
               <p className="font-bold text-carbon">
                 {product.title}{" "}
-                <span className="text-xs font-normal text-stone">
+                <span className="text-xs font-normal text-carbon/75">
                   /{product.locale} · {product.category}
                 </span>
               </p>
-              <p className="text-sm text-stone">{product.slug}</p>
+              <p className="text-sm text-carbon/75">{product.slug}</p>
             </div>
             <div className="flex items-center gap-4 text-sm font-bold">
               <Link

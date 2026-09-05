@@ -93,7 +93,7 @@ export function TestimonialForm({
           accept="image/*"
           className={inputClasses}
         />
-        <p className="mt-1 text-xs text-stone">
+        <p className="mt-1 text-xs text-carbon/75">
           Sube un archivo para reemplazar la foto actual, o pega una URL
           abajo.
         </p>

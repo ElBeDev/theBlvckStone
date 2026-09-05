@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
+import { Archivo } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SITE_URL } from "@/lib/metadata";
 import "../globals.css";
 
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "The Blvck Stone",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "The Blvck Stone",
+    template: "%s | The Blvck Stone",
+  },
   description:
     "Soluciones inteligentes para tu transición energética: energía limpia, electromovilidad y financiamiento estratégico.",
 };
@@ -33,7 +46,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className="h-full antialiased">
+    <html lang={locale} className={`${archivo.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <Header />

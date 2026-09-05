@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { ArrowRight } from "@phosphor-icons/react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 
 const inputClasses =
-  "mt-1 w-full rounded-lg border border-stone/40 bg-white/5 px-4 py-3 text-ivory placeholder:text-stone focus:border-turquoise focus:outline-none";
+  "mt-2 w-full rounded-lg border border-white/15 bg-black-base/40 px-4 py-3 text-ivory transition-colors focus:border-turquoise focus:outline-none focus:ring-2 focus:ring-turquoise/30";
 const labelClasses = "block text-sm font-bold text-ivory";
 
 export function ContactForm() {
@@ -36,33 +37,38 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div>
-        <label htmlFor="name" className={labelClasses}>
-          {t("name")}
-        </label>
-        <input id="name" name="name" type="text" required className={inputClasses} />
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-5 rounded-2xl bg-petrol-soft p-7 md:p-9"
+    >
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="name" className={labelClasses}>
+            {t("name")}
+          </label>
+          <input id="name" name="name" type="text" required autoComplete="name" className={inputClasses} />
+        </div>
+        <div>
+          <label htmlFor="email" className={labelClasses}>
+            {t("email")}
+          </label>
+          <input id="email" name="email" type="email" required autoComplete="email" className={inputClasses} />
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="email" className={labelClasses}>
-          {t("email")}
-        </label>
-        <input id="email" name="email" type="email" required className={inputClasses} />
-      </div>
-
-      <div>
-        <label htmlFor="phone" className={labelClasses}>
-          {t("phone")}
-        </label>
-        <input id="phone" name="phone" type="tel" className={inputClasses} />
-      </div>
-
-      <div>
-        <label htmlFor="industry" className={labelClasses}>
-          {t("industry")}
-        </label>
-        <input id="industry" name="industry" type="text" className={inputClasses} />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="phone" className={labelClasses}>
+            {t("phone")}
+          </label>
+          <input id="phone" name="phone" type="tel" autoComplete="tel" className={inputClasses} />
+        </div>
+        <div>
+          <label htmlFor="industry" className={labelClasses}>
+            {t("industry")}
+          </label>
+          <input id="industry" name="industry" type="text" autoComplete="organization" className={inputClasses} />
+        </div>
       </div>
 
       <div>
@@ -72,14 +78,11 @@ export function ContactForm() {
         <textarea id="message" name="message" rows={4} className={inputClasses} />
       </div>
 
-      <label className="flex items-start gap-2 text-sm text-mist">
-        <input type="checkbox" name="consent" required className="mt-1" />
+      <label className="flex items-start gap-3 text-sm text-mist">
+        <input type="checkbox" name="consent" required className="mt-1 h-4 w-4 accent-amber" />
         <span>
           {t("consent")}{" "}
-          <Link
-            href="/legal/aviso-de-privacidad"
-            className="text-turquoise underline"
-          >
+          <Link href="/legal/aviso-de-privacidad" className="font-bold text-turquoise underline">
             {t("privacyLink")}
           </Link>
         </span>
@@ -90,9 +93,10 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-full bg-amber px-6 py-3 font-bold text-petrol transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber px-6 py-4 text-base font-bold text-petrol transition-transform hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 sm:w-auto"
       >
         {status === "sending" ? t("sending") : t("submit")}
+        <ArrowRight size={18} weight="bold" />
       </button>
 
       {status === "error" && <p className="text-sm text-coral">{t("error")}</p>}

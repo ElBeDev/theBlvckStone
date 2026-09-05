@@ -24,7 +24,7 @@ export default async function ProtectedAdminLayout({
     <div className="mx-auto flex min-h-screen max-w-6xl">
       <aside className="w-56 shrink-0 border-r border-black/5 bg-white p-6">
         <p className="mb-8 text-lg font-black text-petrol">Admin</p>
-        <nav className="space-y-3 text-sm font-bold text-stone">
+        <nav className="space-y-3 text-sm font-bold text-carbon/75">
           {navItems.map((item) => (
             <Link
               key={item.href}

@@ -124,6 +124,8 @@
 - El schema de Drizzle ya está aplicado en la base de Neon real (5 tablas creadas)
 - Subida de imágenes desde `/admin` (productos y testimonios) ya sube el archivo a Vercel Blob y guarda la URL pública — probado con un archivo real de punta a punta
 
+- **Rediseño visual completo (v2.6)** aplicando el skill `design-taste-frontend` (Vercel Labs `skills` CLI) en modo *Preserve* con ejecución tipo overhaul: diales objetivo `VARIANCE 7 / MOTION 6 / DENSITY 4`. Home con 8 secciones de familias de layout distintas (split hero, franja numérica con count-up, bento asimétrico, lista sticky, galería acordeón, cita destacada, filas editoriales, banda CTA); tema oscuro en home y contacto, claro en interiores; menú móvil real; logo mark construido según la descripción del brief; fuente **Archivo** vía `next/font` como stand-in de Helvetica Now Display; animaciones con Motion (scroll-reveal, count-up, entrada del hero) respetando `prefers-reduced-motion`; iconos Phosphor. Copy completo ES/EN sin placeholders (incluye borradores legales marcados como pendientes de revisión legal). Metadata SEO por página (canonical, `hreflang`, Open Graph, imagen OG generada), `sitemap.xml` y `robots.txt`. Verificado con Playwright en desktop y móvil: nav en una línea (73px), cero CTAs con wrap, cero overflow horizontal, cero errores de consola, H1 en máximo 2 líneas, contraste AA en texto secundario.
+- **Imágenes: placeholders curados**, no fotografía de marca. Se usan fotos de Picsum por ID fijo con tratamiento duotono petróleo para que lean como textura de marca. Hay que reemplazarlas por fotografía real antes del lanzamiento; la lista de slots está en "Pendientes".
 - **Contenido de demo cargado** vía `scripts/seed-demo.mjs`: 9 productos (ES+EN, 3 por pilar), 3 posts de blog (ES+EN, con Markdown) y 4 testimonios. **Es contenido inventado para poder mostrar el sitio poblado** — nombres de empresas y personas en los testimonios son ficticios y deben reemplazarse por casos reales autorizados antes de cualquier lanzamiento público. El script queda en el repo para volver a poblar el ambiente si se resetea la base de datos.
 - **Las páginas públicas ya leen del mini-CMS:** `/productos/energia-limpia|electromovilidad|financiamiento` muestran los productos reales de esa categoría e idioma (o el estado "pendiente" si no hay ninguno todavía); `/blog` y `/blog/[slug]` renderizan los posts reales (con Markdown); `/casos-de-exito` muestra los testimonios reales; `/contacto` toma los teléfonos y el email de `site_settings` en vez de tenerlos escritos en el código. Probado de punta a punta: contenido cargado desde `/admin` aparece de inmediato en el sitio público, en el idioma correcto, sin filtrarse al otro idioma.
 - Se agregó una columna `category` a `products` (energia-limpia / electromovilidad / financiamiento) para poder listar cada producto bajo su pilar correspondiente
@@ -596,6 +598,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [x] ~~Provisionar Postgres y storage de imágenes, setear `DATABASE_URL`/`ADMIN_USERNAME`/`ADMIN_PASSWORD`/`SESSION_SECRET`/`BLOB_READ_WRITE_TOKEN` en Vercel~~ — resuelto con Neon + Vercel Blob, ambos nativos de Vercel
 - [x] ~~Conectar las páginas públicas a las tablas del mini-CMS~~ — resuelto: productos, blog, casos de éxito y contacto ya leen contenido real
 - [ ] **Reemplazar el contenido de demo (inventado) por contenido real** antes de compartir el link fuera del equipo — especialmente los 4 testimonios, que hoy son ficticios
+- [ ] **Fotografía real para reemplazar los placeholders** (todos en `src/components/DuotoneImage.tsx`, tabla `CURATED`): hero del home (vertical 4:5, infraestructura energética), bento de servicios (2 fotos: energía/BESS y camioneta eléctrica), 4 verticales (residencial, comercial, industrial, flotas), 3 headers de categoría de producto, foto de equipo para Nosotros, portadas de blog, y fotos de producto reales cargadas desde `/admin` (hoy usan una reserva por categoría)
+- [ ] **Archivos de la fuente Helvetica Now Display** (licenciada). Hoy se usa Archivo como stand-in; el cambio es una sola línea en `src/app/[locale]/layout.tsx` y `globals.css`
+- [ ] **Revisión legal** de los borradores de Aviso de Privacidad, Términos y Cookies (visibles con etiqueta "Borrador sujeto a revisión legal")
 - [ ] Alta de cuentas de servicio restantes: Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 
@@ -651,6 +656,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 - **v2.5 (2026-09-05):** Se carga contenido de demostración vía `scripts/seed-demo.mjs`: 9 productos (ES+EN), 3 posts de blog (ES+EN) y 4 testimonios, para poder mostrar el sitio poblado en una demo. **Es contenido inventado, no clientes reales** — queda marcado como pendiente prioritario reemplazarlo antes de compartir el link fuera del equipo.
 
+- **v2.6 (2026-09-05):** Rediseño visual completo del sitio público con el skill `design-taste-frontend` (auditoría, modo Preserve con ejecución overhaul, levers 1 a 5 de la Sección 11.D). Home de 8 secciones con familias de layout distintas, tema por página, menú móvil, logo mark, fuente Archivo vía `next/font`, animaciones con Motion, iconos Phosphor, copy completo ES/EN sin placeholders, borradores legales, metadata SEO por página, sitemap, robots y OG image. Verificación con Playwright (desktop y móvil) y correcciones de contraste AA. `/admin` queda fuera del alcance del skill por decisión explícita (dashboards están fuera de su scope).
+
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.5
+**Versión:** 2.6

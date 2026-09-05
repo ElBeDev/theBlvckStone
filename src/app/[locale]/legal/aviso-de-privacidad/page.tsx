@@ -1,6 +1,21 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PageHeading } from "@/components/PageHeading";
-import { PendingSection } from "@/components/PendingSection";
+import { LegalPage } from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations("pages.legal");
+  return pageMetadata({
+    locale,
+    path: "/legal/aviso-de-privacidad",
+    title: t("privacidad.title"),
+    description: t("privacidad.sections.0.body"),
+  });
+}
 
 export default async function AvisoDePrivacidadPage({
   params,
@@ -9,16 +24,5 @@ export default async function AvisoDePrivacidadPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const t = await getTranslations("pages.legal");
-
-  return (
-    <>
-      <PageHeading title={t("privacidad.title")} />
-      {/* Debe cumplir con la LFPDPPP (Ley Federal de Protección de Datos
-          Personales en Posesión de los Particulares) — texto pendiente
-          de revisión legal. */}
-      <PendingSection text={t("pending")} />
-    </>
-  );
+  return <LegalPage doc="privacidad" />;
 }

@@ -1,6 +1,21 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PageHeading } from "@/components/PageHeading";
-import { PendingSection } from "@/components/PendingSection";
+import { LegalPage } from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations("pages.legal");
+  return pageMetadata({
+    locale,
+    path: "/legal/terminos",
+    title: t("terminos.title"),
+    description: t("terminos.sections.0.body"),
+  });
+}
 
 export default async function TerminosPage({
   params,
@@ -9,13 +24,5 @@ export default async function TerminosPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const t = await getTranslations("pages.legal");
-
-  return (
-    <>
-      <PageHeading title={t("terminos.title")} />
-      <PendingSection text={t("pending")} />
-    </>
-  );
+  return <LegalPage doc="terminos" />;
 }

@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f5f8f7;
   --foreground: #1f2a2a;
 
-  /* The Blvck Stone brand palette */
+  /* The Blvck Stone brand palette (from the brand brief, locked) */
   --color-teal: #10767c;
   --color-turquoise: #1bbcb4;
   --color-petrol: #0e2e30;
@@ -16,6 +16,9 @@
   --color-mist: #e7f2f1;
   --color-ivory: #f5f8f7;
   --color-black-base: #0b0f10;
+  /* Dark-family tints for section rhythm on dark pages */
+  --color-petrol-deep: #0a2325;
+  --color-petrol-soft: #123c3f;
 }
 
 @theme inline {
@@ -25,6 +28,8 @@
   --color-teal: var(--color-teal);
   --color-turquoise: var(--color-turquoise);
   --color-petrol: var(--color-petrol);
+  --color-petrol-deep: var(--color-petrol-deep);
+  --color-petrol-soft: var(--color-petrol-soft);
   --color-mint: var(--color-mint);
   --color-amber: var(--color-amber);
   --color-coral: var(--color-coral);
@@ -34,15 +39,85 @@
   --color-ivory: var(--color-ivory);
   --color-black-base: var(--color-black-base);
 
-  /* Helvetica Now Display is a licensed font (not on Google Fonts).
-     Falls back to Helvetica Neue/Arial until the licensed font files
-     are added via @font-face. */
-  --font-sans: "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial,
+  /* Brand spec is Helvetica Now Display (licensed, files not yet provided).
+     Archivo is the stand-in: a grotesk with the same 300/400/700/900 range.
+     Swap the @font-face here once the licensed files arrive. */
+  --font-sans: var(--font-archivo), "Helvetica Neue", Helvetica, Arial,
     sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Shape system: interactive = pill, surfaces = 2xl (16px), inputs = lg (8px). */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-amber);
+  color: var(--color-petrol);
+}
+
+/* Duotone treatment: makes any photo read as brand texture.
+   Positioning is left to the caller (relative or absolute) so the
+   unlayered rule never overrides a Tailwind position utility. */
+.duotone {
+  overflow: hidden;
+  isolation: isolate;
+}
+.duotone img {
+  filter: grayscale(1) contrast(1.05);
+}
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgb(14 46 48 / 0.72) 0%,
+    rgb(16 118 124 / 0.45) 60%,
+    rgb(27 188 180 / 0.35) 100%
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.duotone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgb(14 46 48 / 0) 40%,
+    rgb(14 46 48 / 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* Accordion gallery (verticals): strips grow on hover, CSS only. */
+.accordion-strip {
+  flex: 1 1 0%;
+  transition: flex 600ms var(--ease-out-expo);
+}
+@media (hover: hover) and (min-width: 768px) {
+  .accordion-strip:hover {
+    flex: 2.4 1 0%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-strip {
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

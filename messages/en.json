@@ -9,9 +9,21 @@
     "nosotros": "About",
     "casosDeExito": "Success Stories",
     "blog": "Blog",
-    "contacto": "Contact"
+    "contacto": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "cta": {
+    "demo": "Request a demo",
+    "explore": "Discover our solutions",
+    "viewAll": "View all",
+    "readMore": "Read article",
+    "designSolution": "Design my solution",
+    "viewProducts": "View products",
+    "backHome": "Back to home"
   },
   "footer": {
+    "tagline": "Strategic integration of industrial projects. Clean energy, electromobility and financing for companies in Mexico.",
     "servicios": "Services",
     "productos": "Products",
     "empresa": "Company",
@@ -19,32 +31,45 @@
     "avisoDePrivacidad": "Privacy Notice",
     "terminos": "Terms of Service",
     "cookies": "Cookies",
+    "offices": "Polanco, Mexico City. Logistics hub in Guadalajara, Jalisco.",
     "rights": "All rights reserved."
   },
   "home": {
+    "heroEyebrow": "Strategic integration of industrial projects",
     "heroHeadline": "Smart solutions for your energy transition",
-    "heroSubheadline": "Clean Energy • Electromobility • Strategic Financing",
-    "ctaPrimary": "Discover our solutions",
-    "ctaSecondary": "Get in touch"
+    "heroSubheadline": "Clean energy, electromobility and strategic financing for companies that want to grow without depending on the grid.",
+    "heroImageAlt": "Solar energy and EV charging infrastructure"
+  },
+  "stats": {
+    "title": "Backed by AUX Group",
+    "intro": "An industrial group with almost four decades of manufacturing behind every project we deliver.",
+    "items": [
+      { "value": 39, "suffix": "", "label": "years in the market" },
+      { "value": 9.6, "prefix": "$", "suffix": "M", "label": "in assets" },
+      { "value": 300, "prefix": "$", "suffix": "M", "label": "in revenue (MXN 2025)" },
+      { "value": 6, "suffix": "+", "label": "operating factories" },
+      { "value": 40, "suffix": "K+", "label": "employees worldwide" }
+    ]
   },
   "services": {
-    "eyebrow": "Our business lines",
+    "eyebrow": "Three business lines",
+    "title": "Everything an energy project needs, from a single partner",
     "items": [
       {
-        "title": "Clean Energy & Storage",
-        "description": "End-to-end generation, storage and distribution solutions for renewable energy. BESS, utility-scale inverters, residential and commercial infrastructure.",
+        "title": "Clean Energy and Storage",
+        "description": "Generation, storage and distribution of renewable energy. BESS, utility-scale inverters and residential and commercial infrastructure with AUXSOL technology.",
         "cta": "Explore energy solutions",
         "href": "/productos/energia-limpia"
       },
       {
-        "title": "Electric Vehicles & Charging Infrastructure",
-        "description": "Distribution of next-generation electric trucks plus AC/DC charging infrastructure. Complete solutions for fleets.",
+        "title": "Electric Vehicles and Charging Infrastructure",
+        "description": "Next-generation electric trucks and AC/DC charging stations. Complete solutions for commercial fleets.",
         "cta": "View vehicle catalog",
         "href": "/productos/electromovilidad"
       },
       {
         "title": "Smart Business Financing",
-        "description": "Loans and financial products designed for energy projects and industrial transformation. Flexible options with specialized support.",
+        "description": "Credit, leasing and working capital designed so energy savings pay for the project from month one.",
         "cta": "Explore financing options",
         "href": "/productos/financiamiento"
       }
@@ -52,43 +77,153 @@
   },
   "differentiators": {
     "title": "Why choose The Blvck Stone?",
+    "intro": "Certified technology, local support and integrated financing. What other suppliers promise, we operate.",
     "items": [
-      "Internationally certified technology (UL, KEMA, ANSI, IEC)",
-      "Local technical support in Mexico (CDMX + logistics hubs)",
-      "Remote commissioning included",
-      "Incident resolution in under 48 hours",
-      "Extended warranties (10-10-2/3 years)",
-      "Pre-sale and after-sale support",
-      "Specialized, tailor-made engineering",
-      "Custom technical-economic proposals"
+      { "title": "Certified technology", "description": "Equipment with UL, KEMA, ANSI and IEC certifications." },
+      { "title": "Local technical support", "description": "A team in Mexico City and logistics hubs across Mexico, not a remote call center." },
+      { "title": "Remote commissioning included", "description": "Assisted start-up at no additional cost." },
+      { "title": "Incidents resolved in under 48 hours", "description": "Response time committed by contract." },
+      { "title": "Extended warranties", "description": "Up to 10 years on key equipment, with extensions available." },
+      { "title": "Pre-sale and after-sale support", "description": "From the initial assessment to ongoing maintenance." },
+      { "title": "Tailor-made engineering", "description": "Every proposal starts from your load curve, not a generic package." },
+      { "title": "Technical-economic proposals", "description": "Clear investment, savings and payback numbers before you sign." }
     ]
   },
   "solutions": {
     "title": "Solutions for every industry",
+    "intro": "From homes to industrial plants, we size the solution to your real consumption.",
     "items": [
-      { "title": "Residential", "description": "Inverters, BESS, AC Chargers" },
-      { "title": "Commercial (C&I)", "description": "Mid-size solutions, DC Multicharger" },
-      { "title": "Industrial/Utility", "description": "350kW+ inverters, 261-418 kWh BESS" },
-      { "title": "Enterprise Fleets", "description": "EV trucks + charging stations" }
+      { "title": "Residential", "description": "Inverters, BESS and AC chargers for homes and small businesses.", "seed": "blvckstone-residencial" },
+      { "title": "Commercial", "description": "Mid-size solutions and DC Multicharger for retail and light industry.", "seed": "blvckstone-comercial" },
+      { "title": "Industrial and Utility", "description": "350 kW+ inverters and 261 to 418 kWh BESS.", "seed": "blvckstone-industrial" },
+      { "title": "Enterprise Fleets", "description": "Electric trucks and charging stations for logistics operations.", "seed": "blvckstone-flotas" }
     ]
   },
-  "stats": {
-    "title": "Backed by AUX Group",
-    "items": [
-      { "value": "39", "label": "years in the market" },
-      { "value": "$9.6M", "label": "in assets" },
-      { "value": "$300M", "label": "in revenue (MXN 2025)" },
-      { "value": "6+", "label": "operating factories" },
-      { "value": "40,000+", "label": "employees worldwide" }
-    ]
+  "testimonials": {
+    "eyebrow": "Real results",
+    "title": "Companies that already transformed their energy"
+  },
+  "blogTeaser": {
+    "title": "Ideas for your energy transition",
+    "intro": "Practical guides on storage, electromobility and financing, written by the team that installs the projects."
   },
   "ctaFinal": {
     "title": "Transform your business today",
-    "primary": "Request a demo",
-    "secondary": "Download catalog"
+    "text": "Tell us about your project and we will propose a tailored technical and financial solution, no strings attached."
+  },
+  "pages": {
+    "productos": {
+      "title": "Our solutions",
+      "description": "Clean energy, electromobility and financing in one place.",
+      "emptyCategory": "We are loading this catalog. Write to us and we will send the spec sheets today.",
+      "specsLabel": "Specifications",
+      "categories": {
+        "energia-limpia": {
+          "title": "Clean Energy and Storage",
+          "description": "AUXSOL generation and storage systems for residential, commercial and utility-scale use.",
+          "seed": "blvckstone-solar"
+        },
+        "electromovilidad": {
+          "title": "Electric Vehicles and Charging Infrastructure",
+          "description": "Electric work trucks and vans, with the charging infrastructure to run them.",
+          "seed": "blvckstone-ev"
+        },
+        "financiamiento": {
+          "title": "Business Financing",
+          "description": "Credit, leasing and working capital structured around the savings your project generates.",
+          "seed": "blvckstone-finance"
+        }
+      },
+      "financingNote": "The financing simulator will be available once current rates and terms are confirmed. In the meantime, we prepare a tailored projection for you."
+    },
+    "soluciones": {
+      "title": "Solutions for every industry",
+      "description": "Four verticals, one engineering approach: size the solution to real consumption and finance it with the savings it generates."
+    },
+    "nosotros": {
+      "title": "More than a supplier, your innovation partner",
+      "description": "We integrate technology, engineering and financing so your company's energy transition is a business decision, not a gamble.",
+      "story": [
+        "The Blvck Stone was born to solve a problem we saw repeat across hundreds of projects: the technology existed, but it arrived without local engineering, without support and without a financial structure that made it viable.",
+        "So we integrated all three. We design the technical solution from your load curve, install and commission it with our own team in Mexico, and finance it so the savings pay for the investment.",
+        "Behind every project is AUX Group, an industrial group with 39 years of history, more than six factories and 40,000 employees worldwide. That backing lets us guarantee supply, pricing and lead times a local distributor cannot."
+      ],
+      "certificationsTitle": "Internationally certified technology",
+      "certifications": ["UL", "KEMA", "ANSI", "IEC"],
+      "howTitle": "How we work",
+      "how": [
+        { "title": "Assessment", "description": "We analyze your consumption, rate and goals before proposing a single piece of equipment." },
+        { "title": "Engineering and financing", "description": "A technical-economic proposal with clear investment, savings and payback." },
+        { "title": "Installation and support", "description": "Commissioning included and incident response in under 48 hours." }
+      ],
+      "teamTitle": "Leadership team",
+      "team": [
+        { "name": "Karla Arizmendi", "role": "Strategy & Growth Director", "initials": "KA" },
+        { "name": "Juan Carlos Meza", "role": "Business Development Director", "initials": "JM" }
+      ]
+    },
+    "casosDeExito": {
+      "title": "Companies that already transformed their energy",
+      "description": "Results from clients who cut costs, gained energy independence or electrified their fleet with us.",
+      "empty": "We are documenting our first success stories. Check back soon."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Guides and news on energy, electromobility and financing.",
+      "empty": "No articles published yet.",
+      "latest": "More articles"
+    },
+    "contacto": {
+      "title": "Transform your business today",
+      "description": "Tell us what you want to solve. We reply within 48 business hours with a first proposal.",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email",
+      "officesLabel": "Offices",
+      "offices": "Polanco, Mexico City",
+      "logistics": "Logistics hub: Guadalajara, Jalisco"
+    },
+    "gracias": {
+      "title": "Thanks for reaching out",
+      "description": "We received your message. A specialist will contact you within 48 business hours."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist or has moved."
+    },
+    "legal": {
+      "draftNotice": "Draft pending legal review before launch.",
+      "updated": "Last updated: September 2026",
+      "privacidad": {
+        "title": "Privacy Notice",
+        "sections": [
+          { "heading": "Data controller", "body": "The Blvck Stone, located in Polanco, Mexico City, is responsible for processing your personal data under Mexico's Federal Law on the Protection of Personal Data Held by Private Parties (LFPDPPP)." },
+          { "heading": "Data we collect", "body": "Through the contact form we collect your name, email, phone, industry and the message you choose to send. We do not request sensitive data." },
+          { "heading": "Purposes", "body": "We use your data to answer your request, prepare technical and commercial proposals, and follow up on the business relationship. We do not use it for other purposes without your consent." },
+          { "heading": "Your rights (ARCO)", "body": "You can access, rectify, cancel or object to the processing of your data by writing to contacto@the-blvckstone.com. We handle requests within the legal timeframes." },
+          { "heading": "Transfers", "body": "We do not transfer your data to third parties except by legal obligation or to providers operating under confidentiality agreements to deliver the service (hosting and email delivery)." },
+          { "heading": "Changes to this notice", "body": "Any change to this notice will be published on this page with its update date." }
+        ]
+      },
+      "terminos": {
+        "title": "Terms of Service",
+        "sections": [
+          { "heading": "Use of the site", "body": "The content of this site is informational. Specifications, prices and financing conditions are confirmed in writing in each proposal." },
+          { "heading": "Intellectual property", "body": "Trademarks, logos and content belong to The Blvck Stone or its licensors and may not be reproduced without authorization." },
+          { "heading": "Liability", "body": "We work to keep information current but do not guarantee it is error-free. Contractual obligations are defined only in signed agreements." },
+          { "heading": "Governing law", "body": "These terms are governed by the laws of the United Mexican States." }
+        ]
+      },
+      "cookies": {
+        "title": "Cookie Policy",
+        "sections": [
+          { "heading": "What they are", "body": "Cookies are small files the browser stores to remember preferences and measure site usage." },
+          { "heading": "Which ones we use", "body": "Technical cookies required for the site to work and, with your consent, analytics cookies to understand how it is used." },
+          { "heading": "How to control them", "body": "You can block or delete cookies from your browser settings. Some features may stop working correctly." }
+        ]
+      }
+    }
   },
   "contact": {
-    "title": "Transform your business today",
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
@@ -97,46 +232,12 @@
     "consent": "I accept the",
     "privacyLink": "Privacy Notice",
     "submit": "Request a demo",
-    "downloadCatalog": "Download catalog",
     "sending": "Sending...",
-    "success": "Thanks! We'll be in touch soon.",
+    "success": "Thanks. We will be in touch soon.",
     "error": "Something went wrong sending the form. Please try again."
   },
-  "pages": {
-    "productos": {
-      "eyebrow": "Catalog",
-      "title": "Our solutions",
-      "description": "Clean energy, electromobility and financing in one place."
-    },
-    "nosotros": {
-      "eyebrow": "Who we are",
-      "title": "More than a supplier, your innovation partner",
-      "description": "Strategic integration of industrial projects, backed by AUX Group."
-    },
-    "casosDeExito": {
-      "eyebrow": "Real results",
-      "title": "Companies that already transformed their energy",
-      "empty": "We're documenting our first success stories. Check back soon."
-    },
-    "blog": {
-      "eyebrow": "Resources",
-      "title": "Blog",
-      "description": "News and content about energy, electromobility and financing.",
-      "empty": "No articles published yet."
-    },
-    "gracias": {
-      "title": "Thanks for reaching out!",
-      "description": "We received your message and will get back to you shortly.",
-      "backHome": "Back to home"
-    },
-    "legal": {
-      "privacidad": { "title": "Privacy Notice" },
-      "terminos": { "title": "Terms of Service" },
-      "cookies": { "title": "Cookie Policy" },
-      "pending": "This document is under legal review and will be published before launch."
-    }
-  },
   "common": {
-    "pendingContent": "Content in progress."
+    "pendingContent": "Content in progress.",
+    "placeholderImage": "Reference image"
   }
 }

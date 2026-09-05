@@ -6,7 +6,7 @@ import { SETTINGS_KEYS } from "./keys";
 export default async function AdminSettingsPage() {
   if (!db) {
     return (
-      <p className="text-stone">
+      <p className="text-carbon/75">
         Base de datos no configurada. Define <code>DATABASE_URL</code> para
         activar esta sección.
       </p>

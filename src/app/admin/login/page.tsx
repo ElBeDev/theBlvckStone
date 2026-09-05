@@ -14,7 +14,7 @@ export default async function AdminLoginPage({
         className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-sm"
       >
         <h1 className="text-xl font-black text-petrol">
-          The Blvck Stone — Admin
+          The Blvck Stone Admin
         </h1>
         <div className="mt-6 space-y-4">
           <div>

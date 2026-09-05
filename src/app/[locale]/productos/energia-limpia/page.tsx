@@ -1,12 +1,23 @@
-import { and, eq } from "drizzle-orm";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { db } from "@/db";
-import { products } from "@/db/schema";
-import { PageHeading } from "@/components/PageHeading";
-import { PendingSection } from "@/components/PendingSection";
-import { ProductGrid } from "@/components/ProductGrid";
+import { ProductCategoryPage } from "@/components/ProductCategoryPage";
+import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations("pages.productos.categories.energia-limpia");
+  return pageMetadata({
+    locale,
+    path: "/productos/energia-limpia",
+    title: t("title"),
+    description: t("description"),
+  });
+}
 
 export default async function EnergiaLimpiaPage({
   params,
@@ -15,38 +26,5 @@ export default async function EnergiaLimpiaPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const tServices = await getTranslations("services");
-  const tCommon = await getTranslations("common");
-  const service = tServices.raw("items")[0] as {
-    title: string;
-    description: string;
-  };
-
-  const items = db
-    ? await db
-        .select()
-        .from(products)
-        .where(
-          and(
-            eq(products.category, "energia-limpia"),
-            eq(products.locale, locale),
-          ),
-        )
-    : [];
-
-  return (
-    <>
-      <PageHeading
-        eyebrow={tServices("eyebrow")}
-        title={service.title}
-        description={service.description}
-      />
-      {items.length === 0 ? (
-        <PendingSection text={tCommon("pendingContent")} />
-      ) : (
-        <ProductGrid items={items} />
-      )}
-    </>
-  );
+  return <ProductCategoryPage locale={locale} category="energia-limpia" />;
 }

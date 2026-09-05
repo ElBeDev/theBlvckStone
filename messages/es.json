@@ -9,9 +9,21 @@
     "nosotros": "Nosotros",
     "casosDeExito": "Casos de Éxito",
     "blog": "Blog",
-    "contacto": "Contacto"
+    "contacto": "Contacto",
+    "menu": "Menú",
+    "close": "Cerrar"
+  },
+  "cta": {
+    "demo": "Solicitar demostración",
+    "explore": "Descubre nuestras soluciones",
+    "viewAll": "Ver todos",
+    "readMore": "Leer artículo",
+    "designSolution": "Diseñar mi solución",
+    "viewProducts": "Ver productos",
+    "backHome": "Volver al inicio"
   },
   "footer": {
+    "tagline": "Integración estratégica de proyectos industriales. Energía limpia, electromovilidad y financiamiento para empresas en México.",
     "servicios": "Servicios",
     "productos": "Productos",
     "empresa": "Empresa",
@@ -19,32 +31,45 @@
     "avisoDePrivacidad": "Aviso de Privacidad",
     "terminos": "Términos de servicio",
     "cookies": "Cookies",
+    "offices": "Polanco, CDMX. Centro logístico en Guadalajara, Jalisco.",
     "rights": "Todos los derechos reservados."
   },
   "home": {
+    "heroEyebrow": "Integración estratégica de proyectos industriales",
     "heroHeadline": "Soluciones inteligentes para tu transición energética",
-    "heroSubheadline": "Energía limpia • Electromovilidad • Financiamiento Estratégico",
-    "ctaPrimary": "Descubre nuestras soluciones",
-    "ctaSecondary": "Contacta con nosotros"
+    "heroSubheadline": "Energía limpia, electromovilidad y financiamiento estratégico para empresas que quieren crecer sin depender de la red.",
+    "heroImageAlt": "Infraestructura de energía solar y carga eléctrica"
+  },
+  "stats": {
+    "title": "Respaldados por AUX Group",
+    "intro": "Un grupo industrial con casi cuatro décadas de manufactura detrás de cada proyecto que entregamos.",
+    "items": [
+      { "value": 39, "suffix": "", "label": "años de historia en el mercado" },
+      { "value": 9.6, "prefix": "$", "suffix": "M", "label": "en activos" },
+      { "value": 300, "prefix": "$", "suffix": "M", "label": "en ingresos (MXN 2025)" },
+      { "value": 6, "suffix": "+", "label": "fábricas operativas" },
+      { "value": 40, "suffix": "K+", "label": "empleados globalmente" }
+    ]
   },
   "services": {
-    "eyebrow": "Nuestras líneas de negocio",
+    "eyebrow": "Tres líneas de negocio",
+    "title": "Todo lo que un proyecto energético necesita, en un solo socio",
     "items": [
       {
-        "title": "Energía Limpia & Almacenamiento",
-        "description": "Soluciones integrales de generación, almacenamiento y distribución de energía renovable. BESS, inversores utility-scale, infraestructura residencial y comercial.",
+        "title": "Energía Limpia y Almacenamiento",
+        "description": "Generación, almacenamiento y distribución de energía renovable. BESS, inversores utility-scale e infraestructura residencial y comercial con tecnología AUXSOL.",
         "cta": "Explorar soluciones energéticas",
         "href": "/productos/energia-limpia"
       },
       {
-        "title": "Vehículos Eléctricos & Infraestructura de Carga",
-        "description": "Distribución de camionetas eléctricas de última generación + infraestructura de carga AC/DC. Soluciones completas para flotas.",
+        "title": "Vehículos Eléctricos e Infraestructura de Carga",
+        "description": "Camionetas eléctricas de última generación y estaciones de carga AC/DC. Soluciones completas para flotas comerciales.",
         "cta": "Ver catálogo de vehículos",
         "href": "/productos/electromovilidad"
       },
       {
         "title": "Financiamiento Empresarial Inteligente",
-        "description": "Préstamos y productos financieros diseñados para proyectos de energía y transformación industrial. Opciones flexibles con soporte especializado.",
+        "description": "Crédito, arrendamiento y capital de trabajo diseñados para que el ahorro energético pague el proyecto desde el primer mes.",
         "cta": "Consultar opciones de financiamiento",
         "href": "/productos/financiamiento"
       }
@@ -52,43 +77,153 @@
   },
   "differentiators": {
     "title": "¿Por qué elegir The Blvck Stone?",
+    "intro": "Tecnología certificada, soporte local y financiamiento integrado. Lo que otros proveedores prometen, nosotros lo operamos.",
     "items": [
-      "Tecnología certificada internacionalmente (UL, KEMA, ANSI, IEC)",
-      "Soporte técnico local en México (CDMX + centros logísticos)",
-      "Comisionamiento remoto incluido",
-      "Resolución de incidencias < 48 horas",
-      "Garantías extendidas (10-10-2/3 años)",
-      "Acompañamiento preventa y postventa",
-      "Ingeniería especializada a medida",
-      "Propuestas técnico-económicas personalizadas"
+      { "title": "Tecnología certificada", "description": "Equipos con certificaciones UL, KEMA, ANSI e IEC." },
+      { "title": "Soporte técnico local", "description": "Equipo en CDMX y centros logísticos en México, no un call center remoto." },
+      { "title": "Comisionamiento remoto incluido", "description": "Puesta en marcha asistida sin costo adicional." },
+      { "title": "Incidencias en menos de 48 horas", "description": "Tiempo de respuesta comprometido por contrato." },
+      { "title": "Garantías extendidas", "description": "Hasta 10 años en equipos clave, con extensión disponible." },
+      { "title": "Acompañamiento preventa y postventa", "description": "Del diagnóstico inicial al mantenimiento continuo." },
+      { "title": "Ingeniería a la medida", "description": "Cada propuesta parte de tu curva de carga, no de un paquete genérico." },
+      { "title": "Propuestas técnico-económicas", "description": "Números claros de inversión, ahorro y retorno antes de firmar." }
     ]
   },
   "solutions": {
     "title": "Soluciones para cada industria",
+    "intro": "Del hogar a la planta industrial, dimensionamos la solución al tamaño real de tu consumo.",
     "items": [
-      { "title": "Residencial", "description": "Inversores, BESS, AC Chargers" },
-      { "title": "Comercial (C&I)", "description": "Soluciones medianas, DC Multicharger" },
-      { "title": "Industrial/Utility", "description": "Inversores +350kW, BESS 261-418 kWh" },
-      { "title": "Flotas Empresariales", "description": "Camionetas EV + estaciones de carga" }
+      { "title": "Residencial", "description": "Inversores, BESS y cargadores AC para casas y pequeños comercios.", "seed": "blvckstone-residencial" },
+      { "title": "Comercial", "description": "Soluciones medianas y DC Multicharger para comercio e industria ligera.", "seed": "blvckstone-comercial" },
+      { "title": "Industrial y Utility", "description": "Inversores de más de 350 kW y BESS de 261 a 418 kWh.", "seed": "blvckstone-industrial" },
+      { "title": "Flotas Empresariales", "description": "Camionetas eléctricas y estaciones de carga para operaciones logísticas.", "seed": "blvckstone-flotas" }
     ]
   },
-  "stats": {
-    "title": "Respaldados por AUX Group",
-    "items": [
-      { "value": "39", "label": "años de historia en el mercado" },
-      { "value": "$9.6M", "label": "en activos" },
-      { "value": "$300M", "label": "en ingresos (MXN 2025)" },
-      { "value": "6+", "label": "fábricas operativas" },
-      { "value": "40,000+", "label": "empleados globalmente" }
-    ]
+  "testimonials": {
+    "eyebrow": "Casos reales",
+    "title": "Empresas que ya transformaron su energía"
+  },
+  "blogTeaser": {
+    "title": "Ideas para tu transición energética",
+    "intro": "Guías prácticas sobre almacenamiento, electromovilidad y financiamiento, escritas por el equipo que instala los proyectos."
   },
   "ctaFinal": {
     "title": "Transforma tu negocio hoy",
-    "primary": "Solicitar demostración",
-    "secondary": "Descargar catálogo"
+    "text": "Cuéntanos tu proyecto y te proponemos una solución técnica y financiera a la medida, sin compromiso."
+  },
+  "pages": {
+    "productos": {
+      "title": "Nuestras soluciones",
+      "description": "Energía limpia, electromovilidad y financiamiento en un solo lugar.",
+      "emptyCategory": "Estamos cargando el catálogo de esta línea. Escríbenos y te enviamos las fichas técnicas hoy mismo.",
+      "specsLabel": "Especificaciones",
+      "categories": {
+        "energia-limpia": {
+          "title": "Energía Limpia y Almacenamiento",
+          "description": "Sistemas AUXSOL de generación y almacenamiento para uso residencial, comercial y utility-scale.",
+          "seed": "blvckstone-solar"
+        },
+        "electromovilidad": {
+          "title": "Vehículos Eléctricos e Infraestructura de Carga",
+          "description": "Camionetas y vans eléctricas de trabajo, con la infraestructura de carga para operarlas.",
+          "seed": "blvckstone-ev"
+        },
+        "financiamiento": {
+          "title": "Financiamiento Empresarial",
+          "description": "Crédito, arrendamiento y capital de trabajo estructurados alrededor del ahorro que genera tu proyecto.",
+          "seed": "blvckstone-finance"
+        }
+      },
+      "financingNote": "El simulador de financiamiento estará disponible cuando se confirmen las tasas y plazos vigentes. Mientras tanto, te preparamos una corrida a la medida."
+    },
+    "soluciones": {
+      "title": "Soluciones para cada industria",
+      "description": "Cuatro verticales, una misma ingeniería: dimensionar la solución al consumo real y financiarla con el ahorro que genera."
+    },
+    "nosotros": {
+      "title": "Más que un proveedor, tu socio en innovación",
+      "description": "Integramos tecnología, ingeniería y financiamiento para que la transición energética de tu empresa sea una decisión de negocio, no una apuesta.",
+      "story": [
+        "The Blvck Stone nace para resolver un problema que vimos repetirse en cientos de proyectos: la tecnología existía, pero llegaba sin ingeniería local, sin soporte y sin una estructura financiera que la hiciera viable.",
+        "Por eso integramos las tres piezas. Diseñamos la solución técnica a partir de tu curva de carga, la instalamos y comisionamos con equipo propio en México, y la financiamos de forma que el ahorro pague la inversión.",
+        "Detrás de cada proyecto está AUX Group, un grupo industrial con 39 años de historia, más de seis fábricas y 40,000 empleados en el mundo. Esa espalda nos permite garantizar suministro, precio y tiempos que un distribuidor local no puede."
+      ],
+      "certificationsTitle": "Tecnología certificada internacionalmente",
+      "certifications": ["UL", "KEMA", "ANSI", "IEC"],
+      "howTitle": "Cómo trabajamos",
+      "how": [
+        { "title": "Diagnóstico", "description": "Analizamos tu consumo, tarifa y objetivos antes de proponer un solo equipo." },
+        { "title": "Ingeniería y financiamiento", "description": "Una propuesta técnico-económica con inversión, ahorro y retorno claros." },
+        { "title": "Instalación y soporte", "description": "Comisionamiento incluido y respuesta a incidencias en menos de 48 horas." }
+      ],
+      "teamTitle": "Equipo directivo",
+      "team": [
+        { "name": "Karla Arizmendi", "role": "Strategy & Growth Director", "initials": "KA" },
+        { "name": "Juan Carlos Meza", "role": "Business Development Director", "initials": "JM" }
+      ]
+    },
+    "casosDeExito": {
+      "title": "Empresas que ya transformaron su energía",
+      "description": "Resultados de clientes que redujeron costos, ganaron independencia energética o electrificaron su flota con nosotros.",
+      "empty": "Estamos documentando nuestros primeros casos de éxito. Vuelve pronto."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Guías y noticias sobre energía, electromovilidad y financiamiento.",
+      "empty": "Aún no hay artículos publicados.",
+      "latest": "Más artículos"
+    },
+    "contacto": {
+      "title": "Transforma tu negocio hoy",
+      "description": "Cuéntanos qué quieres resolver. Respondemos en menos de 48 horas hábiles con una primera propuesta.",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Email",
+      "officesLabel": "Oficinas",
+      "offices": "Polanco, CDMX",
+      "logistics": "Centro logístico: Guadalajara, Jalisco"
+    },
+    "gracias": {
+      "title": "Gracias por contactarnos",
+      "description": "Recibimos tu mensaje. Un especialista te contactará en menos de 48 horas hábiles."
+    },
+    "notFound": {
+      "title": "Página no encontrada",
+      "description": "La página que buscas no existe o cambió de lugar."
+    },
+    "legal": {
+      "draftNotice": "Borrador sujeto a revisión legal antes del lanzamiento.",
+      "updated": "Última actualización: septiembre de 2026",
+      "privacidad": {
+        "title": "Aviso de Privacidad",
+        "sections": [
+          { "heading": "Responsable", "body": "The Blvck Stone, con domicilio en Polanco, Ciudad de México, es responsable del tratamiento de tus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)." },
+          { "heading": "Datos que recabamos", "body": "A través del formulario de contacto recabamos nombre, correo electrónico, teléfono, industria y el mensaje que decidas enviarnos. No solicitamos datos sensibles." },
+          { "heading": "Finalidades", "body": "Usamos tus datos para responder a tu solicitud, preparar propuestas técnicas y comerciales, y dar seguimiento a la relación de negocio. No los usamos para fines distintos sin tu consentimiento." },
+          { "heading": "Derechos ARCO", "body": "Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a contacto@the-blvckstone.com. Atenderemos tu solicitud en los plazos que marca la ley." },
+          { "heading": "Transferencias", "body": "No transferimos tus datos a terceros salvo obligación legal o proveedores que operan bajo contrato de confidencialidad para prestar el servicio (alojamiento y envío de correo)." },
+          { "heading": "Cambios al aviso", "body": "Cualquier cambio a este aviso se publicará en esta misma página con la fecha de actualización." }
+        ]
+      },
+      "terminos": {
+        "title": "Términos de Servicio",
+        "sections": [
+          { "heading": "Uso del sitio", "body": "El contenido de este sitio es informativo. Las especificaciones, precios y condiciones de financiamiento se confirman por escrito en cada propuesta." },
+          { "heading": "Propiedad intelectual", "body": "Las marcas, logotipos y contenidos pertenecen a The Blvck Stone o a sus licenciantes y no pueden reproducirse sin autorización." },
+          { "heading": "Responsabilidad", "body": "Trabajamos por mantener la información actualizada, pero no garantizamos que esté libre de errores. Las obligaciones contractuales se definen únicamente en los contratos firmados." },
+          { "heading": "Legislación aplicable", "body": "Estos términos se rigen por las leyes de los Estados Unidos Mexicanos." }
+        ]
+      },
+      "cookies": {
+        "title": "Política de Cookies",
+        "sections": [
+          { "heading": "Qué son", "body": "Las cookies son pequeños archivos que el navegador guarda para recordar preferencias y medir el uso del sitio." },
+          { "heading": "Cuáles usamos", "body": "Cookies técnicas necesarias para el funcionamiento del sitio y, con tu consentimiento, cookies de analítica para entender cómo se usa." },
+          { "heading": "Cómo controlarlas", "body": "Puedes bloquear o eliminar cookies desde la configuración de tu navegador. Algunas funciones podrían dejar de operar correctamente." }
+        ]
+      }
+    }
   },
   "contact": {
-    "title": "Transforma tu negocio hoy",
     "name": "Nombre",
     "email": "Email",
     "phone": "Teléfono",
@@ -97,46 +232,12 @@
     "consent": "Acepto el",
     "privacyLink": "Aviso de Privacidad",
     "submit": "Solicitar demostración",
-    "downloadCatalog": "Descargar catálogo",
     "sending": "Enviando...",
-    "success": "¡Gracias! Te contactaremos pronto.",
+    "success": "Gracias. Te contactaremos pronto.",
     "error": "Hubo un error al enviar el formulario. Intenta de nuevo."
   },
-  "pages": {
-    "productos": {
-      "eyebrow": "Catálogo",
-      "title": "Nuestras soluciones",
-      "description": "Energía limpia, electromovilidad y financiamiento en un solo lugar."
-    },
-    "nosotros": {
-      "eyebrow": "Quiénes somos",
-      "title": "Más que un proveedor, tu socio en innovación",
-      "description": "Integración estratégica de proyectos industriales, respaldados por AUX Group."
-    },
-    "casosDeExito": {
-      "eyebrow": "Resultados reales",
-      "title": "Empresas que ya transformaron su energía",
-      "empty": "Estamos documentando nuestros primeros casos de éxito. Vuelve pronto."
-    },
-    "blog": {
-      "eyebrow": "Recursos",
-      "title": "Blog",
-      "description": "Noticias y contenido sobre energía, electromovilidad y financiamiento.",
-      "empty": "Aún no hay artículos publicados."
-    },
-    "gracias": {
-      "title": "¡Gracias por contactarnos!",
-      "description": "Recibimos tu mensaje y te contactaremos a la brevedad.",
-      "backHome": "Volver al inicio"
-    },
-    "legal": {
-      "privacidad": { "title": "Aviso de Privacidad" },
-      "terminos": { "title": "Términos de Servicio" },
-      "cookies": { "title": "Política de Cookies" },
-      "pending": "Este documento está en revisión legal y se publicará antes del lanzamiento."
-    }
-  },
   "common": {
-    "pendingContent": "Contenido en construcción."
+    "pendingContent": "Contenido en construcción.",
+    "placeholderImage": "Imagen de referencia"
   }
 }

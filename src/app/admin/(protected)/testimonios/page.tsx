@@ -6,7 +6,7 @@ import { deleteTestimonial } from "./actions";
 export default async function AdminTestimonialsPage() {
   if (!db) {
     return (
-      <p className="text-stone">
+      <p className="text-carbon/75">
         Base de datos no configurada. Define <code>DATABASE_URL</code> para
         activar esta sección.
       </p>
@@ -29,7 +29,7 @@ export default async function AdminTestimonialsPage() {
 
       <div className="mt-6 space-y-3">
         {items.length === 0 && (
-          <p className="text-stone">Todavía no hay testimonios cargados.</p>
+          <p className="text-carbon/75">Todavía no hay testimonios cargados.</p>
         )}
         {items.map((testimonial) => (
           <div
@@ -38,7 +38,7 @@ export default async function AdminTestimonialsPage() {
           >
             <div>
               <p className="font-bold text-carbon">{testimonial.name}</p>
-              <p className="text-sm text-stone">
+              <p className="text-sm text-carbon/75">
                 {[testimonial.role, testimonial.company]
                   .filter(Boolean)
                   .join(" · ")}
