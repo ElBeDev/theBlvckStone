@@ -28,6 +28,10 @@
 | **Hosting** | Vercel ahora → VPS propio más adelante | Vercel para lanzar rápido y validar con el cliente sin infraestructura que mantener. Cuando el proyecto madure, se migra a un VPS propio (Docker) para tener todo autoalojado: Next.js, Postgres y almacenamiento de imágenes |
 | **Base de datos** | Postgres — Neon, instalado como integración nativa de Vercel (no una cuenta aparte) | Guarda leads y todo el contenido del mini-CMS (productos, blog, testimonios, configuración). Es Postgres estándar: migrar a un Postgres autoalojado en el VPS más adelante no cambia código, solo mueve los datos |
 | **Storage de imágenes** | Vercel Blob (store `blvckstone-media`, plan gratuito) | Nativo de Vercel, sin cuenta aparte que administrar. El panel `/admin` sube el archivo directo a Blob y guarda la URL pública resultante |
+| **Animación** | Motion (`motion/react`) | Scroll-reveal, count-up y entrada del hero en componentes cliente aislados; todo respeta `prefers-reduced-motion`. Sin listeners de scroll manuales |
+| **Iconografía** | Phosphor Icons (`@phosphor-icons/react`, entrada `/ssr` para Server Components) | Una sola familia, peso `duotone`/`bold` consistente. Sustituye al set custom de 20 a 30 iconos del brief mientras no exista |
+| **Tipografía en producción** | Archivo vía `next/font/google` (300/400/700/900) | Stand-in fiel a Helvetica Now Display (licenciada, archivos pendientes). Cambio de una línea cuando lleguen |
+| **Verificación visual** | Playwright (devDependency) + Chromium headless | Screenshots desktop/móvil y mediciones mecánicas del pre-flight (nav, CTAs, H1, overflow, consola). Ver "Entornos & flujo de trabajo" |
 
 ---
 
@@ -48,6 +52,8 @@
 
 ### Tipografía
 **Fuente base:** Helvetica Now Display (no mezclar familias tipográficas)
+
+> **Estado (2026-09-05):** los archivos licenciados de Helvetica Now Display no se han entregado. El sitio carga **Archivo** (Google Fonts, vía `next/font`, autoalojada en build) con los mismos cuatro pesos como stand-in; antes caía en silencio a Arial del sistema. La jerarquía de abajo se aplica igual con Archivo.
 
 **Jerarquía tipográfica por uso:**
 
@@ -75,6 +81,8 @@
 - Interlocados, esquinas redondeadas
 - Símbolo ®
 - Uso: Header, favicon, elementos decorativos
+
+> **Estado (2026-09-05):** no existe archivo oficial del logo todavía. El mark de dos triángulos se construyó como SVG a partir de esta descripción (`src/components/layout/LogoMark.tsx`) y se usa en header, footer y la imagen Open Graph, junto al wordmark "THE BLVCK STONE". Se reemplaza por el archivo oficial cuando el cliente lo entregue; el favicon sigue siendo el default y también está pendiente.
 
 ### Guía Tipográfica Detallada (Helvetica Now Display)
 
@@ -107,6 +115,35 @@
 - **Títulos + Párrafo:** 16-20px gap
 - **Entre líneas (line-height):** Aumentar 0.1-0.2 en textos pequeños
 - **Letter spacing:** Minimal, solo en headlines ultragruesas (+0.5px)
+
+---
+
+## 🧭 SISTEMA DE DISEÑO VIGENTE *(nueva, v2.7)*
+
+Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-frontend`** (repo `Leonxlnx/taste-skill`, instalado con el CLI `skills` de Vercel Labs; vive en `.agents/skills/design-taste-frontend/SKILL.md`). Cualquier cambio visual futuro debe respetar estas reglas para no regresar al look genérico. `/admin` queda fuera: el propio skill excluye dashboards y UI de producto.
+
+**Modo y diales:** Redesign *Preserve* (marca, IA, contenido y slugs intactos) con ejecución tipo overhaul. Diales: `DESIGN_VARIANCE 7`, `MOTION_INTENSITY 6`, `VISUAL_DENSITY 4`.
+
+**Reglas duras que ya se aplican (y que hay que mantener):**
+- **Cero em-dashes (`—`) ni en-dashes (`–`)** en ningún texto visible: copy, CTAs, alt text, contenido cargado desde `/admin`. Usar coma, punto, dos puntos o guion normal.
+- **Un solo label por intención de CTA.** El intent "contacto" es siempre **"Solicitar demostración"** (nav, hero, banda final, formulario). El intent "explorar" es "Descubre nuestras soluciones".
+- **Tema por página:** home y `/contacto` oscuros (petróleo / petróleo profundo / negro base); interiores claros (marfil / blanco / niebla). Dentro de una página no se alternan temas; el footer oscuro es el único bloque de contraste, una vez.
+- **Sistema de formas:** interactivos = píldora (`rounded-full`), superficies = `rounded-2xl` (16px), inputs = `rounded-lg` (8px). Documentado en `globals.css`.
+- **Color:** ámbar solo para CTA primario; turquesa/teal para secundarios y acentos; nada de colores nuevos ni gradientes de texto. Texto secundario usa `carbon/75` (fondos claros) y `mist/70` (fondos oscuros): Gris Piedra `#6B7A80` se conserva como token pero **no** para texto corrido porque da 4.45:1 sobre blanco (falla AA por centésimas).
+- **Presupuesto de eyebrows:** máximo 1 cada 3 secciones. En el home son 3 para 8 secciones (hero, servicios, testimonios). Las páginas interiores no llevan.
+- **Hero:** H1 en máximo 2 líneas en desktop, subtítulo de 20 palabras o menos, máximo 4 elementos de texto, `pt` máximo 24.
+- **Sin repetir familias de layout** en una misma página. El home usa 8 distintas: split hero, franja numérica, bento asimétrico, lista sticky, galería acordeón, cita destacada, filas editoriales, banda CTA. Nada de "3 cards iguales en fila".
+- **Imágenes:** siempre foto real (o placeholder etiquetado), nunca SVG decorativo hecho a mano ni "fake screenshots" de divs. Tratamiento duotono petróleo (`.duotone` en `globals.css`) para unificar cualquier foto como textura de marca. Los placeholders se curan por ID en `src/components/DuotoneImage.tsx`.
+- **Animación con motivo:** cada movimiento comunica jerarquía, narrativa o feedback. `whileInView` con `once: true`, count-up en cifras de credibilidad, entrada escalonada del hero. Prohibido `window.addEventListener('scroll')`. Todo colapsa a estático con `prefers-reduced-motion`.
+- **Nav:** una sola línea en desktop, altura 73px (tope 80). Menú móvil con `AnimatePresence`.
+
+**Excepciones declaradas en el pre-flight:**
+- No hay modo oscuro/claro por preferencia del sistema: el tema está bloqueado por marca y por página (permitido por el skill cuando la marca lo exige).
+- Los títulos de artículo de blog se limitan a 2 líneas a 35px; son titulares editoriales, no heros de landing.
+
+**Resultado de las auditorías del Paso 4 (2026-09-05):** em-dash audit en cero (código, mensajes, base de datos y HTML servido); pre-flight sin ningún ítem en Fail; preservación con 4 cambios anunciados y aprobados (label del CTA del header "Contacto" → "Solicitar demostración", CTA secundario del hero unificado al mismo label, eliminación del botón "Descargar catálogo" que no tenía catálogo, y borradores legales en lugar del placeholder); fidelidad de marca con los 11 hex intactos, wordmark intacto y logo mark construido según el brief.
+
+**Cómo repetir la verificación visual:** con el dev server corriendo, un script de Playwright (desktop 1440×900 y móvil 390×844) debe hacer scroll por toda la página antes de capturar, porque las secciones con scroll-reveal quedan en opacidad 0 en una captura sin scroll. Medir: filas del nav, altura del header, líneas del H1, CTAs con alto mayor a 64px (wrap), `scrollWidth > innerWidth` (overflow), errores de consola, y contar `tracking-[0.18em]` (eyebrows) en `main`.
 
 ---
 
@@ -160,6 +197,22 @@ El footer de 4 columnas del brief original (Servicios / Productos / Empresa / Le
 ---
 
 ## 🎯 ESTRATEGIA DE CONTENIDO & SECCIONES
+
+> **Mapa brief → implementación (v2.6).** Las secciones de abajo son la intención original del brief; esta tabla dice cómo quedó cada una en el sitio. Donde el skill de diseño obligó a cambiar el patrón (por ejemplo, "3 cards" se convirtió en bento) se anota el motivo.
+
+| Sección del brief | Dónde vive | Cómo se implementó |
+|---|---|---|
+| 1. Hero | Home | Split asimétrico 7/5: eyebrow, H1 (2 líneas), subtítulo de 16 palabras, 2 CTAs; foto duotono 4:5 con marco turquesa desfasado; entrada escalonada con Motion. El video hero del brief queda pendiente de material |
+| 2. Servicios (3 cards) | Home | **Bento asimétrico** (1 celda grande con foto + 1 con foto + 1 tintada con icono) en vez de 3 cards iguales, que el skill prohíbe por genérico. Colores de acento por pilar como pedía el brief |
+| 3. Diferenciadores (grid de 8) | Home | Título sticky a la izquierda, 8 ítems con icono Phosphor + título + una línea a la derecha, sin cards ni bordes |
+| 4. Casos de uso / verticales (4 fichas) | Home + `/soluciones` | Home: galería acordeón (las tiras crecen al hover, solo CSS). `/soluciones`: 4 tiles fotográficos con CTA "Diseñar mi solución" → `/contacto` (el modal del brief se sustituyó por la página de contacto) |
+| 5. Productos destacados (showcase) | `/productos/*` | Cards horizontales foto + texto + chips de especificaciones (sin tabla de filas con líneas). Contenido real desde `/admin`. El carrusel y el simulador de financiamiento quedan pendientes (video YouTube y reglas de negocio) |
+| 6. Nosotros | `/nosotros` | Historia en 3 párrafos + 3 cifras con count-up, "Cómo trabajamos" en 3 pasos sin numerar, certificaciones como badges de texto, equipo con monograma de iniciales |
+| 7. Testimonios | Home + `/casos-de-exito` | Home: cita destacada grande + 2 secundarias. `/casos-de-exito`: cita hero en petróleo + grid de citas con borde turquesa. Datos reales desde `/admin` |
+| 8. Estadísticas AUX Group | Home + `/nosotros` | Franja numérica con count-up sobre petróleo profundo, sin cards |
+| 9. Blog | Home + `/blog` + `/blog/[slug]` | Home: 3 filas editoriales. Índice: post destacado con foto + filas. Artículo: portada, ancho de lectura 65ch, Markdown renderizado |
+| 10. Contacto & CTA final | `/contacto` + banda CTA | Formulario a la derecha en tarjeta petróleo suave, datos de contacto a la izquierda con iconos; teléfonos y email vienen de `site_settings`. "Descargar catálogo" se eliminó hasta que exista un catálogo |
+| 11. Footer | Global | 5 columnas (marca + 4), tagline, oficinas, email. Etiquetas idénticas al brief |
 
 ### 1. HERO SECTION (Principal)
 **Objetivo:** Captar atención inmediata con visual impactante
@@ -423,14 +476,16 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - Touch-friendly buttons (mín. 48x48px)
 
 #### Animaciones & Interactividad
-- Scroll reveal effects (Framer Motion o AOS)
+- ✅ Scroll reveal, count-up y entrada del hero con **Motion** (`motion/react`), con `prefers-reduced-motion` respetado
 - Hover states en elementos interactivos
 - Transiciones suaves (300-400ms)
 - NO sobrecargar con animaciones (máx 2-3 por sección)
 
 #### SEO
-- Meta tags dinámicos (title, description) por página e idioma
-- `hreflang` ES/EN entre versiones equivalentes
+- ✅ Meta tags dinámicos (title, description) por página e idioma (`generateMetadata` + `src/lib/metadata.ts`)
+- ✅ `hreflang` ES/EN y canonical entre versiones equivalentes
+- ✅ Open Graph / Twitter Card con imagen OG generada (`opengraph-image.tsx`)
+- ✅ `sitemap.xml` y `robots.txt` (`/admin` y `/api` excluidos)
 - Open Graph / Twitter Card
 - Sitemap.xml + robots.txt (generados automáticamente por Next.js a partir del sitemap definido arriba)
 - Structured data (Schema.org: Organization, Product, BreadcrumbList, Article para blog)
@@ -441,7 +496,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - WCAG 2.1 Level AA compliance
 - Keyboard navigation funcional
 - Alt text en todas las imágenes (en ambos idiomas)
-- Contraste de colores adecuado
+- ✅ Contraste de colores verificado: CTAs 8.2:1, acentos 6.1:1, texto secundario ajustado a `carbon/75` y `mist/70` para pasar AA (ver "Sistema de diseño vigente")
 
 #### Formularios & Leads
 - Validación client-side (Zod/react-hook-form) y server-side (Route Handler)
@@ -504,7 +559,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
   - Testimonials: 200x200 (avatares)
 
 ### Iconografía
-- Set de 20-30 iconos custom (diseño minimalista, geométrico)
+- Set de 20-30 iconos custom (diseño minimalista, geométrico) — **mientras no exista, el sitio usa Phosphor Icons** (una sola familia, sin SVG hechos a mano)
 - Colores: Turquesa (#1BBCB4), Menta (#37E6C4), Ámbar (#FFB43D), Gris (#6B7A80)
 - Estilos: Outline o filled (consistente, sin mezclar)
 - Stroke width: 2px (para coherencia con Helvetica Now Display)
@@ -561,6 +616,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **Entornos:** Local → Preview (deploy automático por PR en Vercel) → Producción (`the-blvckstone.com` en Vercel, luego VPS propio)
 - **CI en cada PR:** lint, type-check, build
 - **Panel de administración:** `/admin` dentro del propio proyecto Next.js, acceso solo para Karla/Juan Carlos (ver "Panel de administración propio")
+- **Verificación visual:** Playwright está instalado como devDependency (`npx playwright install chromium` la primera vez). Cualquier cambio de diseño se valida con screenshots en 1440×900 y 390×844 haciendo scroll completo antes de capturar, más las mediciones descritas en "Sistema de diseño vigente". `npm run build` y `npm run lint` deben quedar en cero antes de hacer push
+- **Contenido de demo:** `node scripts/seed-demo.mjs` con `DATABASE_URL` cargada repuebla productos, posts y testimonios sin duplicar
 
 ---
 
@@ -656,8 +713,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 - **v2.5 (2026-09-05):** Se carga contenido de demostración vía `scripts/seed-demo.mjs`: 9 productos (ES+EN), 3 posts de blog (ES+EN) y 4 testimonios, para poder mostrar el sitio poblado en una demo. **Es contenido inventado, no clientes reales** — queda marcado como pendiente prioritario reemplazarlo antes de compartir el link fuera del equipo.
 
+- **v2.7 (2026-09-05):** Se documenta el sistema de diseño vigente (reglas del skill que ahora gobiernan el sitio, excepciones declaradas, resultado de las auditorías del Paso 4 y cómo repetir la verificación visual), el mapa brief → implementación por sección, y se actualizan stack, tipografía, iconografía y especificaciones técnicas con lo que ya está implementado.
 - **v2.6 (2026-09-05):** Rediseño visual completo del sitio público con el skill `design-taste-frontend` (auditoría, modo Preserve con ejecución overhaul, levers 1 a 5 de la Sección 11.D). Home de 8 secciones con familias de layout distintas, tema por página, menú móvil, logo mark, fuente Archivo vía `next/font`, animaciones con Motion, iconos Phosphor, copy completo ES/EN sin placeholders, borradores legales, metadata SEO por página, sitemap, robots y OG image. Verificación con Playwright (desktop y móvil) y correcciones de contraste AA. `/admin` queda fuera del alcance del skill por decisión explícita (dashboards están fuera de su scope).
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.6
+**Versión:** 2.7
