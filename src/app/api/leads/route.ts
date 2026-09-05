@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { db } from "@/db";
+import { leads } from "@/db/schema";
 
 type LeadPayload = {
   name?: string;
@@ -16,11 +18,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "missing_fields" }, { status: 400 });
   }
 
-  // TODO: persistir en Supabase (tabla `leads`) y notificar por email vía
-  // Resend una vez provisionados esos servicios. El payload se mantiene
-  // genérico para poder conectar un CRM (HubSpot/Zoho/Salesforce) después
-  // sin tener que rehacer el formulario.
-  console.log("New lead:", data);
+  if (db) {
+    await db.insert(leads).values({
+      name: data.name,
+      email: data.email,
+      phone: data.phone || null,
+      industry: data.industry || null,
+      message: data.message || null,
+    });
+  } else {
+    // TODO: quitar este fallback una vez que DATABASE_URL esté configurado.
+    console.log("New lead (DB no configurada, no se persistió):", data);
+  }
+
+  // TODO: notificar por email vía Resend una vez provisionado.
 
   return NextResponse.json({ ok: true });
 }

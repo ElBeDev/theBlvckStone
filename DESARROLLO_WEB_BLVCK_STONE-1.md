@@ -109,6 +109,24 @@
 
 ---
 
+## ✅ AVANCE DEL PROYECTO *(nueva, se actualiza según avanza el desarrollo)*
+
+**Al 2026-09-05:**
+- Repo creado y pusheado: [github.com/ElBeDev/theBlvckStone](https://github.com/ElBeDev/theBlvckStone), listo para importar en Vercel
+- Scaffold Next.js (TS + Tailwind) con la paleta de marca como tokens, ruteo bilingüe ES/EN (`next-intl`)
+- Las 15 rutas del mapa del sitio existen y renderizan (home completa; el resto con estructura lista y placeholders donde falta copy/imágenes del cliente)
+- Formulario de contacto funcional, con validación y consentimiento de privacidad
+- Esquema de base de datos (Drizzle + Postgres) para `leads`, `products`, `posts`, `testimonials` y `site_settings`
+- Panel `/admin` con login (usuario/contraseña) y CRUD completo (crear/editar/borrar) para productos, blog y testimonios, más un formulario de configuración para datos de contacto — probado de punta a punta en navegador
+- `/api/leads` ya inserta en la tabla `leads` cuando hay `DATABASE_URL` configurada (por ahora sigue cayendo a solo log si no la hay)
+
+**Todavía no está conectado (siguiente tramo):**
+- No existe un proyecto de Supabase real todavía — sin `DATABASE_URL`, el panel funciona pero no persiste nada
+- Las páginas públicas (home, productos, blog, etc.) **todavía leen contenido estático** de los archivos de traducción (`messages/es.json` / `en.json`), no de las tablas `products`/`posts`/`testimonials` — falta conectar esa lectura una vez que haya contenido real cargado desde `/admin`
+- Subida de imágenes desde el panel: por ahora los formularios solo aceptan una URL de imagen (no hay upload de archivo todavía; ver "Almacenamiento de imágenes" más abajo)
+
+---
+
 ## 🗺️ MAPA DEL SITIO (Sitemap)
 
 Cada ruta existe en `/es/...` (default) y `/en/...`.
@@ -361,10 +379,11 @@ En vez de un CMS externo (Sanity/Strapi/Payload), Karla y Juan Carlos editan con
 - `testimonials` — testimonios/casos de éxito (nombre, empresa, cargo, cita, foto)
 - `site_settings` — textos configurables de home (headline, subheadline, estadísticas, datos de contacto)
 
-### Panel `/admin`
-- Rutas protegidas bajo `/admin`, login simple (usuario/contraseña) solo para Karla y Juan Carlos — 2 cuentas editoras, sin roles complejos
-- CRUD por tipo de contenido (crear/editar/borrar productos, posts, testimonios)
-- Editor de texto simple (Markdown o rich text básico) para el cuerpo del blog
+### Panel `/admin` — ✅ implementado (2026-09-05)
+- Rutas protegidas bajo `/admin`, login con usuario/contraseña vía variables de entorno (`ADMIN_USERNAME`/`ADMIN_PASSWORD`) — por ahora una sola cuenta compartida, no 2 cuentas separadas; pasar a multiusuario es un fast-follow, no bloquea el lanzamiento
+- CRUD completo (crear/editar/borrar) para productos, posts de blog y testimonios, más un formulario de configuración para datos de contacto
+- Editor de texto simple (textarea en Markdown) para el cuerpo del blog
+- **Pendiente:** conectar las páginas públicas para que lean de estas tablas en vez del contenido estático actual (ver "Avance del proyecto")
 
 ### Almacenamiento de imágenes (dos fases)
 - **Mientras el sitio esté en Vercel:** el disco es efímero, no sirve para guardar uploads del panel — usar un storage externo mínimo (Vercel Blob o un bucket S3-compatible) solo para las imágenes subidas desde `/admin`
@@ -541,8 +560,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 2. **Video Hero:** si el material propio no está listo, definir banco de imágenes/video temporal para no bloquear Fase 2.
 3. **Simulador de financiamiento:** requiere reglas de negocio (tasas, plazos, requisitos de elegibilidad) del área financiera antes de poder programarse — confirmar si entra en v1 o se mueve a v2.
 4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito.
-5. **El panel de administración propio requiere tiempo de desarrollo dedicado** (login, CRUD de productos/blog/testimonios, subida de imágenes) — no viene gratis como en un CMS externo; hay que dimensionarlo en el timeline.
-6. **Mientras el sitio esté en Vercel**, las imágenes subidas desde `/admin` necesitan un storage externo temporal (Vercel Blob o bucket S3-compatible) hasta la migración al VPS.
+5. **Las páginas públicas todavía no leen del mini-CMS** — el panel `/admin` ya guarda en Postgres, pero home/productos/blog siguen mostrando el contenido estático de `messages/*.json`. Es el siguiente tramo de trabajo antes de que cargar contenido desde `/admin` tenga efecto visible en el sitio.
+6. **Mientras el sitio esté en Vercel**, las imágenes subidas desde `/admin` necesitan un storage externo temporal (Vercel Blob o bucket S3-compatible) hasta la migración al VPS — hoy los formularios solo aceptan una URL de imagen, no hay upload de archivo.
 
 ---
 
@@ -567,8 +586,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [ ] Redes sociales activas a enlazar (LinkedIn confirmado, ¿Instagram?)
 - [ ] Proveedor de DNS/dominio y correo corporativo
 - [ ] Alta de cuentas de servicio: Vercel, Supabase, Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
-- [ ] Mecanismo de login del panel `/admin` (usuario/contraseña simple vs algo más robusto)
-- [ ] Storage temporal de imágenes mientras se esté en Vercel (Vercel Blob vs bucket S3-compatible)
+- [ ] Provisionar el proyecto de Supabase real y setear `DATABASE_URL` (+ `ADMIN_USERNAME`/`ADMIN_PASSWORD`/`SESSION_SECRET`) en Vercel
+- [ ] Conectar las páginas públicas a las tablas del mini-CMS (hoy leen contenido estático)
+- [ ] Storage de imágenes: definir Vercel Blob vs bucket S3-compatible y agregar upload de archivo al panel (hoy solo acepta URL)
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 
 ---
@@ -617,7 +637,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **v1.0 (2026-09-03):** Documento inicial — identidad visual, secciones de contenido, specs técnicas generales, timeline.
 - **v2.0 (2026-09-05):** Se cierran las decisiones de arquitectura abiertas en v1 (multi-página, Next.js + Sanity + Supabase + Vercel, bilingüe ES/EN, sin CRM en v1). Se agregan: mapa del sitio, secciones de Nosotros/Testimonios/Blog, sección de privacidad y cumplimiento (LFPDPPP, cookies), soporte de navegadores, entornos y flujo de trabajo, riesgos/dependencias, y lista de pendientes abiertos. Timeline ajustado de 9 a 10 semanas para reflejar el alcance real.
 - **v2.1 (2026-09-05):** Se reemplaza Sanity por un panel de administración propio (Next.js + Postgres) para minimizar dependencias de terceros y facilitar la futura migración a un VPS propio. Se agrega la sección "Panel de administración propio (mini-CMS)" con el modelo de contenido, el enfoque de `/admin` y la estrategia de almacenamiento de imágenes en dos fases (Vercel → VPS). Hosting definido como plan en dos fases: Vercel ahora, VPS propio más adelante. Se registra el repositorio en GitHub ([ElBeDev/theBlvckStone](https://github.com/ElBeDev/theBlvckStone)) con el scaffold inicial ya pusheado.
+- **v2.2 (2026-09-05):** Se agrega la sección "Avance del proyecto" para llevar el estado real del desarrollo. Se implementa y prueba de punta a punta el esquema de base de datos (Drizzle) y el panel `/admin` completo: login, y CRUD de productos/blog/testimonios + configuración de contacto. Se deja explícito que las páginas públicas todavía no leen de estas tablas (siguen usando contenido estático) — se agrega como pendiente prioritario junto con la conexión real a Supabase y el upload de imágenes.
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.1
+**Versión:** 2.2
