@@ -21,12 +21,12 @@
 |----------|---------|---------|
 | **Estructura del sitio** | Multi-página (no one-page) | Coincide con las 4 columnas del footer (Servicios/Productos/Empresa/Legal), permite SEO por tema y deja espacio para blog y páginas de producto individuales |
 | **Framework** | Next.js 14+ (App Router) + TypeScript + Tailwind CSS | SSR/SSG para SEO, rutas de archivo natural para multi-página, i18n routing nativo |
-| **CMS** | Sanity (headless, hosted) | Karla/Juan Carlos editan textos, productos, blog e imágenes sin depender de un dev. Hosted (sin servidor que mantener), buen soporte de contenido localizado ES/EN, generoso tier gratuito. *(Alternativa: Strapi self-hosted si prefieren control total del dato — cambiar de opinión aquí es barato, avisar antes de iniciar Fase 2)* |
-| **Internacionalización** | Rutas `/es/...` y `/en/...` (next-intl) | Cada documento de Sanity tiene campos localizados; fallback a español si falta traducción |
+| **CMS** | Panel de administración propio (Next.js + Postgres) | Sin CMS externo, ni SaaS (Sanity) ni servicio aparte que mantener (Strapi/Payload). Tablas propias (`products`, `posts`, `testimonials`, `site_settings`) + panel `/admin` con login para Karla/Juan Carlos. Vive en el mismo repo y el mismo deploy — al migrar al VPS es la misma pieza, no hay nada aparte que mover |
+| **Internacionalización** | Rutas `/es/...` y `/en/...` (next-intl) | Cada fila de contenido tiene campos localizados; fallback a español si falta traducción |
 | **Backend / Leads** | Next.js Route Handlers, sin servidor aparte | El formulario de contacto guarda el lead en Postgres (Supabase) y dispara un email (Resend) — sin CRM todavía |
 | **CRM** | Ninguno en v1 | El payload del lead se diseña genérico (`leads` con nombre/email/teléfono/mensaje/industria/utm) para poder conectar HubSpot/Zoho/Salesforce después sin rehacer el formulario |
-| **Hosting** | Vercel | Integración nativa con Next.js, preview deployments por PR, analytics incluido |
-| **Base de datos** | Postgres (Supabase), solo para leads | El contenido de marketing vive en Sanity; no hace falta Mongo aparte |
+| **Hosting** | Vercel ahora → VPS propio más adelante | Vercel para lanzar rápido y validar con el cliente sin infraestructura que mantener. Cuando el proyecto madure, se migra a un VPS propio (Docker) para tener todo autoalojado: Next.js, Postgres y almacenamiento de imágenes |
+| **Base de datos** | Postgres (Supabase por ahora) | Guarda leads y todo el contenido del mini-CMS (productos, blog, testimonios, configuración). Es Postgres estándar: migrar a un Postgres autoalojado en el VPS más adelante no cambia código, solo mueve los datos |
 
 ---
 
@@ -299,7 +299,7 @@ El footer de 4 columnas del brief original (Servicios / Productos / Empresa / Le
 - Listado paginado de artículos (`/blog`), detalle (`/blog/[slug]`)
 - Categorías sugeridas: Energía & Sustentabilidad, Electromovilidad, Financiamiento, Casos de éxito, Noticias AUX Group
 - Autor, fecha, tiempo de lectura, artículos relacionados
-- Gestionado 100% desde Sanity para que el equipo publique sin dev
+- Gestionado 100% desde el panel `/admin` propio para que el equipo publique sin dev
 
 **Diseño:**
 - Cards con imagen destacada, título, extracto
@@ -351,10 +351,34 @@ El footer de 4 columnas del brief original (Servicios / Productos / Empresa / Le
 
 ---
 
+## 🗄️ PANEL DE ADMINISTRACIÓN PROPIO (mini-CMS) *(nueva)*
+
+En vez de un CMS externo (Sanity/Strapi/Payload), Karla y Juan Carlos editan contenido desde un panel propio, construido dentro del mismo proyecto Next.js.
+
+### Modelo de contenido (tablas en Postgres)
+- `products` — productos/servicios (título, descripción, specs, imágenes, slug, idioma)
+- `posts` — artículos de blog (título, cuerpo, autor, fecha, categoría, slug, idioma)
+- `testimonials` — testimonios/casos de éxito (nombre, empresa, cargo, cita, foto)
+- `site_settings` — textos configurables de home (headline, subheadline, estadísticas, datos de contacto)
+
+### Panel `/admin`
+- Rutas protegidas bajo `/admin`, login simple (usuario/contraseña) solo para Karla y Juan Carlos — 2 cuentas editoras, sin roles complejos
+- CRUD por tipo de contenido (crear/editar/borrar productos, posts, testimonios)
+- Editor de texto simple (Markdown o rich text básico) para el cuerpo del blog
+
+### Almacenamiento de imágenes (dos fases)
+- **Mientras el sitio esté en Vercel:** el disco es efímero, no sirve para guardar uploads del panel — usar un storage externo mínimo (Vercel Blob o un bucket S3-compatible) solo para las imágenes subidas desde `/admin`
+- **Al migrar al VPS:** las imágenes se guardan directo en disco local (o un volumen Docker); ya no se necesita el bucket externo
+
+### Por qué esta ruta y no Strapi/Payload
+Menos piezas que mantener: un solo repo, un solo deploy, una sola base de datos. El costo es construir el panel a mano (formularios CRUD no vienen gratis de fábrica), pero se gana control total del dato y una migración al VPS sin piezas sueltas que mover.
+
+---
+
 ## 🔧 ESPECIFICACIONES TÉCNICAS
 
 ### Stack Definido
-Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (TS) + Tailwind + Sanity + Supabase (leads) + Vercel**.
+Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (TS) + Tailwind + panel `/admin` propio + Postgres (Supabase) + Vercel → VPS**.
 
 ### Requisitos Funcionales
 
@@ -504,10 +528,10 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 ## ⚙️ ENTORNOS & FLUJO DE TRABAJO *(nueva)*
 
-- **Repositorio:** GitHub privado. `main` = producción, ramas de feature + Pull Request para cada cambio
-- **Entornos:** Local → Preview (deploy automático por PR en Vercel) → Producción (`the-blvckstone.com` en Vercel)
+- **Repositorio:** [github.com/ElBeDev/theBlvckStone](https://github.com/ElBeDev/theBlvckStone) — `main` = producción, ramas de feature + Pull Request para cada cambio
+- **Entornos:** Local → Preview (deploy automático por PR en Vercel) → Producción (`the-blvckstone.com` en Vercel, luego VPS propio)
 - **CI en cada PR:** lint, type-check, build
-- **CMS:** Sanity Studio embebido en el proyecto (`/studio`), acceso separado para Karla/Juan Carlos con rol editor (sin acceso a código)
+- **Panel de administración:** `/admin` dentro del propio proyecto Next.js, acceso solo para Karla/Juan Carlos (ver "Panel de administración propio")
 
 ---
 
@@ -517,7 +541,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 2. **Video Hero:** si el material propio no está listo, definir banco de imágenes/video temporal para no bloquear Fase 2.
 3. **Simulador de financiamiento:** requiere reglas de negocio (tasas, plazos, requisitos de elegibilidad) del área financiera antes de poder programarse — confirmar si entra en v1 o se mueve a v2.
 4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito.
-5. **Elección final CMS (Sanity vs Strapi):** confirmar antes de iniciar Fase 2, ya que cambia la infraestructura.
+5. **El panel de administración propio requiere tiempo de desarrollo dedicado** (login, CRUD de productos/blog/testimonios, subida de imágenes) — no viene gratis como en un CMS externo; hay que dimensionarlo en el timeline.
+6. **Mientras el sitio esté en Vercel**, las imágenes subidas desde `/admin` necesitan un storage externo temporal (Vercel Blob o bucket S3-compatible) hasta la migración al VPS.
 
 ---
 
@@ -525,9 +550,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 > Ajustado desde la v1 para reflejar multi-página + CMS + bilingüe. Asume que el cliente entrega contenido (textos, imágenes, video) a tiempo — ver "Riesgos y dependencias".
 
-1. **Fase 0 (Semana 1):** Kickoff, wireframes de páginas clave, setup de repo/proyecto (Next.js + Sanity + Vercel), modelado de contenido en Sanity
+1. **Fase 0 (Semana 1):** Kickoff, wireframes de páginas clave, setup de repo/proyecto (Next.js + Vercel), modelado de datos del mini-CMS en Postgres
 2. **Fase 1 (Semana 2-3):** Diseño UI (mockups) de Home + páginas de producto + Nosotros, aprobación de cliente
-3. **Fase 2 (Semana 4-7):** Desarrollo frontend, integración Sanity, i18n ES/EN, formulario de leads + Supabase + email
+3. **Fase 2 (Semana 4-7):** Desarrollo frontend, panel `/admin` (CRUD + login), i18n ES/EN, formulario de leads + Supabase + email
 4. **Fase 3 (Semana 8-9):** Carga de contenido real (ambos idiomas), testing cross-browser/responsive/accesibilidad, QA
 5. **Fase 4 (Semana 10):** UAT con cliente, correcciones finales, deploy a producción, configuración DNS/SSL/GA4/GTM
 6. **Post-launch:** Manual de uso del CMS para Karla/Juan Carlos, monitoreo, ajustes SEO continuos
@@ -536,13 +561,15 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 ## 📌 PENDIENTES / DECISIONES ABIERTAS
 
-- [ ] Confirmar Sanity vs Strapi de forma definitiva
 - [ ] Textos finales en español (y su traducción al inglés)
 - [ ] Autorización de logos/testimonios de clientes reales
 - [ ] Confirmar si el simulador de financiamiento entra en v1 o v2
 - [ ] Redes sociales activas a enlazar (LinkedIn confirmado, ¿Instagram?)
 - [ ] Proveedor de DNS/dominio y correo corporativo
-- [ ] Alta de cuentas de servicio: Vercel, Sanity, Supabase, Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
+- [ ] Alta de cuentas de servicio: Vercel, Supabase, Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
+- [ ] Mecanismo de login del panel `/admin` (usuario/contraseña simple vs algo más robusto)
+- [ ] Storage temporal de imágenes mientras se esté en Vercel (Vercel Blob vs bucket S3-compatible)
+- [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 
 ---
 
@@ -589,7 +616,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 - **v1.0 (2026-09-03):** Documento inicial — identidad visual, secciones de contenido, specs técnicas generales, timeline.
 - **v2.0 (2026-09-05):** Se cierran las decisiones de arquitectura abiertas en v1 (multi-página, Next.js + Sanity + Supabase + Vercel, bilingüe ES/EN, sin CRM en v1). Se agregan: mapa del sitio, secciones de Nosotros/Testimonios/Blog, sección de privacidad y cumplimiento (LFPDPPP, cookies), soporte de navegadores, entornos y flujo de trabajo, riesgos/dependencias, y lista de pendientes abiertos. Timeline ajustado de 9 a 10 semanas para reflejar el alcance real.
+- **v2.1 (2026-09-05):** Se reemplaza Sanity por un panel de administración propio (Next.js + Postgres) para minimizar dependencias de terceros y facilitar la futura migración a un VPS propio. Se agrega la sección "Panel de administración propio (mini-CMS)" con el modelo de contenido, el enfoque de `/admin` y la estrategia de almacenamiento de imágenes en dos fases (Vercel → VPS). Hosting definido como plan en dos fases: Vercel ahora, VPS propio más adelante. Se registra el repositorio en GitHub ([ElBeDev/theBlvckStone](https://github.com/ElBeDev/theBlvckStone)) con el scaffold inicial ya pusheado.
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.0
+**Versión:** 2.1
