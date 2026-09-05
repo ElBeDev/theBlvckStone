@@ -124,6 +124,7 @@
 - El schema de Drizzle ya está aplicado en la base de Neon real (5 tablas creadas)
 - Subida de imágenes desde `/admin` (productos y testimonios) ya sube el archivo a Vercel Blob y guarda la URL pública — probado con un archivo real de punta a punta
 
+- **Contenido de demo cargado** vía `scripts/seed-demo.mjs`: 9 productos (ES+EN, 3 por pilar), 3 posts de blog (ES+EN, con Markdown) y 4 testimonios. **Es contenido inventado para poder mostrar el sitio poblado** — nombres de empresas y personas en los testimonios son ficticios y deben reemplazarse por casos reales autorizados antes de cualquier lanzamiento público. El script queda en el repo para volver a poblar el ambiente si se resetea la base de datos.
 - **Las páginas públicas ya leen del mini-CMS:** `/productos/energia-limpia|electromovilidad|financiamiento` muestran los productos reales de esa categoría e idioma (o el estado "pendiente" si no hay ninguno todavía); `/blog` y `/blog/[slug]` renderizan los posts reales (con Markdown); `/casos-de-exito` muestra los testimonios reales; `/contacto` toma los teléfonos y el email de `site_settings` en vez de tenerlos escritos en el código. Probado de punta a punta: contenido cargado desde `/admin` aparece de inmediato en el sitio público, en el idioma correcto, sin filtrarse al otro idioma.
 - Se agregó una columna `category` a `products` (energia-limpia / electromovilidad / financiamiento) para poder listar cada producto bajo su pilar correspondiente
 
@@ -566,7 +567,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 1. **Contenido bilingüe es el cuello de botella más probable.** Copy, imágenes y video deben entregarse en ES (y EN si aplica antes del lanzamiento) — si no llegan a tiempo, el timeline de Fase 3 se corre.
 2. **Video Hero:** si el material propio no está listo, definir banco de imágenes/video temporal para no bloquear Fase 2.
 3. **Simulador de financiamiento:** requiere reglas de negocio (tasas, plazos, requisitos de elegibilidad) del área financiera antes de poder programarse — confirmar si entra en v1 o se mueve a v2.
-4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito — mientras tanto, esa sección se ve vacía en producción (correcto, no hay que inventar contenido).
+4. **Autorización de testimonios/logos de clientes** para la sección de Casos de Éxito — hoy tiene testimonios **de demo, inventados** (ver "Avance del proyecto"), cargados solo para mostrar el sitio poblado en reuniones internas. Deben reemplazarse por casos reales autorizados antes de compartir el link fuera del equipo o de conectar el dominio real.
 5. ~~Las páginas públicas todavía no leen del mini-CMS~~ — **resuelto:** productos, blog, casos de éxito y contacto ya leen de Postgres en vivo.
 6. ~~Mientras el sitio esté en Vercel, las imágenes subidas desde `/admin` necesitan un storage externo temporal~~ — **resuelto:** Vercel Blob ya está provisionado y el upload de archivo funciona en productos y testimonios.
 
@@ -594,6 +595,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [ ] Proveedor de DNS/dominio y correo corporativo
 - [x] ~~Provisionar Postgres y storage de imágenes, setear `DATABASE_URL`/`ADMIN_USERNAME`/`ADMIN_PASSWORD`/`SESSION_SECRET`/`BLOB_READ_WRITE_TOKEN` en Vercel~~ — resuelto con Neon + Vercel Blob, ambos nativos de Vercel
 - [x] ~~Conectar las páginas públicas a las tablas del mini-CMS~~ — resuelto: productos, blog, casos de éxito y contacto ya leen contenido real
+- [ ] **Reemplazar el contenido de demo (inventado) por contenido real** antes de compartir el link fuera del equipo — especialmente los 4 testimonios, que hoy son ficticios
 - [ ] Alta de cuentas de servicio restantes: Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 
@@ -647,6 +649,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **v2.3 (2026-09-05):** Se reemplaza Supabase por **Neon**, instalado como integración nativa dentro del mismo proyecto de Vercel (un tercero menos que administrar por separado). Se provisiona **Vercel Blob** para el almacenamiento de imágenes y se conecta el upload de archivo real en los formularios de productos y testimonios (antes solo aceptaban una URL). Todo probado de punta a punta contra la base de datos y el storage reales: login, CRUD completo, subida de imagen, y dashboard con conteos en vivo. `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `SESSION_SECRET` ya están seteados en Vercel (production/preview/development).
 - **v2.4 (2026-09-05):** Se conectan las páginas públicas al mini-CMS: productos (por categoría e idioma), blog (índice + detalle con Markdown), casos de éxito y los datos de contacto ahora se leen de Postgres en vivo en vez del copy estático. Se agrega la columna `category` a `products` para asociar cada producto a uno de los 3 pilares. El home y el índice `/productos` se mantienen con el copy de marca fijo a propósito. Probado de punta a punta: contenido cargado desde `/admin` aparece de inmediato en el sitio, respetando el idioma.
 
+- **v2.5 (2026-09-05):** Se carga contenido de demostración vía `scripts/seed-demo.mjs`: 9 productos (ES+EN), 3 posts de blog (ES+EN) y 4 testimonios, para poder mostrar el sitio poblado en una demo. **Es contenido inventado, no clientes reales** — queda marcado como pendiente prioritario reemplazarlo antes de compartir el link fuera del equipo.
+
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-09-05
-**Versión:** 2.4
+**Versión:** 2.5
