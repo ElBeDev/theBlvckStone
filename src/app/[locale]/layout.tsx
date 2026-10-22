@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Dust } from "@/components/void/Dust";
 import { ScrollClock } from "@/components/void/ScrollClock";
 import { SITE_URL } from "@/lib/metadata";
 import "../globals.css";
@@ -59,7 +58,6 @@ export default async function LocaleLayout({
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <ScrollClock />
-          <Dust />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
