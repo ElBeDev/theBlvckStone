@@ -7,14 +7,7 @@ import type { ProductCategory } from "@/lib/product-categories";
 import { PageHero } from "@/components/PageHero";
 import { ProductGrid } from "@/components/ProductGrid";
 import { CtaBand } from "@/components/CtaBand";
-
-const IMAGE_POOLS: Record<ProductCategory, number[]> = {
-  "energia-limpia": [54, 28, 66],
-  electromovilidad: [155, 197, 133],
-  financiamiento: [180, 60, 20],
-  construccion: [1031, 69, 1081],
-  "estrategia-fiscal": [1, 8, 48],
-};
+import { siteImage } from "@/components/DuotoneImage";
 
 export async function ProductCategoryPage({
   locale,
@@ -62,7 +55,7 @@ export async function ProductCategoryPage({
         <ProductGrid
           items={items}
           specsLabel={t("specsLabel")}
-          imagePool={IMAGE_POOLS[category]}
+          fallbackImage={siteImage(t(`categories.${category}.seed`))}
         />
       )}
 

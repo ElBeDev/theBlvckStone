@@ -133,7 +133,7 @@ Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-f
 - **Presupuesto de eyebrows:** máximo 1 cada 3 secciones. En el home son 3 para 8 secciones (hero, servicios, testimonios). Las páginas interiores no llevan.
 - **Hero:** H1 en máximo 2 líneas en desktop, subtítulo de 20 palabras o menos, máximo 4 elementos de texto, `pt` máximo 24.
 - **Sin repetir familias de layout** en una misma página. El home usa 8 distintas: split hero, franja numérica, bento asimétrico, lista sticky, galería acordeón, cita destacada, filas editoriales, banda CTA. Nada de "3 cards iguales en fila".
-- **Imágenes:** siempre foto real (o placeholder etiquetado), nunca SVG decorativo hecho a mano ni "fake screenshots" de divs. Tratamiento duotono petróleo (`.duotone` en `globals.css`) para unificar cualquier foto como textura de marca. Los placeholders se curan por ID en `src/components/DuotoneImage.tsx`.
+- **Imágenes:** siempre foto real, nunca SVG decorativo hecho a mano ni "fake screenshots" de divs. *(v2.9)* Las fotos conservan su color bajo un tinte petróleo suave (`.duotone` en `globals.css`); donde hay texto encima se agrega `.duotone-legible` (degradado oscuro). Las fotos del sitio viven en `public/images/site/` y se direccionan por seed en `src/components/DuotoneImage.tsx` (`siteImage`); las de cada servicio en `public/images/servicios/<slug>.jpg`, guardadas en `products.image_url`. Ninguna foto muestra marcas de proveedores ni de sus clientes.
 - **Animación con motivo:** cada movimiento comunica jerarquía, narrativa o feedback. `whileInView` con `once: true`, count-up en cifras de credibilidad, entrada escalonada del hero. Prohibido `window.addEventListener('scroll')`. Todo colapsa a estático con `prefers-reduced-motion`.
 - **Nav:** una sola línea en desktop, altura 73px (tope 80). Menú móvil con `AnimatePresence`.
 
@@ -667,7 +667,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
 - [ ] **Revisión legal y regulatoria del contenido financiero y fiscal** antes del lanzamiento: la inversión a tasa fija (5% mensual) se publica como oferta al público, y el programa de productividad y la deducción inmediata hacen afirmaciones fiscales.
 - [x] ~~Decidir si las marcas del fabricante se siguen mencionando por nombre~~ — resuelto (2026-10-21): **el sitio no usa marcas de proveedores**. La franja de estadísticas ya no muestra cifras corporativas del fabricante sino compromisos propios (5 líneas, 29 servicios, 48 h, 10 años de garantía en inversores, hasta 40% de ahorro con BESS)
-- [ ] Fotos reales para las 29 fichas de servicio (hoy usan placeholders por categoría); el material aprovechable está listado en los reportes locales de `docs/empresas/`
+- [x] ~~Fotos reales para las 29 fichas de servicio~~ — resuelto en v2.9: 46 fotos (17 del sitio, 29 de servicios), la mayoría del material de proveedores con logos recortados o difuminados y el resto de bancos libres (Unsplash/Pexels). Sigue pendiente la foto real del equipo para Nosotros y un hero con carga EV/BESS propio
 
 ---
 
@@ -726,6 +726,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 - **v2.8 (2026-10-21):** Catálogo real de servicios a partir de la carpeta de Drive. Se agregan las líneas Construcción e Infraestructura Industrial y Estrategia Fiscal y Laboral (rutas, categorías, copy ES/EN, bento de 5 celdas, footer, sitemap). 29 servicios ES+EN en `scripts/seed-services.mjs`; los productos de demo se eliminan y `seed-demo.mjs` queda solo con blog y testimonios. Se retiran del sitio todas las menciones a marcas de proveedores (copy de servicios, Nosotros, footer y franja de estadísticas). Documentación reorganizada en `docs/` (brief, reportes por proveedor en `docs/empresas/`, tracker interno en `docs/interno/`).
 
+- **v2.9 (2026-10-21):** Fotografía real en todo el sitio: se retiran los placeholders de Picsum (y su dominio de `next.config.ts`) y se sustituyen por 46 fotos locales sin marcas. El tratamiento de imagen pasa de duotono en escala de grises a color con tinte petróleo suave, con degradado de legibilidad donde hay texto sobre foto. Las fichas de servicio sin foto propia usan la imagen de su categoría.
+
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-10-21
-**Versión:** 2.8
+**Versión:** 2.9

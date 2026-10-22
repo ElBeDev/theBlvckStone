@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 
 export function PageHero({
   eyebrow,
@@ -42,7 +42,7 @@ export function PageHero({
         {imageSeed && (
           <Reveal delay={0.1} className="lg:col-span-5">
             <DuotoneImage
-              src={placeholderUrl(imageSeed, 1200, 900)}
+              src={siteImage(imageSeed)}
               alt={imageAlt ?? title}
               width={1200}
               height={900}

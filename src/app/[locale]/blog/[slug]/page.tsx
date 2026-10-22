@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { db } from "@/db";
 import { posts } from "@/db/schema";
 import { Link } from "@/i18n/navigation";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -86,7 +86,7 @@ export default async function BlogPostPage({
 
       <div className="mx-auto max-w-5xl px-5 pt-10 md:px-8">
         <DuotoneImage
-          src={placeholderUrl(`post-${post.slug}`, 1600, 900)}
+          src={siteImage(`post-${post.slug}`)}
           alt={post.title}
           width={1600}
           height={900}

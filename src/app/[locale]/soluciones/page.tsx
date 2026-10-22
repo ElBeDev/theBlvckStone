@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { pageMetadata } from "@/lib/metadata";
 
 type Vertical = { title: string; description: string; seed: string };
@@ -54,11 +54,11 @@ export default async function SolucionesPage({
                 }`}
               >
                 <DuotoneImage
-                  src={placeholderUrl(item.seed, 1000, 900)}
+                  src={siteImage(item.seed)}
                   alt={item.title}
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                  className="duotone-legible absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
                 />
                 <div className="relative z-10 flex flex-1 flex-col justify-end p-7">
                   <h2 className="text-2xl font-black leading-tight tracking-tight md:text-3xl">

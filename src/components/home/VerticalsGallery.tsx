@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/navigation";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { Reveal } from "@/components/motion/Reveal";
 
 type Vertical = { title: string; description: string; seed: string };
@@ -43,11 +43,11 @@ export function VerticalsGallery({
               className="accordion-strip group relative block h-56 overflow-hidden rounded-2xl md:h-full"
             >
               <DuotoneImage
-                src={placeholderUrl(item.seed, 900, 1200)}
+                src={siteImage(item.seed)}
                 alt={item.title}
                 fill
                 sizes="(min-width: 768px) 40vw, 100vw"
-                className="absolute inset-0"
+                className="duotone-legible absolute inset-0"
               />
               <div className="relative z-10 flex h-full flex-col justify-end p-6">
                 <h3 className="text-xl font-bold leading-snug md:text-2xl">

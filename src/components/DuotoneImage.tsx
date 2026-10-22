@@ -1,41 +1,34 @@
 import Image from "next/image";
 
-// Placeholder photography until the client provides brand assets.
-// Curated Picsum IDs so each slot shows a subject that fits (infrastructure,
-// energy, logistics) instead of whatever a random seed returns. The duotone
-// wrapper makes them read as brand texture. Swap for real photos later.
-const CURATED: Record<string, number> = {
-  "blvckstone-hero-energy": 134,
-  "blvckstone-solar-field": 137,
-  "blvckstone-electric-truck": 84,
-  "blvckstone-residencial": 164,
-  "blvckstone-comercial": 43,
-  "blvckstone-industrial": 101,
-  "blvckstone-flotas": 155,
-  "blvckstone-solar": 137,
-  "blvckstone-ev": 181,
-  "blvckstone-finance": 180,
-  "blvckstone-construccion": 1076,
-  "blvckstone-fiscal": 534,
-  "blvckstone-industrial-building": 1078,
-  "blvckstone-team-industrial": 192,
-  "post-senales-necesitas-bess": 54,
-  "post-signs-you-need-bess": 54,
-  "post-electromovilidad-flotas-mexico": 197,
-  "post-electromobility-fleets-mexico": 197,
-  "post-financiar-proyecto-energia-limpia": 60,
-  "post-financing-clean-energy-project": 60,
+// Site photography lives in public/images/site. Each slot is addressed by a
+// seed so components stay decoupled from file names. The duotone wrapper
+// unifies every photo as brand texture. Service photos are stored per product
+// (products.image_url) and fall back to their category image.
+const SITE_IMAGES: Record<string, string> = {
+  "blvckstone-hero-energy": "hero",
+  "blvckstone-solar-field": "bento-energia",
+  "blvckstone-electric-truck": "bento-ev",
+  "blvckstone-industrial-building": "bento-construccion",
+  "blvckstone-residencial": "vertical-residencial",
+  "blvckstone-comercial": "vertical-comercial",
+  "blvckstone-industrial": "vertical-industrial",
+  "blvckstone-flotas": "vertical-flotas",
+  "blvckstone-solar": "cat-energia",
+  "blvckstone-ev": "cat-electromovilidad",
+  "blvckstone-finance": "cat-financiamiento",
+  "blvckstone-construccion": "cat-construccion",
+  "blvckstone-fiscal": "cat-estrategia-fiscal",
+  "blvckstone-team-industrial": "nosotros",
+  "post-senales-necesitas-bess": "blog-bess",
+  "post-signs-you-need-bess": "blog-bess",
+  "post-electromovilidad-flotas-mexico": "blog-flotas",
+  "post-electromobility-fleets-mexico": "blog-flotas",
+  "post-financiar-proyecto-energia-limpia": "blog-financiamiento",
+  "post-financing-clean-energy-project": "blog-financiamiento",
 };
 
-export function placeholderUrl(seed: string, w: number, h: number) {
-  const id = CURATED[seed];
-  return id
-    ? `https://picsum.photos/id/${id}/${w}/${h}`
-    : `https://picsum.photos/seed/${seed}/${w}/${h}`;
-}
-
-export function placeholderById(id: number, w: number, h: number) {
-  return `https://picsum.photos/id/${id}/${w}/${h}`;
+export function siteImage(seed: string) {
+  return `/images/site/${SITE_IMAGES[seed] ?? "cat-energia"}.jpg`;
 }
 
 type Base = {

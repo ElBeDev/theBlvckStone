@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -91,7 +91,7 @@ export function Hero({
             className="absolute -top-4 -right-4 hidden h-full w-full rounded-2xl border border-turquoise/40 lg:block"
           />
           <DuotoneImage
-            src={placeholderUrl("blvckstone-hero-energy", 1200, 1500)}
+            src={siteImage("blvckstone-hero-energy")}
             alt={imageAlt}
             width={1200}
             height={1500}

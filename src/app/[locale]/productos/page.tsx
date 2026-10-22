@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { pageMetadata } from "@/lib/metadata";
 
 type ServiceItem = {
@@ -67,7 +67,7 @@ export default async function ProductosPage({
                   className="group grid gap-6 py-10 md:grid-cols-12 md:items-center md:gap-10"
                 >
                   <DuotoneImage
-                    src={placeholderUrl(seeds[i], 900, 600)}
+                    src={siteImage(seeds[i])}
                     alt={service.title}
                     width={900}
                     height={600}

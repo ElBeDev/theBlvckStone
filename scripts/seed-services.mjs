@@ -3,7 +3,7 @@
 // internos: el sitio presenta cada servicio como propio, sin nombres de marca.
 // Borra los productos de demostración y hace upsert por slug, así que se puede
 // volver a correr sin duplicar filas. Los productos creados desde /admin con
-// otros slugs no se tocan.
+// otros slugs no se tocan, y una foto subida desde /admin no se reemplaza.
 import postgres from "postgres";
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -572,14 +572,15 @@ async function main() {
     for (const locale of ["es", "en"]) {
       const c = s[locale];
       await sql`
-        insert into products (slug, locale, category, title, description, specs)
-        values (${s.slug + "-" + locale}, ${locale}, ${s.category}, ${c.title}, ${c.description}, ${c.specs})
+        insert into products (slug, locale, category, title, description, specs, image_url)
+        values (${s.slug + "-" + locale}, ${locale}, ${s.category}, ${c.title}, ${c.description}, ${c.specs}, ${`/images/servicios/${s.slug}.jpg`})
         on conflict (slug) do update set
           locale = excluded.locale,
           category = excluded.category,
           title = excluded.title,
           description = excluded.description,
           specs = excluded.specs,
+          image_url = coalesce(products.image_url, excluded.image_url),
           updated_at = now()
       `;
       count++;

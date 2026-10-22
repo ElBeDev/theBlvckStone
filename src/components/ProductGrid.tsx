@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, placeholderById } from "@/components/DuotoneImage";
+import { DuotoneImage } from "@/components/DuotoneImage";
 
 type Product = {
   id: number;
@@ -27,11 +27,11 @@ function parseSpecs(specs: string | null) {
 export function ProductGrid({
   items,
   specsLabel,
-  imagePool,
+  fallbackImage,
 }: {
   items: Product[];
   specsLabel: string;
-  imagePool: number[];
+  fallbackImage: string;
 }) {
   return (
     <section className="bg-white">
@@ -42,7 +42,7 @@ export function ProductGrid({
             <Reveal key={item.id} delay={(i % 2) * 0.06} as="article">
               <div className="grid h-full overflow-hidden rounded-2xl border border-petrol/10 bg-ivory sm:grid-cols-5">
                 <DuotoneImage
-                  src={item.imageUrl ?? placeholderById(imagePool[i % imagePool.length], 800, 900)}
+                  src={item.imageUrl ?? fallbackImage}
                   alt={item.title}
                   fill
                   sizes="(min-width: 1024px) 20vw, (min-width: 640px) 40vw, 100vw"

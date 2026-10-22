@@ -7,7 +7,7 @@ import {
   Truck,
 } from "@phosphor-icons/react/ssr";
 import { Link } from "@/i18n/navigation";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { Reveal } from "@/components/motion/Reveal";
 
 type ServiceItem = {
@@ -98,11 +98,11 @@ function BentoImageCell({
       }`}
     >
       <DuotoneImage
-        src={placeholderUrl(seed, tall ? 1400 : 900, tall ? 1200 : 700)}
+        src={siteImage(seed)}
         alt={item.title}
         fill
         sizes={tall ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
-        className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+        className="duotone-legible absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
       />
       <div className="relative z-10 flex flex-1 flex-col justify-between p-7">
         <Icon size={36} weight="duotone" className="text-turquoise" />

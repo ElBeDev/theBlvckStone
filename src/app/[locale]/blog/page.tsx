@@ -6,7 +6,7 @@ import { posts } from "@/db/schema";
 import { Link } from "@/i18n/navigation";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -72,7 +72,7 @@ export default async function BlogPage({
                   className="group grid gap-8 overflow-hidden rounded-2xl bg-mist md:grid-cols-12"
                 >
                   <DuotoneImage
-                    src={placeholderUrl(`post-${featured.slug}`, 1200, 800)}
+                    src={siteImage(`post-${featured.slug}`)}
                     alt={featured.title}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
