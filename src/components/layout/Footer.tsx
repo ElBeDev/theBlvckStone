@@ -1,41 +1,29 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { PRODUCT_CATEGORIES } from "@/lib/product-categories";
 import { LogoMark } from "./LogoMark";
 
+// The last plane: index, lines, legal, offices. Still no boxes.
 export function Footer() {
   const tNav = useTranslations("nav");
   const tFooter = useTranslations("footer");
+  const tLines = useTranslations("pages.productos.categories");
   const year = new Date().getFullYear();
 
   const columns = [
     {
-      title: tFooter("servicios"),
-      links: [
-        { href: "/productos/energia-limpia", label: tNav("energiaLimpia") },
-        { href: "/productos/electromovilidad", label: tNav("electromovilidad") },
-        { href: "/productos/financiamiento", label: tNav("financiamiento") },
-        { href: "/productos/construccion", label: tNav("construccion") },
-        { href: "/productos/estrategia-fiscal", label: tNav("estrategiaFiscal") },
-      ],
-    },
-    {
-      title: tFooter("productos"),
-      links: [
-        { href: "/productos/energia-limpia", label: "Paneles solares y BESS" },
-        { href: "/productos/electromovilidad", label: "Camionetas" },
-        { href: "/productos/financiamiento", label: "Financiamiento" },
-        { href: "/productos/construccion", label: "Cubiertas y naves" },
-        { href: "/productos/estrategia-fiscal", label: "Nómina y productividad" },
-      ],
-    },
-    {
       title: tFooter("empresa"),
       links: [
+        { href: "/productos", label: tNav("productos") },
+        { href: "/soluciones", label: tNav("soluciones") },
         { href: "/nosotros", label: tNav("nosotros") },
-        { href: "/casos-de-exito", label: tNav("casosDeExito") },
         { href: "/blog", label: tNav("blog") },
         { href: "/contacto", label: tNav("contacto") },
       ],
+    },
+    {
+      title: tFooter("servicios"),
+      links: PRODUCT_CATEGORIES.map((c) => ({ href: `/productos/${c.value}`, label: tLines(`${c.value}.title`) })),
     },
     {
       title: tFooter("legal"),
@@ -48,55 +36,37 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-black-base text-ivory">
-      <div className="mx-auto max-w-7xl px-5 py-16 md:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
-          <div>
-            <div className="flex items-center gap-3">
-              <LogoMark className="h-9 w-9" />
-              <span className="text-base font-black tracking-tight">
-                THE BLVCK STONE
-              </span>
-            </div>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist/70">
-              {tFooter("tagline")}
-            </p>
-            <p className="mt-4 text-sm text-mist/70">{tFooter("offices")}</p>
+    <footer className="mx-auto max-w-7xl px-5 pb-16 pt-24 md:px-8 md:pt-32">
+      <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div>
+          <div className="flex items-center gap-3">
+            <LogoMark className="h-8 w-8" />
+            <span className="v-title text-base">THE BLVCK STONE</span>
           </div>
-
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-turquoise">
-                {col.title}
-              </h3>
-              <ul className="space-y-2.5 text-sm text-mist/70">
-                {col.links.map((link) => (
-                  <li key={link.href + link.label}>
-                    <Link
-                      href={link.href}
-                      className="transition-colors hover:text-ivory"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-mist/70 sm:flex-row sm:items-center sm:justify-between">
-          <span>
-            © {year} The Blvck Stone. {tFooter("rights")}
-          </span>
-          <a
-            href="mailto:contacto@the-blvckstone.com"
-            className="transition-colors hover:text-ivory"
-          >
+          <p className="v-body mt-6 max-w-[36ch] text-base text-ink-1">{tFooter("tagline")}</p>
+          <p className="mt-6 text-base text-ink-2">{tFooter("offices")}</p>
+          <a href="mailto:contacto@the-blvckstone.com" className="mt-2 inline-block text-base text-ink-1 underline hover:text-ink-0">
             contacto@the-blvckstone.com
           </a>
         </div>
+        {columns.map((col) => (
+          <div key={col.title}>
+            <h3 className="text-base font-bold text-ink-0">{col.title}</h3>
+            <ul className="mt-4 space-y-2.5">
+              {col.links.map((link) => (
+                <li key={link.href + link.label}>
+                  <Link href={link.href} data-depth={1} className="text-base hover:text-ink-0">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
+      <p className="mt-16 text-sm text-ink-2">
+        © {year} The Blvck Stone. {tFooter("rights")}
+      </p>
     </footer>
   );
 }

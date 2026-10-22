@@ -1,9 +1,7 @@
-import { Envelope, MapPin, Phone } from "@phosphor-icons/react/ssr";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { db } from "@/db";
 import { siteSettings } from "@/db/schema";
 import { ContactForm } from "@/components/ContactForm";
-import { Reveal } from "@/components/motion/Reveal";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -21,12 +19,7 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.contacto");
-  return pageMetadata({
-    locale,
-    path: "/contacto",
-    title: t("title"),
-    description: t("description"),
-  });
+  return pageMetadata({ locale, path: "/contacto", title: t("title"), description: t("description") });
 }
 
 export default async function ContactoPage({
@@ -37,62 +30,47 @@ export default async function ContactoPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("pages.contacto");
-
-  const rows = db ? await db.select().from(siteSettings) : [];
-  const values = {
-    ...DEFAULTS,
-    ...Object.fromEntries(rows.map((row) => [row.key, row.value])),
-  };
+  const [t, rows] = await Promise.all([
+    getTranslations("pages.contacto"),
+    db ? db.select().from(siteSettings) : Promise.resolve([]),
+  ]);
+  const values = { ...DEFAULTS, ...Object.fromEntries(rows.map((row) => [row.key, row.value])) };
 
   const contacts = [
-    { Icon: Phone, label: "Karla Arizmendi", value: values.contact_phone_karla, href: `tel:${values.contact_phone_karla.replace(/\s/g, "")}` },
-    { Icon: Phone, label: "Juan Carlos Meza", value: values.contact_phone_juan_carlos, href: `tel:${values.contact_phone_juan_carlos.replace(/\s/g, "")}` },
-    { Icon: Envelope, label: t("emailLabel"), value: values.contact_email, href: `mailto:${values.contact_email}` },
+    { label: "Karla Arizmendi", value: values.contact_phone_karla, href: `tel:${values.contact_phone_karla.replace(/\s/g, "")}` },
+    { label: "Juan Carlos Meza", value: values.contact_phone_juan_carlos, href: `tel:${values.contact_phone_juan_carlos.replace(/\s/g, "")}` },
+    { label: t("emailLabel"), value: values.contact_email, href: `mailto:${values.contact_email}` },
   ];
 
   return (
-    <section className="bg-petrol text-ivory">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 pt-14 pb-20 md:px-8 lg:grid-cols-12 lg:gap-10 lg:pt-20 lg:pb-28">
-        <Reveal className="lg:col-span-5">
-          <h1 className="max-w-[16ch] text-4xl font-black leading-[1.05] tracking-tighter md:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-6 max-w-[44ch] text-lg leading-relaxed text-mist/80">
-            {t("description")}
-          </p>
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 md:px-8 md:pt-24">
+      <h1 data-depth={0} className="v-display max-w-[14ch] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+        {t("title")}
+      </h1>
+      <p className="v-body mt-8 max-w-[46ch] text-xl leading-snug text-ink-1 md:text-2xl">{t("description")}</p>
 
-          <ul className="mt-10 space-y-6">
+      <div className="mt-20 grid gap-16 lg:grid-cols-12 lg:gap-20">
+        <section className="lg:col-span-7">
+          <ContactForm />
+        </section>
+        <section className="lg:col-span-5">
+          <ul className="space-y-8">
             {contacts.map((item) => (
-              <li key={item.label} className="flex items-start gap-4">
-                <item.Icon size={22} weight="duotone" className="mt-1 shrink-0 text-turquoise" />
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wide text-mist/60">
-                    {item.label}
-                  </p>
-                  <a href={item.href} className="text-lg font-bold text-ivory transition-colors hover:text-turquoise">
-                    {item.value}
-                  </a>
-                </div>
+              <li key={item.label}>
+                <p className="text-base text-ink-2">{item.label}</p>
+                <a href={item.href} data-depth={0} className="v-title mt-1 block text-2xl hover:text-signal md:text-3xl">
+                  {item.value}
+                </a>
               </li>
             ))}
-            <li className="flex items-start gap-4">
-              <MapPin size={22} weight="duotone" className="mt-1 shrink-0 text-turquoise" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wide text-mist/60">
-                  {t("officesLabel")}
-                </p>
-                <p className="text-lg font-bold">{t("offices")}</p>
-                <p className="text-sm text-mist/70">{t("logistics")}</p>
-              </div>
+            <li>
+              <p className="text-base text-ink-2">{t("officesLabel")}</p>
+              <p data-depth={0} className="v-title mt-1 text-2xl md:text-3xl">{t("offices")}</p>
+              <p className="mt-1 text-lg text-ink-1">{t("logistics")}</p>
             </li>
           </ul>
-        </Reveal>
-
-        <Reveal delay={0.1} className="lg:col-span-7">
-          <ContactForm />
-        </Reveal>
+        </section>
       </div>
-    </section>
+    </div>
   );
 }

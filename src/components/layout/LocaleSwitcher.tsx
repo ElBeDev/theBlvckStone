@@ -9,19 +9,17 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const active = "text-turquoise";
-  const idle = "text-mist/70 hover:text-ivory";
-
   return (
-    <div className="flex items-center gap-1 text-xs font-bold tracking-wide">
+    <div className="flex items-center gap-2 text-base font-bold">
       {routing.locales.map((loc, i) => (
-        <span key={loc} className="flex items-center gap-1">
-          {i > 0 && <span className="text-mist/40">/</span>}
+        <span key={loc} className="flex items-center gap-2">
+          {i > 0 && <span className="text-ink-3">/</span>}
           <button
             type="button"
             onClick={() => router.replace(pathname, { locale: loc })}
             aria-current={loc === locale}
-            className={`transition-colors ${loc === locale ? active : idle}`}
+            data-depth={loc === locale ? 0 : 2}
+            className="hover:text-ink-0"
           >
             {loc.toUpperCase()}
           </button>

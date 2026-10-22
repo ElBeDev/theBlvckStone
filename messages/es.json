@@ -16,7 +16,7 @@
     "close": "Cerrar"
   },
   "cta": {
-    "demo": "Solicitar demostración",
+    "demo": "Solicitar evaluación sin costo",
     "explore": "Descubre nuestras soluciones",
     "viewAll": "Ver todos",
     "readMore": "Leer artículo",
@@ -35,23 +35,6 @@
     "cookies": "Cookies",
     "offices": "Polanco, CDMX. Centro logístico en Guadalajara, Jalisco.",
     "rights": "Todos los derechos reservados."
-  },
-  "home": {
-    "heroEyebrow": "Integración estratégica de proyectos industriales",
-    "heroHeadline": "Soluciones inteligentes para tu transición energética",
-    "heroSubheadline": "Energía limpia, electromovilidad y financiamiento estratégico para empresas que quieren crecer sin depender de la red.",
-    "heroImageAlt": "Infraestructura de energía solar y carga eléctrica"
-  },
-  "stats": {
-    "title": "Un solo socio para todo tu proyecto",
-    "intro": "Ingeniería, suministro, construcción y financiamiento con compromisos que puedes medir.",
-    "items": [
-      { "value": 5, "suffix": "", "label": "líneas de negocio integradas" },
-      { "value": 29, "suffix": "", "label": "servicios con un solo responsable" },
-      { "value": 48, "suffix": " h", "label": "máximo para resolver incidencias" },
-      { "value": 10, "suffix": "", "label": "años de garantía en inversores" },
-      { "value": 40, "suffix": "%", "label": "de ahorro potencial en tu factura con BESS" }
-    ]
   },
   "services": {
     "eyebrow": "Cinco líneas de negocio",
@@ -89,46 +72,36 @@
       }
     ]
   },
-  "differentiators": {
-    "title": "¿Por qué elegir The Blvck Stone?",
-    "intro": "Tecnología certificada, soporte local y financiamiento integrado. Lo que otros proveedores prometen, nosotros lo operamos.",
-    "items": [
-      { "title": "Tecnología certificada", "description": "Equipos con certificaciones UL, KEMA, ANSI e IEC." },
-      { "title": "Soporte técnico local", "description": "Equipo en CDMX y centros logísticos en México, no un call center remoto." },
-      { "title": "Comisionamiento remoto incluido", "description": "Puesta en marcha asistida sin costo adicional." },
-      { "title": "Incidencias en menos de 48 horas", "description": "Tiempo de respuesta comprometido por contrato." },
-      { "title": "Garantías extendidas", "description": "Hasta 10 años en equipos clave, con extensión disponible." },
-      { "title": "Acompañamiento preventa y postventa", "description": "Del diagnóstico inicial al mantenimiento continuo." },
-      { "title": "Ingeniería a la medida", "description": "Cada propuesta parte de tu curva de carga, no de un paquete genérico." },
-      { "title": "Propuestas técnico-económicas", "description": "Números claros de inversión, ahorro y retorno antes de firmar." }
-    ]
-  },
   "solutions": {
     "title": "Soluciones para cada industria",
     "intro": "Del hogar a la planta industrial, dimensionamos la solución al tamaño real de tu consumo.",
     "items": [
-      { "title": "Residencial", "description": "Inversores, BESS y cargadores AC para casas y pequeños comercios.", "seed": "blvckstone-residencial" },
-      { "title": "Comercial", "description": "Soluciones medianas y DC Multicharger para comercio e industria ligera.", "seed": "blvckstone-comercial" },
-      { "title": "Industrial y Utility", "description": "Inversores de más de 350 kW y BESS de 261 a 418 kWh.", "seed": "blvckstone-industrial" },
-      { "title": "Flotas Empresariales", "description": "Camionetas eléctricas y estaciones de carga para operaciones logísticas.", "seed": "blvckstone-flotas" }
+      {
+        "title": "Residencial",
+        "description": "Inversores, BESS y cargadores AC para casas y pequeños comercios.",
+        "seed": "blvckstone-residencial"
+      },
+      {
+        "title": "Comercial",
+        "description": "Soluciones medianas y DC Multicharger para comercio e industria ligera.",
+        "seed": "blvckstone-comercial"
+      },
+      {
+        "title": "Industrial y Utility",
+        "description": "Inversores de más de 350 kW y BESS de 261 a 418 kWh.",
+        "seed": "blvckstone-industrial"
+      },
+      {
+        "title": "Flotas Empresariales",
+        "description": "Camionetas eléctricas y estaciones de carga para operaciones logísticas.",
+        "seed": "blvckstone-flotas"
+      }
     ]
-  },
-  "testimonials": {
-    "eyebrow": "Casos reales",
-    "title": "Empresas que ya transformaron su energía"
-  },
-  "blogTeaser": {
-    "title": "Ideas para tu transición energética",
-    "intro": "Guías prácticas sobre almacenamiento, electromovilidad y financiamiento, escritas por el equipo que instala los proyectos."
-  },
-  "ctaFinal": {
-    "title": "Transforma tu negocio hoy",
-    "text": "Cuéntanos tu proyecto y te proponemos una solución técnica y financiera a la medida, sin compromiso."
   },
   "pages": {
     "productos": {
-      "title": "Nuestras soluciones",
-      "description": "Energía limpia, electromovilidad, financiamiento, construcción industrial y estrategia fiscal en un solo socio.",
+      "title": "Cinco líneas, un solo responsable.",
+      "description": "Toca una línea para verla al frente. Cada una tiene sus fichas con especificaciones y condiciones reales.",
       "emptyCategory": "Estamos cargando el catálogo de esta línea. Escríbenos y te enviamos las fichas técnicas hoy mismo.",
       "specsLabel": "Especificaciones",
       "categories": {
@@ -158,14 +131,15 @@
           "seed": "blvckstone-fiscal"
         }
       },
-      "financingNote": "El simulador de financiamiento estará disponible cuando se confirmen las tasas y plazos vigentes. Mientras tanto, te preparamos una corrida a la medida."
+      "financingNote": "El simulador de financiamiento estará disponible cuando se confirmen las tasas y plazos vigentes. Mientras tanto, te preparamos una corrida a la medida.",
+      "nextLine": "Siguiente línea"
     },
     "soluciones": {
       "title": "Soluciones para cada industria",
       "description": "Cuatro verticales, una misma ingeniería: dimensionar la solución al consumo real y financiarla con el ahorro que genera."
     },
     "nosotros": {
-      "title": "Más que un proveedor, tu socio en innovación",
+      "title": "Un solo responsable, del recibo de CFE al comisionamiento.",
       "description": "Integramos tecnología, ingeniería y financiamiento para que la transición energética de tu empresa sea una decisión de negocio, no una apuesta.",
       "story": [
         "The Blvck Stone nace para resolver un problema que vimos repetirse en cientos de proyectos: la tecnología existía, pero llegaba sin ingeniería local, sin soporte y sin una estructura financiera que la hiciera viable.",
@@ -173,17 +147,39 @@
         "Detrás de cada proyecto hay una red de fabricantes y especialistas que seleccionamos y coordinamos como un solo equipo. Eso nos permite garantizar suministro, precio y tiempos en energía, movilidad, construcción y finanzas, con un solo responsable frente a ti."
       ],
       "certificationsTitle": "Tecnología certificada internacionalmente",
-      "certifications": ["UL", "KEMA", "ANSI", "IEC"],
+      "certifications": [
+        "UL",
+        "KEMA",
+        "ANSI",
+        "IEC"
+      ],
       "howTitle": "Cómo trabajamos",
       "how": [
-        { "title": "Diagnóstico", "description": "Analizamos tu consumo, tarifa y objetivos antes de proponer un solo equipo." },
-        { "title": "Ingeniería y financiamiento", "description": "Una propuesta técnico-económica con inversión, ahorro y retorno claros." },
-        { "title": "Instalación y soporte", "description": "Comisionamiento incluido y respuesta a incidencias en menos de 48 horas." }
+        {
+          "title": "Diagnóstico",
+          "description": "Analizamos tu consumo, tarifa y objetivos antes de proponer un solo equipo."
+        },
+        {
+          "title": "Ingeniería y financiamiento",
+          "description": "Una propuesta técnico-económica con inversión, ahorro y retorno claros."
+        },
+        {
+          "title": "Instalación y soporte",
+          "description": "Comisionamiento incluido y respuesta a incidencias en menos de 48 horas."
+        }
       ],
       "teamTitle": "Equipo directivo",
       "team": [
-        { "name": "Karla Arizmendi", "role": "Strategy & Growth Director", "initials": "KA" },
-        { "name": "Juan Carlos Meza", "role": "Business Development Director", "initials": "JM" }
+        {
+          "name": "Karla Arizmendi",
+          "role": "Strategy & Growth Director",
+          "initials": "KA"
+        },
+        {
+          "name": "Juan Carlos Meza",
+          "role": "Business Development Director",
+          "initials": "JM"
+        }
       ]
     },
     "casosDeExito": {
@@ -195,11 +191,13 @@
       "title": "Blog",
       "description": "Guías y noticias sobre energía, electromovilidad y financiamiento.",
       "empty": "Aún no hay artículos publicados.",
-      "latest": "Más artículos"
+      "latest": "Más artículos",
+      "demoNotice": "Artículos de ejemplo, en revisión editorial.",
+      "demoTag": "Ejemplo"
     },
     "contacto": {
-      "title": "Transforma tu negocio hoy",
-      "description": "Cuéntanos qué quieres resolver. Respondemos en menos de 48 horas hábiles con una primera propuesta.",
+      "title": "Manda tu recibo de CFE.",
+      "description": "Cuéntanos qué quieres resolver. Respondemos en menos de 48 horas hábiles con una primera propuesta. El diagnóstico no tiene costo.",
       "phoneLabel": "Teléfono",
       "emailLabel": "Email",
       "officesLabel": "Oficinas",
@@ -220,29 +218,68 @@
       "privacidad": {
         "title": "Aviso de Privacidad",
         "sections": [
-          { "heading": "Responsable", "body": "The Blvck Stone, con domicilio en Polanco, Ciudad de México, es responsable del tratamiento de tus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)." },
-          { "heading": "Datos que recabamos", "body": "A través del formulario de contacto recabamos nombre, correo electrónico, teléfono, industria y el mensaje que decidas enviarnos. No solicitamos datos sensibles." },
-          { "heading": "Finalidades", "body": "Usamos tus datos para responder a tu solicitud, preparar propuestas técnicas y comerciales, y dar seguimiento a la relación de negocio. No los usamos para fines distintos sin tu consentimiento." },
-          { "heading": "Derechos ARCO", "body": "Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a contacto@the-blvckstone.com. Atenderemos tu solicitud en los plazos que marca la ley." },
-          { "heading": "Transferencias", "body": "No transferimos tus datos a terceros salvo obligación legal o proveedores que operan bajo contrato de confidencialidad para prestar el servicio (alojamiento y envío de correo)." },
-          { "heading": "Cambios al aviso", "body": "Cualquier cambio a este aviso se publicará en esta misma página con la fecha de actualización." }
+          {
+            "heading": "Responsable",
+            "body": "The Blvck Stone, con domicilio en Polanco, Ciudad de México, es responsable del tratamiento de tus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)."
+          },
+          {
+            "heading": "Datos que recabamos",
+            "body": "A través del formulario de contacto recabamos nombre, correo electrónico, teléfono, industria y el mensaje que decidas enviarnos. No solicitamos datos sensibles."
+          },
+          {
+            "heading": "Finalidades",
+            "body": "Usamos tus datos para responder a tu solicitud, preparar propuestas técnicas y comerciales, y dar seguimiento a la relación de negocio. No los usamos para fines distintos sin tu consentimiento."
+          },
+          {
+            "heading": "Derechos ARCO",
+            "body": "Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a contacto@the-blvckstone.com. Atenderemos tu solicitud en los plazos que marca la ley."
+          },
+          {
+            "heading": "Transferencias",
+            "body": "No transferimos tus datos a terceros salvo obligación legal o proveedores que operan bajo contrato de confidencialidad para prestar el servicio (alojamiento y envío de correo)."
+          },
+          {
+            "heading": "Cambios al aviso",
+            "body": "Cualquier cambio a este aviso se publicará en esta misma página con la fecha de actualización."
+          }
         ]
       },
       "terminos": {
         "title": "Términos de Servicio",
         "sections": [
-          { "heading": "Uso del sitio", "body": "El contenido de este sitio es informativo. Las especificaciones, precios y condiciones de financiamiento se confirman por escrito en cada propuesta." },
-          { "heading": "Propiedad intelectual", "body": "Las marcas, logotipos y contenidos pertenecen a The Blvck Stone o a sus licenciantes y no pueden reproducirse sin autorización." },
-          { "heading": "Responsabilidad", "body": "Trabajamos por mantener la información actualizada, pero no garantizamos que esté libre de errores. Las obligaciones contractuales se definen únicamente en los contratos firmados." },
-          { "heading": "Legislación aplicable", "body": "Estos términos se rigen por las leyes de los Estados Unidos Mexicanos." }
+          {
+            "heading": "Uso del sitio",
+            "body": "El contenido de este sitio es informativo. Las especificaciones, precios y condiciones de financiamiento se confirman por escrito en cada propuesta."
+          },
+          {
+            "heading": "Propiedad intelectual",
+            "body": "Las marcas, logotipos y contenidos pertenecen a The Blvck Stone o a sus licenciantes y no pueden reproducirse sin autorización."
+          },
+          {
+            "heading": "Responsabilidad",
+            "body": "Trabajamos por mantener la información actualizada, pero no garantizamos que esté libre de errores. Las obligaciones contractuales se definen únicamente en los contratos firmados."
+          },
+          {
+            "heading": "Legislación aplicable",
+            "body": "Estos términos se rigen por las leyes de los Estados Unidos Mexicanos."
+          }
         ]
       },
       "cookies": {
         "title": "Política de Cookies",
         "sections": [
-          { "heading": "Qué son", "body": "Las cookies son pequeños archivos que el navegador guarda para recordar preferencias y medir el uso del sitio." },
-          { "heading": "Cuáles usamos", "body": "Cookies técnicas necesarias para el funcionamiento del sitio y, con tu consentimiento, cookies de analítica para entender cómo se usa." },
-          { "heading": "Cómo controlarlas", "body": "Puedes bloquear o eliminar cookies desde la configuración de tu navegador. Algunas funciones podrían dejar de operar correctamente." }
+          {
+            "heading": "Qué son",
+            "body": "Las cookies son pequeños archivos que el navegador guarda para recordar preferencias y medir el uso del sitio."
+          },
+          {
+            "heading": "Cuáles usamos",
+            "body": "Cookies técnicas necesarias para el funcionamiento del sitio y, con tu consentimiento, cookies de analítica para entender cómo se usa."
+          },
+          {
+            "heading": "Cómo controlarlas",
+            "body": "Puedes bloquear o eliminar cookies desde la configuración de tu navegador. Algunas funciones podrían dejar de operar correctamente."
+          }
         ]
       }
     }
@@ -255,7 +292,7 @@
     "message": "Mensaje",
     "consent": "Acepto el",
     "privacyLink": "Aviso de Privacidad",
-    "submit": "Solicitar demostración",
+    "submit": "Solicitar evaluación sin costo",
     "sending": "Enviando...",
     "success": "Gracias. Te contactaremos pronto.",
     "error": "Hubo un error al enviar el formulario. Intenta de nuevo."
@@ -263,5 +300,88 @@
   "common": {
     "pendingContent": "Contenido en construcción.",
     "placeholderImage": "Imagen de referencia"
+  },
+  "void": {
+    "hook": "Toda tu planta, un solo responsable.",
+    "sub": "Energía, flotas, financiamiento, construcción y estrategia fiscal: ingeniería, suministro y forma de pago en una sola propuesta.",
+    "lines": [
+      {
+        "word": "Energía",
+        "title": "Energía limpia y almacenamiento",
+        "text": "Solar fotovoltaico, BESS detrás del medidor e inversores utility-scale, dimensionados a tu curva de carga.",
+        "href": "/productos/energia-limpia"
+      },
+      {
+        "word": "Flotas",
+        "title": "Vehículos eléctricos y carga",
+        "text": "Vans eléctricas de trabajo, cargadores AC y DC, electrolineras como negocio y mantenimiento de flota.",
+        "href": "/productos/electromovilidad"
+      },
+      {
+        "word": "Financiamiento",
+        "title": "Financiamiento y coberturas",
+        "text": "Arrendamiento, crédito y PPA para tu proyecto; créditos puente, coberturas de tipo de cambio y combustible.",
+        "href": "/productos/financiamiento"
+      },
+      {
+        "word": "Construcción",
+        "title": "Construcción e infraestructura",
+        "text": "Cubiertas metálicas, naves de membrana, recubrimientos, pavimentos, proyectos ferroviarios y certificación LEED.",
+        "href": "/productos/construccion"
+      },
+      {
+        "word": "Fiscal",
+        "title": "Estrategia fiscal y laboral",
+        "text": "Deducción inmediata de tu inversión en energía, programa de productividad, nómina y servicios sindicales.",
+        "href": "/productos/estrategia-fiscal"
+      }
+    ],
+    "linesCta": "Ver la línea",
+    "numbersLead": "Números de nuestras corridas.",
+    "numbers": [
+      {
+        "value": "$75,192",
+        "text": "al año por cada van eléctrica frente a una de gasolina.",
+        "basis": "3,000 km al mes; 24.9 kWh por 100 km a 3.50 MXN por kWh contra 8 km por litro a 23.68 MXN. Precios promedio de mayo de 2025."
+      },
+      {
+        "value": "74%",
+        "text": "de TIR estimada en una electrolinera de 480 kW.",
+        "basis": "Corrida preliminar con tarifa GDMTH 2025, inversión llave en mano de $4,320,000 MXN con transformador, venta a 7.8 MXN por kWh y 3.5 horas de uso al día."
+      },
+      {
+        "value": "25 a 40%",
+        "text": "menos en tu factura con almacenamiento detrás del medidor.",
+        "basis": "Recorte de demanda en punta y traslado de consumo a horario base con BESS de litio ferrofosfato. Para autoconsumo no requiere permiso de generación de la CRE."
+      }
+    ],
+    "commitLead": "Lo que va escrito en cada propuesta.",
+    "commitments": [
+      "Evaluación sin costo.",
+      "Incidencias resueltas en menos de 48 horas.",
+      "10 años de garantía en inversores.",
+      "Hasta 100% deducible el primer año."
+    ],
+    "processLead": "Cómo trabajamos.",
+    "process": [
+      {
+        "title": "Diagnóstico",
+        "text": "Leemos tu recibo de CFE y tu curva de carga: cargos por demanda, factor de potencia y periodos punta."
+      },
+      {
+        "title": "Propuesta técnico-económica",
+        "text": "Inversión, ahorro mensual, retorno, forma de pago y tratamiento fiscal en un solo documento."
+      },
+      {
+        "title": "Permisos, instalación y comisionamiento",
+        "text": "Interconexión con CFE, obra con equipo propio en México y puesta en marcha remota incluida."
+      },
+      {
+        "title": "Operación y monitoreo",
+        "text": "EMS 24/7, mantenimiento e incidencias resueltas en menos de 48 horas."
+      }
+    ],
+    "finalTitle": "Manda tu recibo de CFE.",
+    "finalText": "Te decimos qué conviene antes de proponer un solo equipo. El diagnóstico no cuesta."
   }
 }

@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { Archivo, Unbounded } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Dust } from "@/components/void/Dust";
+import { ScrollClock } from "@/components/void/ScrollClock";
 import { SITE_URL } from "@/lib/metadata";
 import "../globals.css";
 
 const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
+  weight: "variable",
   variable: "--font-archivo",
+  display: "swap",
+});
+
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-unbounded",
   display: "swap",
 });
 
@@ -23,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | The Blvck Stone",
   },
   description:
-    "Soluciones inteligentes para tu transición energética: energía limpia, electromovilidad y financiamiento estratégico.",
+    "Toda tu planta, un solo responsable: energía limpia, flotas eléctricas, financiamiento, construcción industrial y estrategia fiscal.",
 };
 
 export function generateStaticParams() {
@@ -46,9 +55,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${archivo.variable} h-full antialiased`}>
+    <html lang={locale} className={`${archivo.variable} ${unbounded.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
+          <ScrollClock />
+          <Dust />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

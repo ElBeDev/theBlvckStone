@@ -1,13 +1,12 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { PageHero } from "@/components/PageHero";
-import { CtaBand } from "@/components/CtaBand";
-import { Reveal } from "@/components/motion/Reveal";
-import { CountUp } from "@/components/motion/CountUp";
+import { siteImage } from "@/lib/images";
+import { Line } from "@/components/void/Line";
+import { PageTitle } from "@/components/void/PageTitle";
+import { Signal } from "@/components/void/Signal";
 import { pageMetadata } from "@/lib/metadata";
 
 type Step = { title: string; description: string };
-type Member = { name: string; role: string; initials: string };
-type StatItem = { value: number; prefix?: string; suffix?: string; label: string };
+type Member = { name: string; role: string };
 
 export async function generateMetadata({
   params,
@@ -16,12 +15,7 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.nosotros");
-  return pageMetadata({
-    locale,
-    path: "/nosotros",
-    title: t("title"),
-    description: t("description"),
-  });
+  return pageMetadata({ locale, path: "/nosotros", title: t("title"), description: t("description") });
 }
 
 export default async function NosotrosPage({
@@ -32,121 +26,72 @@ export default async function NosotrosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [t, tStats, tCta, tCtaFinal] = await Promise.all([
-    getTranslations("pages.nosotros"),
-    getTranslations("stats"),
-    getTranslations("cta"),
-    getTranslations("ctaFinal"),
-  ]);
-
+  const [t, tCta] = await Promise.all([getTranslations("pages.nosotros"), getTranslations("cta")]);
   const story = t.raw("story") as string[];
   const how = t.raw("how") as Step[];
   const team = t.raw("team") as Member[];
   const certifications = t.raw("certifications") as string[];
-  const stats = tStats.raw("items") as StatItem[];
 
   return (
     <>
-      <PageHero
-        title={t("title")}
-        description={t("description")}
-        imageSeed="blvckstone-team-industrial"
-      />
+      <PageTitle title={t("title")} text={t("description")} image={siteImage("blvckstone-team-industrial")} />
 
-      <section>
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 md:px-8 lg:grid-cols-12">
-          <Reveal className="space-y-6 lg:col-span-7">
-            {story.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 24)}
-                className="max-w-[65ch] text-lg leading-relaxed text-mist/90"
-              >
-                {paragraph}
+      <section className="mx-auto max-w-7xl px-5 py-8 md:px-8">
+        <div className="v-body max-w-[52ch] space-y-8 text-xl leading-snug text-ink-0 md:text-2xl">
+          {story.map((p) => (
+            <p key={p.slice(0, 24)}>{p}</p>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
+        <Line depth={1} size="md" as="h2">
+          {t("howTitle")}
+        </Line>
+        <ol className="mt-14 space-y-12">
+          {how.map((step, i) => (
+            <li key={step.title} className="grid gap-4 md:grid-cols-12 md:items-baseline">
+              <span data-depth={2} className="v-num text-3xl md:col-span-1">
+                {i + 1}
+              </span>
+              <h3 data-depth={0} className="v-title text-3xl md:col-span-5 md:text-4xl">
+                {step.title}
+              </h3>
+              <p className="v-body max-w-[44ch] text-lg text-ink-1 md:col-span-6 md:text-xl">{step.description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <Line depth={1} size="md" as="h2">
+            {t("certificationsTitle")}
+          </Line>
+        </div>
+        <Line depth={0} size="xl" bleed className="mt-10">
+          {certifications.join("   ·   ")}
+        </Line>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
+        <Line depth={1} size="md" as="h2">
+          {t("teamTitle")}
+        </Line>
+        <ul className="mt-14 space-y-10">
+          {team.map((m) => (
+            <li key={m.name}>
+              <p data-depth={0} className="v-title text-4xl md:text-6xl">
+                {m.name}
               </p>
-            ))}
-          </Reveal>
-          <div className="grid grid-cols-2 gap-8 lg:col-span-5 lg:grid-cols-1 lg:border-l lg:border-white/10 lg:pl-10">
-            {stats.slice(0, 3).map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.07}>
-                <p className="text-4xl font-black tracking-tighter text-turquoise md:text-5xl">
-                  <CountUp
-                    value={stat.value}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    decimals={Number.isInteger(stat.value) ? 0 : 1}
-                  />
-                </p>
-                <p className="mt-1 text-sm text-mist/75">{stat.label}</p>
-              </Reveal>
-            ))}
-          </div>
+              <p className="mt-3 text-lg text-ink-1 md:text-xl">{m.role}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-16">
+          <Signal label={tCta("demo")} />
         </div>
       </section>
-
-      <section className="bg-petrol-soft/40">
-        <div className="mx-auto max-w-7xl px-5 py-20 md:px-8">
-          <Reveal>
-            <h2 className="text-3xl font-black tracking-tight text-ivory md:text-4xl">
-              {t("howTitle")}
-            </h2>
-          </Reveal>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {how.map((step, i) => (
-              <Reveal key={step.title} delay={i * 0.08}>
-                <div className="h-1 w-12 rounded-full bg-turquoise" />
-                <h3 className="mt-5 text-xl font-bold text-ivory">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist/75">
-                  {step.description}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 py-20 md:px-8 lg:grid-cols-2">
-          <Reveal>
-            <h2 className="text-2xl font-black tracking-tight text-ivory md:text-3xl">
-              {t("certificationsTitle")}
-            </h2>
-            <ul className="mt-8 flex flex-wrap gap-3">
-              {certifications.map((cert) => (
-                <li
-                  key={cert}
-                  className="rounded-full border border-white/15 px-6 py-3 text-lg font-black tracking-tight text-ivory"
-                >
-                  {cert}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="text-2xl font-black tracking-tight text-ivory md:text-3xl">
-              {t("teamTitle")}
-            </h2>
-            <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-              {team.map((member) => (
-                <li key={member.name} className="flex items-center gap-4">
-                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-petrol-soft text-lg font-black text-turquoise">
-                    {member.initials}
-                  </span>
-                  <div>
-                    <p className="font-bold text-ivory">{member.name}</p>
-                    <p className="text-sm text-mist/75">{member.role}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      <CtaBand
-        title={tCtaFinal("title")}
-        text={tCtaFinal("text")}
-        ctaLabel={tCta("demo")}
-      />
     </>
   );
 }

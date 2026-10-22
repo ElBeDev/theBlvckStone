@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/motion/Reveal";
+import { PageTitle } from "@/components/void/PageTitle";
 
 type LegalSection = { heading: string; body: string };
 
@@ -14,27 +13,24 @@ export async function LegalPage({
 
   return (
     <>
-      <PageHero title={t(`${doc}.title`)}>
-        <p className="mt-6 text-sm text-mist/75">{t("updated")}</p>
-        <p className="mt-2 inline-block rounded-full border border-amber/50 bg-amber/10 px-3 py-1 text-xs font-bold text-amber">
-          {t("draftNotice")}
+      <PageTitle title={t(`${doc}.title`)}>
+        <p className="mt-6 text-base text-ink-2">
+          {t("updated")} · {t("draftNotice")}
         </p>
-      </PageHero>
-
-      <section>
-        <div className="mx-auto max-w-3xl space-y-10 px-5 py-16 md:px-8 lg:py-20">
-          {sections.map((section, i) => (
-            <Reveal key={section.heading} delay={Math.min(i, 3) * 0.04}>
-              <h2 className="text-xl font-black tracking-tight text-ivory">
-                {section.heading}
-              </h2>
-              <p className="mt-3 max-w-[65ch] leading-relaxed text-mist/90">
-                {section.body}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      </PageTitle>
+      <ol className="mx-auto max-w-7xl space-y-14 px-5 pb-24 md:px-8">
+        {sections.map((section, i) => (
+          <li key={section.heading} className="grid gap-4 md:grid-cols-12">
+            <span data-depth={2} className="v-num text-2xl md:col-span-1">
+              {i + 1}
+            </span>
+            <h2 data-depth={0} className="v-title text-2xl md:col-span-4 md:text-3xl">
+              {section.heading}
+            </h2>
+            <p className="v-body max-w-[60ch] text-lg text-ink-1 md:col-span-7">{section.body}</p>
+          </li>
+        ))}
+      </ol>
     </>
   );
 }

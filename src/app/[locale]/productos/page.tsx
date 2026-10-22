@@ -1,26 +1,11 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ssr";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { PageHero } from "@/components/PageHero";
-import { CtaBand } from "@/components/CtaBand";
-import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
+import { siteImage } from "@/lib/images";
+import { PRODUCT_CATEGORIES } from "@/lib/product-categories";
+import { DepthQueue, type QueueItem } from "@/components/void/DepthQueue";
+import { PageTitle } from "@/components/void/PageTitle";
 import { pageMetadata } from "@/lib/metadata";
 
-type ServiceItem = {
-  title: string;
-  description: string;
-  cta: string;
-  href: string;
-};
-
-const seeds = [
-  "blvckstone-solar",
-  "blvckstone-ev",
-  "blvckstone-finance",
-  "blvckstone-construccion",
-  "blvckstone-fiscal",
-];
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -29,14 +14,10 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.productos");
-  return pageMetadata({
-    locale,
-    path: "/productos",
-    title: t("title"),
-    description: t("description"),
-  });
+  return pageMetadata({ locale, path: "/productos", title: t("title"), description: t("description") });
 }
 
+// The five lines again, as the index.
 export default async function ProductosPage({
   params,
 }: {
@@ -45,65 +26,20 @@ export default async function ProductosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [tPage, tServices, tCta, tCtaFinal] = await Promise.all([
-    getTranslations("pages.productos"),
-    getTranslations("services"),
-    getTranslations("cta"),
-    getTranslations("ctaFinal"),
-  ]);
-  const services = tServices.raw("items") as ServiceItem[];
+  const [t, tVoid] = await Promise.all([getTranslations("pages.productos"), getTranslations("void")]);
+  const words = tVoid.raw("lines") as Omit<QueueItem, "image">[];
+  const items: QueueItem[] = PRODUCT_CATEGORIES.map((cat, i) => ({
+    word: words[i]?.word ?? t(`categories.${cat.value}.title`),
+    title: t(`categories.${cat.value}.title`),
+    text: t(`categories.${cat.value}.description`),
+    href: `/productos/${cat.value}`,
+    image: siteImage(`blvckstone-${cat.value}`),
+  }));
 
   return (
     <>
-      <PageHero title={tPage("title")} description={tPage("description")} />
-
-      <section>
-        <div className="mx-auto max-w-7xl px-5 py-4 pb-20 md:px-8">
-          <div className="divide-y divide-white/10">
-            {services.map((service, i) => (
-              <Reveal key={service.href} delay={i * 0.05}>
-                <Link
-                  href={service.href}
-                  className="group grid gap-6 py-10 md:grid-cols-12 md:items-center md:gap-10"
-                >
-                  <DuotoneImage
-                    src={siteImage(seeds[i])}
-                    alt={service.title}
-                    width={900}
-                    height={600}
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    className={`aspect-[3/2] rounded-2xl md:col-span-4 ${
-                      i % 2 === 1 ? "md:order-last" : ""
-                    }`}
-                  />
-                  <div className="md:col-span-8">
-                    <h2 className="text-2xl font-black leading-tight tracking-tight text-ivory transition-colors group-hover:text-turquoise md:text-3xl">
-                      {service.title}
-                    </h2>
-                    <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-mist/75">
-                      {service.description}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-turquoise">
-                      {service.cta}
-                      <ArrowUpRight
-                        size={16}
-                        weight="bold"
-                        className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CtaBand
-        title={tCtaFinal("title")}
-        text={tCtaFinal("text")}
-        ctaLabel={tCta("demo")}
-      />
+      <PageTitle title={t("title")} text={t("description")} />
+      <DepthQueue items={items} cta={tVoid("linesCta")} />
     </>
   );
 }

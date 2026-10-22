@@ -1,12 +1,9 @@
-import { ArrowRight } from "@phosphor-icons/react/ssr";
 import { desc, eq } from "drizzle-orm";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { db } from "@/db";
 import { posts } from "@/db/schema";
 import { Link } from "@/i18n/navigation";
-import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
+import { PageTitle } from "@/components/void/PageTitle";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -18,20 +15,7 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.blog");
-  return pageMetadata({
-    locale,
-    path: "/blog",
-    title: t("title"),
-    description: t("description"),
-  });
-}
-
-function formatDate(date: Date, locale: string) {
-  return new Date(date).toLocaleDateString(locale, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return pageMetadata({ locale, path: "/blog", title: t("title"), description: t("description") });
 }
 
 export default async function BlogPage({
@@ -42,103 +26,37 @@ export default async function BlogPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [t, tCta] = await Promise.all([
-    getTranslations("pages.blog"),
-    getTranslations("cta"),
-  ]);
-
+  const t = await getTranslations("pages.blog");
   const items = db
-    ? await db
-        .select()
-        .from(posts)
-        .where(eq(posts.locale, locale))
-        .orderBy(desc(posts.publishedAt))
+    ? await db.select().from(posts).where(eq(posts.locale, locale)).orderBy(desc(posts.publishedAt))
     : [];
-  const [featured, ...rest] = items;
+  const dateFormat = new Intl.DateTimeFormat(locale === "es" ? "es-MX" : "en-US", { day: "numeric", month: "long", year: "numeric" });
 
   return (
     <>
-      <PageHero title={t("title")} description={t("description")} />
-
-      <section>
-        <div className="mx-auto max-w-7xl px-5 pb-20 md:px-8">
-          {!featured ? (
-            <p className="text-lg text-mist/75">{t("empty")}</p>
-          ) : (
-            <>
-              <Reveal>
-                <Link
-                  href={`/blog/${featured.slug}`}
-                  className="group grid gap-8 overflow-hidden rounded-2xl bg-petrol-soft/40 md:grid-cols-12"
-                >
-                  <DuotoneImage
-                    src={siteImage(`post-${featured.slug}`)}
-                    alt={featured.title}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="relative aspect-[16/10] md:col-span-6 md:aspect-auto md:min-h-[380px]"
-                  />
-                  <div className="flex flex-col justify-center p-8 md:col-span-6 md:py-12">
-                    <p className="text-xs font-bold uppercase tracking-wide text-turquoise">
-                      {formatDate(featured.publishedAt, locale)}
-                    </p>
-                    <h2 className="mt-4 text-2xl font-black leading-tight tracking-tight text-ivory transition-colors group-hover:text-turquoise md:text-3xl">
-                      {featured.title}
-                    </h2>
-                    {featured.excerpt && (
-                      <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-mist/75">
-                        {featured.excerpt}
-                      </p>
-                    )}
-                    <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-turquoise">
-                      {tCta("readMore")}
-                      <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
+      <PageTitle title={t("title")} text={t("description")}>
+        <p className="mt-6 text-base text-ink-2">{t("demoNotice")}</p>
+      </PageTitle>
+      <section className="mx-auto max-w-7xl px-5 pb-24 md:px-8">
+        {items.length === 0 ? (
+          <p className="text-xl text-ink-1">{t("empty")}</p>
+        ) : (
+          <ul className="space-y-16">
+            {items.map((post) => (
+              <li key={post.id}>
+                <Link href={`/blog/${post.slug}`} className="group block">
+                  <p className="text-base text-ink-2">
+                    {dateFormat.format(post.publishedAt)} · {t("demoTag")}
+                  </p>
+                  <h2 data-depth={0} className="v-title mt-3 max-w-[22ch] text-3xl group-hover:text-signal md:text-5xl">
+                    {post.title}
+                  </h2>
+                  {post.excerpt && <p className="v-body mt-5 max-w-[56ch] text-lg text-ink-1 md:text-xl">{post.excerpt}</p>}
                 </Link>
-              </Reveal>
-
-              {rest.length > 0 && (
-                <div className="mt-16">
-                  <Reveal>
-                    <h2 className="text-xl font-black tracking-tight text-ivory">
-                      {t("latest")}
-                    </h2>
-                  </Reveal>
-                  <div className="mt-4 divide-y divide-white/10 border-t border-white/10">
-                    {rest.map((post, i) => (
-                      <Reveal key={post.id} delay={i * 0.05}>
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="group grid gap-3 py-7 md:grid-cols-12 md:items-center md:gap-8"
-                        >
-                          <p className="text-xs font-bold uppercase tracking-wide text-mist/75 md:col-span-3">
-                            {formatDate(post.publishedAt, locale)}
-                          </p>
-                          <div className="md:col-span-8">
-                            <h3 className="text-xl font-bold leading-snug text-ivory transition-colors group-hover:text-turquoise">
-                              {post.title}
-                            </h3>
-                            {post.excerpt && (
-                              <p className="mt-2 max-w-[70ch] text-sm leading-relaxed text-mist/75">
-                                {post.excerpt}
-                              </p>
-                            )}
-                          </div>
-                          <ArrowRight
-                            size={22}
-                            weight="bold"
-                            className="hidden justify-self-end text-turquoise transition-transform group-hover:translate-x-1 md:col-span-1 md:block"
-                          />
-                        </Link>
-                      </Reveal>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </>
   );
