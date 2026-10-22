@@ -9,14 +9,14 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const active = "text-ink underline underline-offset-4";
-  const idle = "text-ink-3 hover:text-ink";
+  const active = "text-turquoise";
+  const idle = "text-mist/70 hover:text-ivory";
 
   return (
     <div className="flex items-center gap-1 text-xs font-bold tracking-wide">
       {routing.locales.map((loc, i) => (
         <span key={loc} className="flex items-center gap-1">
-          {i > 0 && <span className="text-ink-3">/</span>}
+          {i > 0 && <span className="text-mist/40">/</span>}
           <button
             type="button"
             onClick={() => router.replace(pathname, { locale: loc })}

@@ -1,10 +1,13 @@
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ZONES, type ZoneCode } from "@/lib/catalog";
-import { getEntries } from "@/lib/entries";
-import { ZoneSheet } from "@/components/catalog/ZoneSheet";
+import { Link } from "@/i18n/navigation";
+import { PageHero } from "@/components/PageHero";
+import { CtaBand } from "@/components/CtaBand";
+import { Reveal } from "@/components/motion/Reveal";
+import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { pageMetadata } from "@/lib/metadata";
 
-export const dynamic = "force-dynamic";
+type Vertical = { title: string; description: string; seed: string };
 
 export async function generateMetadata({
   params,
@@ -13,10 +16,14 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.soluciones");
-  return pageMetadata({ locale, path: "/soluciones", title: t("title"), description: t("description") });
+  return pageMetadata({
+    locale,
+    path: "/soluciones",
+    title: t("title"),
+    description: t("description"),
+  });
 }
 
-// The plan by zone: where in a plant each entry goes, zone by zone.
 export default async function SolucionesPage({
   params,
 }: {
@@ -25,31 +32,60 @@ export default async function SolucionesPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [t, tc, tz, tEntries] = await Promise.all([
+  const [tPage, tSolutions, tCta, tCtaFinal] = await Promise.all([
     getTranslations("pages.soluciones"),
-    getTranslations("catalog"),
-    getTranslations("zones"),
-    getTranslations("entries"),
+    getTranslations("solutions"),
+    getTranslations("cta"),
+    getTranslations("ctaFinal"),
   ]);
-  const entries = await getEntries(locale);
-  const zoneNames = Object.fromEntries(ZONES.map((z) => [z.code, tz(`${z.key}.name`)])) as Record<ZoneCode, string>;
-  const zoneTexts = Object.fromEntries(ZONES.map((z) => [z.code, tz(`${z.key}.text`)])) as Record<ZoneCode, string>;
+  const items = tSolutions.raw("items") as Vertical[];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 md:px-6">
-      <section className="pt-10 md:pt-14">
-        <h1 className="t-display max-w-[16ch] text-4xl font-black text-ink md:text-6xl">{t("title")}</h1>
-        <p className="t-body mt-5 max-w-[56ch] text-base leading-relaxed text-ink-2 md:text-lg">{t("description")}</p>
-        <p className="t-cond mt-4 text-[11px] text-ink-3">{tc("zonesCount", { count: ZONES.length })} · {tc("entries", { count: entries.length })}</p>
+    <>
+      <PageHero title={tPage("title")} description={tPage("description")} />
+
+      <section>
+        <div className="mx-auto grid max-w-7xl gap-5 px-5 pb-20 md:grid-cols-2 md:px-8">
+          {items.map((item, i) => (
+            <Reveal key={item.title} delay={(i % 2) * 0.07}>
+              <div
+                className={`group relative flex flex-col overflow-hidden rounded-2xl text-ivory ${
+                  i === 0 || i === 3 ? "min-h-[420px]" : "min-h-[340px]"
+                }`}
+              >
+                <DuotoneImage
+                  src={siteImage(item.seed)}
+                  alt={item.title}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="duotone-legible absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                />
+                <div className="relative z-10 flex flex-1 flex-col justify-end p-7">
+                  <h2 className="text-2xl font-black leading-tight tracking-tight md:text-3xl">
+                    {item.title}
+                  </h2>
+                  <p className="mt-3 max-w-[40ch] text-sm leading-relaxed text-mist/85">
+                    {item.description}
+                  </p>
+                  <Link
+                    href="/contacto"
+                    className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-amber px-5 py-2.5 text-sm font-bold text-petrol transition-transform hover:-translate-y-0.5"
+                  >
+                    {tCta("designSolution")}
+                    <ArrowRight size={16} weight="bold" />
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
-      <div className="mt-10 mb-16">
-        <ZoneSheet
-          entries={entries.map((e) => ({ code: e.code, zone: e.zone, n: e.n, slug: e.slug, title: e.title, short: tEntries.has(e.slug) ? tEntries(e.slug) : e.title, imageUrl: e.imageUrl, href: e.href }))}
-          zoneNames={zoneNames}
-          zoneTexts={zoneTexts}
-          labels={{ planTitle: tc("planTitle"), mark: tc("mark"), unmark: tc("unmark"), open: tc("open") }}
-        />
-      </div>
-    </div>
+
+      <CtaBand
+        title={tCtaFinal("title")}
+        text={tCtaFinal("text")}
+        ctaLabel={tCta("demo")}
+      />
+    </>
   );
 }

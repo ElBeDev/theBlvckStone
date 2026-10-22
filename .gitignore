@@ -45,9 +45,3 @@ next-env.d.ts
 /docs/README.md
 /docs/empresas/
 /docs/interno/
-
-# Impeccable: capturas y comps de revisión (locales)
-/.impeccable/review/
-/.impeccable/mocks/
-/.impeccable/critique/
-/.impeccable/build/

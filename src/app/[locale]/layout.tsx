@@ -6,14 +6,12 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { RouteStrip } from "@/components/catalog/RouteStrip";
 import { SITE_URL } from "@/lib/metadata";
 import "../globals.css";
 
 const archivo = Archivo({
   subsets: ["latin"],
-  weight: "variable",
-  axes: ["wdth"],
+  weight: ["300", "400", "700", "900"],
   variable: "--font-archivo",
   display: "swap",
 });
@@ -25,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | The Blvck Stone",
   },
   description:
-    "Catálogo de servicios industriales: energía limpia, electromovilidad, financiamiento, construcción y estrategia fiscal, con un solo responsable.",
+    "Soluciones inteligentes para tu transición energética: energía limpia, electromovilidad y financiamiento estratégico.",
 };
 
 export function generateStaticParams() {
@@ -54,7 +52,6 @@ export default async function LocaleLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-          <RouteStrip />
         </NextIntlClientProvider>
       </body>
     </html>

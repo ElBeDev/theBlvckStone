@@ -2,6 +2,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { desc } from "drizzle-orm";
 import { db } from "@/db";
 import { testimonials } from "@/db/schema";
+import { PageHero } from "@/components/PageHero";
+import { CtaBand } from "@/components/CtaBand";
+import { Reveal } from "@/components/motion/Reveal";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -13,14 +16,18 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.casosDeExito");
-  return pageMetadata({ locale, path: "/casos-de-exito", title: t("title"), description: t("description") });
+  return pageMetadata({
+    locale,
+    path: "/casos-de-exito",
+    title: t("title"),
+    description: t("description"),
+  });
 }
 
 function attribution(t: { role: string | null; company: string | null }) {
   return [t.role, t.company].filter(Boolean).join(", ");
 }
 
-// Kept off the index until real, authorized cases replace the demo rows.
 export default async function CasosDeExitoPage({
   params,
 }: {
@@ -29,34 +36,70 @@ export default async function CasosDeExitoPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("pages.casosDeExito");
-  const items = db ? await db.select().from(testimonials).orderBy(desc(testimonials.createdAt)) : [];
+  const [t, tCta, tCtaFinal] = await Promise.all([
+    getTranslations("pages.casosDeExito"),
+    getTranslations("cta"),
+    getTranslations("ctaFinal"),
+  ]);
+
+  const items = db
+    ? await db.select().from(testimonials).orderBy(desc(testimonials.createdAt))
+    : [];
+  const [featured, ...rest] = items;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 md:px-6">
-      <section className="pt-10 md:pt-14">
-        <h1 className="t-display max-w-[16ch] text-4xl font-black text-ink md:text-6xl">{t("title")}</h1>
-        <p className="t-body mt-5 max-w-[56ch] text-base leading-relaxed text-ink-2 md:text-lg">{t("description")}</p>
-      </section>
-      <section className="mt-10 mb-16">
-        {items.length === 0 ? (
-          <p className="rule-t py-10 text-lg text-ink-2">{t("empty")}</p>
-        ) : (
-          <ul className="cell-grid md:grid-cols-2 lg:grid-cols-3">
-            {items.map((item) => (
-              <li key={item.id} className="p-6">
-                <blockquote>
-                  <p className="t-body text-lg leading-relaxed text-ink">{item.quote}</p>
-                  <footer className="mt-5">
-                    <p className="font-bold text-ink">{item.name}</p>
-                    <p className="t-cond mt-1 text-[11px] text-ink-3">{attribution(item)}</p>
-                  </footer>
-                </blockquote>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-    </div>
+    <>
+      <PageHero title={t("title")} description={t("description")} />
+
+      {items.length === 0 ? (
+        <section>
+          <div className="mx-auto max-w-7xl px-5 py-16 md:px-8">
+            <p className="text-lg text-mist/75">{t("empty")}</p>
+          </div>
+        </section>
+      ) : (
+        <>
+          <section className="bg-petrol text-ivory">
+            <Reveal className="mx-auto max-w-7xl px-5 py-20 md:px-8 lg:py-24">
+              <blockquote className="max-w-4xl">
+                <p className="text-2xl font-bold leading-snug tracking-tight md:text-4xl">
+                  “{featured.quote}”
+                </p>
+                <footer className="mt-8">
+                  <p className="font-bold text-turquoise">{featured.name}</p>
+                  <p className="text-sm text-mist/70">{attribution(featured)}</p>
+                </footer>
+              </blockquote>
+            </Reveal>
+          </section>
+
+          {rest.length > 0 && (
+            <section>
+              <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-12 px-5 py-20 md:grid-cols-2 md:px-8 lg:grid-cols-3">
+                {rest.map((item, i) => (
+                  <Reveal key={item.id} delay={(i % 3) * 0.07}>
+                    <blockquote className="border-l-2 border-turquoise pl-6">
+                      <p className="text-lg leading-relaxed text-mist/90">
+                        “{item.quote}”
+                      </p>
+                      <footer className="mt-5">
+                        <p className="font-bold text-ivory">{item.name}</p>
+                        <p className="text-sm text-mist/75">{attribution(item)}</p>
+                      </footer>
+                    </blockquote>
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+          )}
+        </>
+      )}
+
+      <CtaBand
+        title={tCtaFinal("title")}
+        text={tCtaFinal("text")}
+        ctaLabel={tCta("demo")}
+      />
+    </>
   );
 }

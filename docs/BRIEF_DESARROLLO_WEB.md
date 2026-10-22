@@ -118,28 +118,32 @@
 
 ---
 
-## 🧭 SISTEMA DE DISEÑO VIGENTE *(v3.0, rediseño "Catálogo de nave")*
+## 🧭 SISTEMA DE DISEÑO VIGENTE *(nueva, v2.7)*
 
-Desde v3.0 el sitio público se rige por el skill **Impeccable** (`.agents/skills/impeccable/`, repo `pbakaus/impeccable`), que sustituye al skill `design-taste-frontend` de la v2.6. La verdad del producto vive en `PRODUCT.md`; el contrato de dirección del home en `.impeccable/surfaces/src-app-locale-page-tsx.md`; el sistema visual documentado en `DESIGN.md` y `.impeccable/design.json`. Cualquier cambio visual futuro parte de ahí.
+Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-frontend`** (repo `Leonxlnx/taste-skill`, instalado con el CLI `skills` de Vercel Labs; vive en `.agents/skills/design-taste-frontend/SKILL.md`). Cualquier cambio visual futuro debe respetar estas reglas para no regresar al look genérico. `/admin` queda fuera: el propio skill excluye dashboards y UI de producto.
 
-**Dirección elegida (2026-10-21, decisión del cliente):** el sitio es un **catálogo impreso de servicios industriales**. Los 29 servicios son **entradas numeradas** (código de zona + número: A-01, C-07, E-10) empacadas borde con borde como celdas de estampilla, con el mismo código marcado en un **plano de planta** (zonas A Techo y cubierta, B Subestación y energía, C Patio y flota, D Nave y estructura, E Oficina y finanzas). El visitante **marca con pluma** las entradas que aplican a su planta, ve su **ruta** trazada en el plano y pide la evaluación con esa ruta ya incluida en el formulario (`/contacto?ruta=A-01,C-01`). La ruta vive en `localStorage` y se comparte entre páginas (`src/components/catalog/useRoute.ts`).
+**Modo y diales:** Redesign *Preserve* (marca, IA, contenido y slugs intactos) con ejecución tipo overhaul. Diales: `DESIGN_VARIANCE 7`, `MOTION_INTENSITY 6`, `VISUAL_DENSITY 4`.
 
-**Reglas duras:**
-- **Una sola tinta (marfil) sobre petróleo profundo** con grano fino (`body::before`). Texto secundario es la misma tinta atenuada (`--ink-2`, `--ink-3`), nunca gris. **Turquesa** solo en los divisores y códigos del plano. **Ámbar es la pluma**: círculos trazados, tachaduras, la ruta y la acción principal. No hay más color.
-- **Retícula de filos** (`.rule-t`, `.rule-b`, `.cell-grid`) como único contenedor. Sin tarjetas con sombra, sin bordes de color, sin glass, sin degradados.
-- **Tipografía:** Archivo variable con eje de anchura. `.t-cond` (wdth 75, versalitas, 11 px mínimo) para códigos, pies y etiquetas; `.t-wide` / `.t-display` (wdth 112 a 118, negra) para titulares. Dígitos tabulares en todo el sitio.
-- **Formas:** cuadradas. Interactivos y campos con radio de 2 px (`rounded-xs`); superficies sin radio.
-- **Sin kicker ni eyebrow sobre los títulos. Sin números de sección** (01/02/03) salvo cuando la secuencia informa (pasos de la ruta de trabajo, cláusulas legales).
-- **Una sola animación con motivo:** la pluma dibujándose (círculo en la celda y línea de ruta en el plano). Sin entradas idénticas por sección, sin scroll-reveal.
-- **Superficies del navegador tematizadas:** selección ámbar, caret ámbar, foco visible en ámbar, scrollbar petróleo.
-- **Franja de ruta** fija al pie en todas las páginas (`RouteStrip`): estado de la ruta y la acción principal siempre visibles.
-- Cero em-dashes ni en-dashes en texto visible. Sin marcas de proveedores.
+**Reglas duras que ya se aplican (y que hay que mantener):**
+- **Cero em-dashes (`—`) ni en-dashes (`–`)** en ningún texto visible: copy, CTAs, alt text, contenido cargado desde `/admin`. Usar coma, punto, dos puntos o guion normal.
+- **Un solo label por intención de CTA.** El intent "contacto" es siempre **"Solicitar demostración"** (nav, hero, banda final, formulario). El intent "explorar" es "Descubre nuestras soluciones".
+- **Un solo tema oscuro en todo el sitio** *(v2.10, sustituye al tema por página)*: el cambio de home oscuro a interiores blancos lastimaba la vista al navegar. Base petróleo profundo con un fondo fijo de resplandores teal suaves y grano fino (`body::before` en `globals.css`), bandas en petróleo / petróleo suave para ritmo, tarjetas `bg-petrol-soft/50` con borde `white/10`. Texto: `ivory` para títulos, `mist/75` para secundario, `turquoise` para acentos y links (teal no da contraste sobre oscuro). `color-scheme: dark`. No se usan fondos blancos ni marfil en el sitio público.
+- **Sistema de formas:** interactivos = píldora (`rounded-full`), superficies = `rounded-2xl` (16px), inputs = `rounded-lg` (8px). Documentado en `globals.css`.
+- **Color:** ámbar solo para CTA primario; turquesa/teal para secundarios y acentos; nada de colores nuevos ni gradientes de texto. Texto secundario usa `carbon/75` (fondos claros) y `mist/70` (fondos oscuros): Gris Piedra `#6B7A80` se conserva como token pero **no** para texto corrido porque da 4.45:1 sobre blanco (falla AA por centésimas).
+- **Presupuesto de eyebrows:** máximo 1 cada 3 secciones. En el home son 3 para 8 secciones (hero, servicios, testimonios). Las páginas interiores no llevan.
+- **Hero:** H1 en máximo 2 líneas en desktop, subtítulo de 20 palabras o menos, máximo 4 elementos de texto, `pt` máximo 24.
+- **Sin repetir familias de layout** en una misma página. El home usa 8 distintas: split hero, franja numérica, bento asimétrico, lista sticky, galería acordeón, cita destacada, filas editoriales, banda CTA. Nada de "3 cards iguales en fila".
+- **Imágenes:** siempre foto real, nunca SVG decorativo hecho a mano ni "fake screenshots" de divs. *(v2.9)* Las fotos conservan su color bajo un tinte petróleo suave (`.duotone` en `globals.css`); donde hay texto encima se agrega `.duotone-legible` (degradado oscuro). Las fotos del sitio viven en `public/images/site/` y se direccionan por seed en `src/components/DuotoneImage.tsx` (`siteImage`); las de cada servicio en `public/images/servicios/<slug>.jpg`, guardadas en `products.image_url`. Ninguna foto muestra marcas de proveedores ni de sus clientes.
+- **Animación con motivo:** cada movimiento comunica jerarquía, narrativa o feedback. `whileInView` con `once: true`, count-up en cifras de credibilidad, entrada escalonada del hero. Prohibido `window.addEventListener('scroll')`. Todo colapsa a estático con `prefers-reduced-motion`.
+- **Nav:** una sola línea en desktop, altura 73px (tope 80). Menú móvil con `AnimatePresence`.
 
-**Mapa del sitio (v3.0):** `/` Catálogo (portada + pliego: plano y entradas, corridas de ejemplo, compromisos, ruta de trabajo, boletín) · `/soluciones` Zonas (plano por zona) · `/productos` Índice de líneas y `/productos/<línea>` entradas completas con specs · `/nosotros` · `/blog` Boletín · `/contacto` con ruta prellenada · `/gracias` · `/legal/*` · `/casos-de-exito` existe pero no está en el índice hasta tener casos reales autorizados.
+**Excepciones declaradas en el pre-flight:**
+- No hay modo oscuro/claro por preferencia del sistema: el tema está bloqueado por marca y por página (permitido por el skill cuando la marca lo exige).
+- Los títulos de artículo de blog se limitan a 2 líneas a 35px; son titulares editoriales, no heros de landing.
 
-**Verificación:** `impeccable detect --json` sobre el HTML renderizado (con el CSS de Next descargado al lado) más capturas con Playwright en 1440, 1280 y 390. Hallazgos aceptados como excepción: "cramped-padding" en contenedores de la retícula de filos (el relleno vive en los hijos).
+**Resultado de las auditorías del Paso 4 (2026-09-05):** em-dash audit en cero (código, mensajes, base de datos y HTML servido); pre-flight sin ningún ítem en Fail; preservación con 4 cambios anunciados y aprobados (label del CTA del header "Contacto" → "Solicitar demostración", CTA secundario del hero unificado al mismo label, eliminación del botón "Descargar catálogo" que no tenía catálogo, y borradores legales en lugar del placeholder); fidelidad de marca con los 11 hex intactos, wordmark intacto y logo mark construido según el brief.
 
-**Revisión de acabado (2026-10-21):** revisor Impeccable en contexto aparte, disposición final **ship** tras dos rondas: ocho arreglos materiales (primer viewport con el pliego completo, ámbar solo como pluma, sin kickers, copy en voz de ingeniero, posts de demo etiquetados, fondo a paleta y grano visible, retícula sin losas vacías, plano legible en móvil) y dos regresiones (nombres de celda y nivel de grano) calificados resueltos. Las 46 fotos llevan su procedencia embebida (metadatos JPEG) sin nombrar proveedores. Capturas de referencia en `.impeccable/review/` (no versionadas).
+**Cómo repetir la verificación visual:** con el dev server corriendo, un script de Playwright (desktop 1440×900 y móvil 390×844) debe hacer scroll por toda la página antes de capturar, porque las secciones con scroll-reveal quedan en opacidad 0 en una captura sin scroll. Medir: filas del nav, altura del header, líneas del H1, CTAs con alto mayor a 64px (wrap), `scrollWidth > innerWidth` (overflow), errores de consola, y contar `tracking-[0.18em]` (eyebrows) en `main`.
 
 ---
 
@@ -722,10 +726,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 - **v2.8 (2026-10-21):** Catálogo real de servicios a partir de la carpeta de Drive. Se agregan las líneas Construcción e Infraestructura Industrial y Estrategia Fiscal y Laboral (rutas, categorías, copy ES/EN, bento de 5 celdas, footer, sitemap). 29 servicios ES+EN en `scripts/seed-services.mjs`; los productos de demo se eliminan y `seed-demo.mjs` queda solo con blog y testimonios. Se retiran del sitio todas las menciones a marcas de proveedores (copy de servicios, Nosotros, footer y franja de estadísticas). Documentación reorganizada en `docs/` (brief, reportes por proveedor en `docs/empresas/`, tracker interno en `docs/interno/`).
 
-- **v3.0 (2026-10-21):** Rediseño completo del sitio público con el skill Impeccable: dirección "Catálogo de nave" elegida por el cliente entre la tirada asignada, la propuesta técnico-económica, el retador y el estándar del giro. Nuevo PRODUCT.md, contrato de dirección, componentes de catálogo (plano SVG, celdas, ruta con pluma, franja de ruta), header y footer de catálogo, todas las páginas interiores reescritas, copy ES/EN nuevo, Archivo con eje de anchura. Se retiran hero, bento, estadísticas, diferenciadores, galería de verticales, testimonios del home y CtaBand.
 - **v2.10 (2026-10-21):** Un solo tema oscuro en todas las páginas públicas (header, interiores, blog, legales, 404, gracias), con fondo atmosférico fijo en lugar de color plano. Se mejoran fotos: hero con carga EV/almacenamiento, equipo en Nosotros, vans sin parches y fotos a color donde había fuentes en gris.
 - **v2.9 (2026-10-21):** Fotografía real en todo el sitio: se retiran los placeholders de Picsum (y su dominio de `next.config.ts`) y se sustituyen por 46 fotos locales sin marcas. El tratamiento de imagen pasa de duotono en escala de grises a color con tinte petróleo suave, con degradado de legibilidad donde hay texto sobre foto. Las fichas de servicio sin foto propia usan la imagen de su categoría.
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-10-21
-**Versión:** 3.0
+**Versión:** 2.10
