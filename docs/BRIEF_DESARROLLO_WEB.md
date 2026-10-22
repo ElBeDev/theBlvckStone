@@ -118,6 +118,8 @@
 
 ---
 
+> **v3.1 (2026-10-21, en rama `redesign-v3`):** el rediseño "Catálogo de nave" de v3.0 fue rechazado por el cliente y revertido en producción. La dirección vigente es "Patio de noche" (tipografía enorme sobre petróleo, jerarquía por profundidad, sin cajas); está documentada en [docs/DISENO_V3.md](DISENO_V3.md) y en vista previa pendiente de aprobación. La sección de abajo describe la v3.0 y queda como historial.
+
 ## 🧭 SISTEMA DE DISEÑO VIGENTE *(nueva, v2.7)*
 
 Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-frontend`** (repo `Leonxlnx/taste-skill`, instalado con el CLI `skills` de Vercel Labs; vive en `.agents/skills/design-taste-frontend/SKILL.md`). Cualquier cambio visual futuro debe respetar estas reglas para no regresar al look genérico. `/admin` queda fuera: el propio skill excluye dashboards y UI de producto.

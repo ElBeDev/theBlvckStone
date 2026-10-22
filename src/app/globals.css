@@ -95,14 +95,14 @@ a {
 .v-display {
   font-family: var(--font-display);
   font-weight: 900;
-  line-height: 0.92;
+  line-height: 1;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
 .v-title {
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
@@ -112,7 +112,7 @@ a {
 .v-num {
   font-family: var(--font-display);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 0.95;
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
@@ -169,18 +169,6 @@ a {
   }
   to {
     translate: 0.6vw -0.8vh;
-  }
-}
-
-/* Baselines run past both edges of the screen (from tablet up; a phone
-   wraps them so every word stays readable). */
-.bleed {
-  margin-inline: calc(50% - 50vw);
-  padding-inline: max(1.25rem, calc(50vw - 40rem));
-}
-@media (min-width: 768px) {
-  .bleed {
-    white-space: nowrap;
   }
 }
 

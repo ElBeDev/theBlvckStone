@@ -50,7 +50,7 @@ export function DepthQueue({ items, cta }: { items: QueueItem[]; cta: string }) 
                   onClick={() => setFront(i)}
                   aria-pressed={i === front}
                   data-depth={depth}
-                  className="v-display block w-full text-left text-[1.75rem] uppercase sm:text-5xl md:text-7xl lg:text-[7.5rem]"
+                  className="v-display block w-full text-left text-[1.75rem] uppercase leading-[1.04] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem]"
                 >
                   {item.word}
                 </button>
@@ -59,7 +59,7 @@ export function DepthQueue({ items, cta }: { items: QueueItem[]; cta: string }) 
           })}
         </ul>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-12 md:items-end">
+        <div className="mt-14 grid gap-6 md:grid-cols-12 md:items-end">
           <p className="v-body max-w-[44ch] text-xl leading-snug text-ink-1 md:col-span-8 md:text-2xl" aria-live="polite">
             <span className="text-ink-0">{active.title}.</span> {active.text}
           </p>

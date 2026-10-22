@@ -54,7 +54,7 @@ export default async function NosotrosPage({
               <span data-depth={2} className="v-num text-3xl md:col-span-1">
                 {i + 1}
               </span>
-              <h3 data-depth={0} className="v-title text-3xl md:col-span-5 md:text-4xl">
+              <h3 data-depth={0} className="v-title text-2xl md:col-span-5 md:text-3xl lg:text-4xl">
                 {step.title}
               </h3>
               <p className="v-body max-w-[44ch] text-lg text-ink-1 md:col-span-6 md:text-xl">{step.description}</p>
@@ -69,8 +69,8 @@ export default async function NosotrosPage({
             {t("certificationsTitle")}
           </Line>
         </div>
-        <Line depth={0} size="xl" bleed className="mt-10">
-          {certifications.join("   ·   ")}
+        <Line depth={0} size="xl" className="mx-auto mt-10 max-w-7xl px-5 md:px-8">
+          {certifications.join("  ·  ")}
         </Line>
       </section>
 

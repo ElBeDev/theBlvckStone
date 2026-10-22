@@ -14,7 +14,7 @@ export function Signal({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 bg-signal font-bold text-void transition-transform hover:-translate-y-0.5 active:translate-y-0 ${
+      className={`inline-flex items-center gap-3 whitespace-nowrap bg-signal font-bold text-void transition-transform hover:-translate-y-0.5 active:translate-y-0 ${
         size === "lg" ? "px-8 py-5 text-lg md:text-xl" : "px-6 py-3.5 text-base"
       }`}
     >

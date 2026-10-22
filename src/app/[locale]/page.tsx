@@ -52,7 +52,7 @@ export default async function HomePage({
           <h1 data-depth={0} className="v-display max-w-[13ch] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[6rem]">
             {t("hook")}
           </h1>
-          <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="mt-10 flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
             <p className="v-body max-w-[42ch] text-xl leading-snug text-ink-1 md:text-2xl">{t("sub")}</p>
             <Signal label={tCta("demo")} />
           </div>
@@ -67,16 +67,14 @@ export default async function HomePage({
         <Line depth={1} size="md" as="h2">
           {t("numbersLead")}
         </Line>
-        <ol className="mt-16 space-y-20 md:space-y-28">
+        <ol className="mt-16 space-y-24 md:space-y-32">
           {numbers.map((n) => (
-            <li key={n.value} className="grid gap-6 md:grid-cols-12 md:items-end">
-              <p data-depth={0} className="v-num text-[4rem] sm:text-7xl md:col-span-7 md:text-8xl lg:text-[7.5rem]">
+            <li key={n.value}>
+              <p data-depth={0} className="v-num text-[3.5rem] sm:text-7xl md:text-8xl lg:text-[7.5rem]">
                 {n.value}
               </p>
-              <div className="md:col-span-5 md:pb-3">
-                <p className="v-body max-w-[36ch] text-2xl leading-snug text-ink-0 md:text-3xl">{n.text}</p>
-                <p className="v-body mt-4 max-w-[48ch] text-base text-ink-2">{n.basis}</p>
-              </div>
+              <p className="v-body mt-6 max-w-[30ch] text-2xl leading-snug text-ink-0 md:text-3xl lg:text-4xl">{n.text}</p>
+              <p className="v-body mt-5 max-w-[56ch] text-base text-ink-2 md:text-lg">{n.basis}</p>
             </li>
           ))}
         </ol>
@@ -89,9 +87,9 @@ export default async function HomePage({
             {t("commitLead")}
           </Line>
         </div>
-        <ul className="mt-12 space-y-3 md:space-y-4">
+        <ul className="mx-auto mt-12 max-w-7xl space-y-5 px-5 md:space-y-6 md:px-8">
           {commitments.map((line, i) => (
-            <Line key={line} as="li" size="lg" bleed depth={Math.min(3, i) as 0 | 1 | 2 | 3} className={i > 0 ? `plane-${Math.min(3, i)}` : ""}>
+            <Line key={line} as="li" size="lg" depth={Math.min(3, i) as 0 | 1 | 2 | 3} className="max-w-[18ch]">
               {line}
             </Line>
           ))}
@@ -109,7 +107,7 @@ export default async function HomePage({
               <span data-depth={2} className="v-num text-3xl md:col-span-1">
                 {i + 1}
               </span>
-              <h3 data-depth={0} className="v-title text-3xl md:col-span-5 md:text-4xl">
+              <h3 data-depth={0} className="v-title text-2xl md:col-span-5 md:text-3xl lg:text-4xl">
                 {step.title}
               </h3>
               <p className="v-body max-w-[44ch] text-lg text-ink-1 md:col-span-6 md:text-xl">{step.text}</p>
