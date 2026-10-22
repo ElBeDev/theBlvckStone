@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f8f7;
-  --foreground: #1f2a2a;
+  color-scheme: dark;
+  --background: #0a2325;
+  --foreground: #f5f8f7;
 
   /* The Blvck Stone brand palette (from the brand brief, locked) */
   --color-teal: #10767c;
@@ -55,6 +56,22 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* One dark theme for every page, so navigating never flashes from petrol to
+   white. Instead of a flat fill, a fixed backdrop adds two soft teal glows and
+   a fine grain; sections without their own fill sit on top of it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 42rem at 88% -8%, rgb(27 188 180 / 0.13), transparent 62%),
+    radial-gradient(48rem 40rem at -12% 38%, rgb(16 118 124 / 0.16), transparent 64%),
+    radial-gradient(70rem 50rem at 50% 115%, rgb(55 230 196 / 0.06), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {

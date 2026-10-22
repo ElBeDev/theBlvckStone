@@ -34,13 +34,13 @@ export function ProductGrid({
   fallbackImage: string;
 }) {
   return (
-    <section className="bg-white">
+    <section>
       <div className="mx-auto grid max-w-7xl gap-6 px-5 py-16 md:px-8 lg:grid-cols-2 lg:py-20">
         {items.map((item, i) => {
           const specs = parseSpecs(item.specs);
           return (
             <Reveal key={item.id} delay={(i % 2) * 0.06} as="article">
-              <div className="grid h-full overflow-hidden rounded-2xl border border-petrol/10 bg-ivory sm:grid-cols-5">
+              <div className="grid h-full overflow-hidden rounded-2xl border border-white/10 bg-petrol-soft/50 sm:grid-cols-5">
                 <DuotoneImage
                   src={item.imageUrl ?? fallbackImage}
                   alt={item.title}
@@ -49,25 +49,25 @@ export function ProductGrid({
                   className="relative aspect-[4/3] sm:col-span-2 sm:aspect-auto sm:min-h-full"
                 />
                 <div className="flex flex-col p-6 sm:col-span-3">
-                  <h3 className="text-xl font-bold leading-snug text-petrol">
+                  <h3 className="text-xl font-bold leading-snug text-ivory">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-carbon/75">
+                  <p className="mt-3 text-sm leading-relaxed text-mist/75">
                     {item.description}
                   </p>
                   {specs.length > 0 && (
                     <div className="mt-5">
-                      <p className="text-[11px] font-bold uppercase tracking-wide text-teal">
+                      <p className="text-[11px] font-bold uppercase tracking-wide text-turquoise">
                         {specsLabel}
                       </p>
                       <ul className="mt-2 flex flex-wrap gap-2">
                         {specs.map((spec) => (
                           <li
                             key={spec.label + spec.value}
-                            className="rounded-full border border-petrol/10 bg-white px-3 py-1 text-xs text-carbon"
+                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-mist/90"
                           >
                             {spec.label && (
-                              <span className="font-bold text-petrol">{spec.label}: </span>
+                              <span className="font-bold text-ivory">{spec.label}: </span>
                             )}
                             {spec.value}
                           </li>

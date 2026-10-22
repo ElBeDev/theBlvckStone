@@ -17,13 +17,13 @@ export default async function GraciasPage({
   ]);
 
   return (
-    <section className="bg-ivory">
+    <section>
       <Reveal className="mx-auto max-w-2xl px-5 py-28 text-center md:px-8">
         <CheckCircle size={56} weight="duotone" className="mx-auto text-turquoise" />
-        <h1 className="mt-6 text-3xl font-black tracking-tighter text-petrol md:text-5xl">
+        <h1 className="mt-6 text-3xl font-black tracking-tighter text-ivory md:text-5xl">
           {t("title")}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-carbon/75">{t("description")}</p>
+        <p className="mt-5 text-lg leading-relaxed text-mist/75">{t("description")}</p>
         <Link
           href="/"
           className="mt-9 inline-flex rounded-full bg-amber px-6 py-3.5 text-sm font-bold text-petrol transition-transform hover:-translate-y-0.5"

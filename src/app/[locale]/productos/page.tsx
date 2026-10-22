@@ -57,9 +57,9 @@ export default async function ProductosPage({
     <>
       <PageHero title={tPage("title")} description={tPage("description")} />
 
-      <section className="bg-white">
+      <section>
         <div className="mx-auto max-w-7xl px-5 py-4 pb-20 md:px-8">
-          <div className="divide-y divide-petrol/10">
+          <div className="divide-y divide-white/10">
             {services.map((service, i) => (
               <Reveal key={service.href} delay={i * 0.05}>
                 <Link
@@ -77,13 +77,13 @@ export default async function ProductosPage({
                     }`}
                   />
                   <div className="md:col-span-8">
-                    <h2 className="text-2xl font-black leading-tight tracking-tight text-petrol transition-colors group-hover:text-teal md:text-3xl">
+                    <h2 className="text-2xl font-black leading-tight tracking-tight text-ivory transition-colors group-hover:text-turquoise md:text-3xl">
                       {service.title}
                     </h2>
-                    <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-carbon/75">
+                    <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-mist/75">
                       {service.description}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-teal">
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-turquoise">
                       {service.cta}
                       <ArrowUpRight
                         size={16}
@@ -100,7 +100,6 @@ export default async function ProductosPage({
       </section>
 
       <CtaBand
-        tone="light"
         title={tCtaFinal("title")}
         text={tCtaFinal("text")}
         ctaLabel={tCta("demo")}

@@ -17,7 +17,7 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="bg-ivory text-petrol">
+    <section className="text-ivory">
       <div
         className={`mx-auto grid max-w-7xl items-center gap-10 px-5 pt-14 pb-14 md:px-8 lg:pt-20 lg:pb-20 ${
           imageSeed ? "lg:grid-cols-12" : ""
@@ -25,7 +25,7 @@ export function PageHero({
       >
         <Reveal className={imageSeed ? "lg:col-span-7" : "max-w-4xl"}>
           {eyebrow && (
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-teal">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-turquoise">
               {eyebrow}
             </p>
           )}
@@ -33,7 +33,7 @@ export function PageHero({
             {title}
           </h1>
           {description && (
-            <p className="mt-6 max-w-[56ch] text-lg leading-relaxed text-carbon/75">
+            <p className="mt-6 max-w-[56ch] text-lg leading-relaxed text-mist/75">
               {description}
             </p>
           )}

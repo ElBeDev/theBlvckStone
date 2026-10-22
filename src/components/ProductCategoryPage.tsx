@@ -38,9 +38,9 @@ export async function ProductCategoryPage({
       />
 
       {items.length === 0 ? (
-        <section className="bg-white">
+        <section>
           <div className="mx-auto max-w-7xl px-5 py-16 md:px-8">
-            <p className="max-w-[60ch] text-lg leading-relaxed text-carbon/75">
+            <p className="max-w-[60ch] text-lg leading-relaxed text-mist/75">
               {t("emptyCategory")}
             </p>
             <Link
@@ -60,9 +60,9 @@ export async function ProductCategoryPage({
       )}
 
       {category === "financiamiento" && (
-        <section className="bg-white">
+        <section>
           <div className="mx-auto max-w-7xl px-5 pb-16 md:px-8">
-            <p className="max-w-[70ch] rounded-2xl border border-amber/40 bg-amber/10 px-6 py-5 text-sm leading-relaxed text-petrol">
+            <p className="max-w-[70ch] rounded-2xl border border-amber/40 bg-amber/10 px-6 py-5 text-sm leading-relaxed text-mist/90">
               {t("financingNote")}
             </p>
           </div>
@@ -70,7 +70,6 @@ export async function ProductCategoryPage({
       )}
 
       <CtaBand
-        tone="light"
         title={tCtaFinal("title")}
         text={tCtaFinal("text")}
         ctaLabel={tCta("demo")}

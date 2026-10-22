@@ -4,16 +4,13 @@ import { routing } from "@/i18n/routing";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 
-export function LocaleSwitcher({ tone = "dark" }: { tone?: "dark" | "light" }) {
+export function LocaleSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
 
-  const active = tone === "dark" ? "text-turquoise" : "text-teal";
-  const idle =
-    tone === "dark"
-      ? "text-mist/70 hover:text-ivory"
-      : "text-carbon/70 hover:text-petrol";
+  const active = "text-turquoise";
+  const idle = "text-mist/70 hover:text-ivory";
 
   return (
     <div className="flex items-center gap-1 text-xs font-bold tracking-wide">

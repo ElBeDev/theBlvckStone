@@ -57,11 +57,11 @@ export default async function BlogPostPage({
   const html = await marked.parse(post.body);
 
   return (
-    <article className="bg-white">
+    <article>
       <div className="mx-auto max-w-7xl px-5 pt-10 md:px-8">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm font-bold text-teal transition-colors hover:text-petrol"
+          className="inline-flex items-center gap-1.5 text-sm font-bold text-turquoise transition-colors hover:text-ivory"
         >
           <ArrowLeft size={16} weight="bold" />
           {tNav("blog")}
@@ -69,18 +69,18 @@ export default async function BlogPostPage({
       </div>
 
       <header className="mx-auto max-w-3xl px-5 pt-8 md:px-8">
-        <p className="text-xs font-bold uppercase tracking-wide text-teal">
+        <p className="text-xs font-bold uppercase tracking-wide text-turquoise">
           {new Date(post.publishedAt).toLocaleDateString(locale, {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}
         </p>
-        <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tighter text-petrol lg:text-[2.2rem]">
+        <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tighter text-ivory lg:text-[2.2rem]">
           {post.title}
         </h1>
         {post.excerpt && (
-          <p className="mt-6 text-lg leading-relaxed text-carbon/75">{post.excerpt}</p>
+          <p className="mt-6 text-lg leading-relaxed text-mist/75">{post.excerpt}</p>
         )}
       </header>
 
@@ -97,7 +97,7 @@ export default async function BlogPostPage({
       </div>
 
       <div
-        className="prose-blvck mx-auto max-w-3xl space-y-5 px-5 pt-12 pb-24 text-lg leading-relaxed text-carbon md:px-8 [&_a]:font-bold [&_a]:text-teal [&_a]:underline [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:tracking-tight [&_h2]:text-petrol [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-petrol [&_li]:ml-6 [&_ol]:list-decimal [&_strong]:text-petrol [&_ul]:list-disc"
+        className="prose-blvck mx-auto max-w-3xl space-y-5 px-5 pt-12 pb-24 text-lg leading-relaxed text-mist/90 md:px-8 [&_a]:font-bold [&_a]:text-turquoise [&_a]:underline [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:tracking-tight [&_h2]:text-ivory [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ivory [&_li]:ml-6 [&_ol]:list-decimal [&_strong]:text-ivory [&_ul]:list-disc"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </article>

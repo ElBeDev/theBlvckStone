@@ -8,16 +8,12 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { LogoMark } from "./LogoMark";
 
-const DARK_ROUTES = ["/", "/contacto"];
-
 export function Header() {
   const t = useTranslations("nav");
   const tCta = useTranslations("cta");
   const pathname = usePathname();
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
-
-  const dark = DARK_ROUTES.includes(pathname);
 
   const links = [
     { href: "/", label: t("home") },
@@ -28,13 +24,9 @@ export function Header() {
     { href: "/blog", label: t("blog") },
   ] as const;
 
-  const shell = dark
-    ? "bg-petrol/85 text-ivory border-white/5"
-    : "bg-ivory/85 text-petrol border-petrol/5";
-  const linkIdle = dark
-    ? "text-mist/80 hover:text-ivory"
-    : "text-carbon/80 hover:text-petrol";
-  const linkActive = dark ? "text-turquoise" : "text-teal";
+  const shell = "bg-petrol/85 text-ivory border-white/5";
+  const linkIdle = "text-mist/80 hover:text-ivory";
+  const linkActive = "text-turquoise";
 
   return (
     <header
@@ -71,7 +63,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
-          <LocaleSwitcher tone={dark ? "dark" : "light"} />
+          <LocaleSwitcher />
           <Link
             href="/contacto"
             className="rounded-full bg-amber px-5 py-2.5 text-sm font-bold text-petrol transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
@@ -99,9 +91,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`border-t lg:hidden ${
-              dark ? "border-white/5 bg-petrol" : "border-petrol/5 bg-ivory"
-            }`}
+            className="border-t border-white/5 bg-petrol lg:hidden"
           >
             <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
               {links.map((link) => (
@@ -115,7 +105,7 @@ export function Header() {
                 </Link>
               ))}
               <div className="mt-3 flex items-center justify-between px-3">
-                <LocaleSwitcher tone={dark ? "dark" : "light"} />
+                <LocaleSwitcher />
                 <Link
                   href="/contacto"
                   onClick={() => setOpen(false)}

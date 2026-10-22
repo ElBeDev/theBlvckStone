@@ -44,7 +44,7 @@ export default async function SolucionesPage({
     <>
       <PageHero title={tPage("title")} description={tPage("description")} />
 
-      <section className="bg-white">
+      <section>
         <div className="mx-auto grid max-w-7xl gap-5 px-5 pb-20 md:grid-cols-2 md:px-8">
           {items.map((item, i) => (
             <Reveal key={item.title} delay={(i % 2) * 0.07}>
@@ -82,7 +82,6 @@ export default async function SolucionesPage({
       </section>
 
       <CtaBand
-        tone="light"
         title={tCtaFinal("title")}
         text={tCtaFinal("text")}
         ctaLabel={tCta("demo")}

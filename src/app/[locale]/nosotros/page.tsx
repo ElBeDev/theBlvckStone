@@ -53,22 +53,22 @@ export default async function NosotrosPage({
         imageSeed="blvckstone-team-industrial"
       />
 
-      <section className="bg-white">
+      <section>
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 md:px-8 lg:grid-cols-12">
           <Reveal className="space-y-6 lg:col-span-7">
             {story.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 24)}
-                className="max-w-[65ch] text-lg leading-relaxed text-carbon"
+                className="max-w-[65ch] text-lg leading-relaxed text-mist/90"
               >
                 {paragraph}
               </p>
             ))}
           </Reveal>
-          <div className="grid grid-cols-2 gap-8 lg:col-span-5 lg:grid-cols-1 lg:border-l lg:border-petrol/10 lg:pl-10">
+          <div className="grid grid-cols-2 gap-8 lg:col-span-5 lg:grid-cols-1 lg:border-l lg:border-white/10 lg:pl-10">
             {stats.slice(0, 3).map((stat, i) => (
               <Reveal key={stat.label} delay={i * 0.07}>
-                <p className="text-4xl font-black tracking-tighter text-teal md:text-5xl">
+                <p className="text-4xl font-black tracking-tighter text-turquoise md:text-5xl">
                   <CountUp
                     value={stat.value}
                     prefix={stat.prefix}
@@ -76,17 +76,17 @@ export default async function NosotrosPage({
                     decimals={Number.isInteger(stat.value) ? 0 : 1}
                   />
                 </p>
-                <p className="mt-1 text-sm text-carbon/75">{stat.label}</p>
+                <p className="mt-1 text-sm text-mist/75">{stat.label}</p>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-mist">
+      <section className="bg-petrol-soft/40">
         <div className="mx-auto max-w-7xl px-5 py-20 md:px-8">
           <Reveal>
-            <h2 className="text-3xl font-black tracking-tight text-petrol md:text-4xl">
+            <h2 className="text-3xl font-black tracking-tight text-ivory md:text-4xl">
               {t("howTitle")}
             </h2>
           </Reveal>
@@ -94,8 +94,8 @@ export default async function NosotrosPage({
             {how.map((step, i) => (
               <Reveal key={step.title} delay={i * 0.08}>
                 <div className="h-1 w-12 rounded-full bg-turquoise" />
-                <h3 className="mt-5 text-xl font-bold text-petrol">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-carbon/75">
+                <h3 className="mt-5 text-xl font-bold text-ivory">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-mist/75">
                   {step.description}
                 </p>
               </Reveal>
@@ -104,17 +104,17 @@ export default async function NosotrosPage({
         </div>
       </section>
 
-      <section className="bg-white">
+      <section>
         <div className="mx-auto grid max-w-7xl gap-14 px-5 py-20 md:px-8 lg:grid-cols-2">
           <Reveal>
-            <h2 className="text-2xl font-black tracking-tight text-petrol md:text-3xl">
+            <h2 className="text-2xl font-black tracking-tight text-ivory md:text-3xl">
               {t("certificationsTitle")}
             </h2>
             <ul className="mt-8 flex flex-wrap gap-3">
               {certifications.map((cert) => (
                 <li
                   key={cert}
-                  className="rounded-full border border-petrol/15 px-6 py-3 text-lg font-black tracking-tight text-petrol"
+                  className="rounded-full border border-white/15 px-6 py-3 text-lg font-black tracking-tight text-ivory"
                 >
                   {cert}
                 </li>
@@ -122,18 +122,18 @@ export default async function NosotrosPage({
             </ul>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="text-2xl font-black tracking-tight text-petrol md:text-3xl">
+            <h2 className="text-2xl font-black tracking-tight text-ivory md:text-3xl">
               {t("teamTitle")}
             </h2>
             <ul className="mt-8 grid gap-6 sm:grid-cols-2">
               {team.map((member) => (
                 <li key={member.name} className="flex items-center gap-4">
-                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-petrol text-lg font-black text-turquoise">
+                  <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-petrol-soft text-lg font-black text-turquoise">
                     {member.initials}
                   </span>
                   <div>
-                    <p className="font-bold text-petrol">{member.name}</p>
-                    <p className="text-sm text-carbon/75">{member.role}</p>
+                    <p className="font-bold text-ivory">{member.name}</p>
+                    <p className="text-sm text-mist/75">{member.role}</p>
                   </div>
                 </li>
               ))}
@@ -143,7 +143,6 @@ export default async function NosotrosPage({
       </section>
 
       <CtaBand
-        tone="light"
         title={tCtaFinal("title")}
         text={tCtaFinal("text")}
         ctaLabel={tCta("demo")}

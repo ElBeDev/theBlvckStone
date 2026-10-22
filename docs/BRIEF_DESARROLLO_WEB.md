@@ -127,7 +127,7 @@ Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-f
 **Reglas duras que ya se aplican (y que hay que mantener):**
 - **Cero em-dashes (`—`) ni en-dashes (`–`)** en ningún texto visible: copy, CTAs, alt text, contenido cargado desde `/admin`. Usar coma, punto, dos puntos o guion normal.
 - **Un solo label por intención de CTA.** El intent "contacto" es siempre **"Solicitar demostración"** (nav, hero, banda final, formulario). El intent "explorar" es "Descubre nuestras soluciones".
-- **Tema por página:** home y `/contacto` oscuros (petróleo / petróleo profundo / negro base); interiores claros (marfil / blanco / niebla). Dentro de una página no se alternan temas; el footer oscuro es el único bloque de contraste, una vez.
+- **Un solo tema oscuro en todo el sitio** *(v2.10, sustituye al tema por página)*: el cambio de home oscuro a interiores blancos lastimaba la vista al navegar. Base petróleo profundo con un fondo fijo de resplandores teal suaves y grano fino (`body::before` en `globals.css`), bandas en petróleo / petróleo suave para ritmo, tarjetas `bg-petrol-soft/50` con borde `white/10`. Texto: `ivory` para títulos, `mist/75` para secundario, `turquoise` para acentos y links (teal no da contraste sobre oscuro). `color-scheme: dark`. No se usan fondos blancos ni marfil en el sitio público.
 - **Sistema de formas:** interactivos = píldora (`rounded-full`), superficies = `rounded-2xl` (16px), inputs = `rounded-lg` (8px). Documentado en `globals.css`.
 - **Color:** ámbar solo para CTA primario; turquesa/teal para secundarios y acentos; nada de colores nuevos ni gradientes de texto. Texto secundario usa `carbon/75` (fondos claros) y `mist/70` (fondos oscuros): Gris Piedra `#6B7A80` se conserva como token pero **no** para texto corrido porque da 4.45:1 sobre blanco (falla AA por centésimas).
 - **Presupuesto de eyebrows:** máximo 1 cada 3 secciones. En el home son 3 para 8 secciones (hero, servicios, testimonios). Las páginas interiores no llevan.
@@ -726,8 +726,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 
 - **v2.8 (2026-10-21):** Catálogo real de servicios a partir de la carpeta de Drive. Se agregan las líneas Construcción e Infraestructura Industrial y Estrategia Fiscal y Laboral (rutas, categorías, copy ES/EN, bento de 5 celdas, footer, sitemap). 29 servicios ES+EN en `scripts/seed-services.mjs`; los productos de demo se eliminan y `seed-demo.mjs` queda solo con blog y testimonios. Se retiran del sitio todas las menciones a marcas de proveedores (copy de servicios, Nosotros, footer y franja de estadísticas). Documentación reorganizada en `docs/` (brief, reportes por proveedor en `docs/empresas/`, tracker interno en `docs/interno/`).
 
+- **v2.10 (2026-10-21):** Un solo tema oscuro en todas las páginas públicas (header, interiores, blog, legales, 404, gracias), con fondo atmosférico fijo en lugar de color plano. Se mejoran fotos: hero con carga EV/almacenamiento, equipo en Nosotros, vans sin parches y fotos a color donde había fuentes en gris.
 - **v2.9 (2026-10-21):** Fotografía real en todo el sitio: se retiran los placeholders de Picsum (y su dominio de `next.config.ts`) y se sustituyen por 46 fotos locales sin marcas. El tratamiento de imagen pasa de duotono en escala de grises a color con tinte petróleo suave, con degradado de legibilidad donde hay texto sobre foto. Las fichas de servicio sin foto propia usan la imagen de su categoría.
 
 **Documento generado:** 2026-09-03
 **Última actualización:** 2026-10-21
-**Versión:** 2.9
+**Versión:** 2.10

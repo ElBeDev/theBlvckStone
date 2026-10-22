@@ -52,9 +52,9 @@ export default async function CasosDeExitoPage({
       <PageHero title={t("title")} description={t("description")} />
 
       {items.length === 0 ? (
-        <section className="bg-white">
+        <section>
           <div className="mx-auto max-w-7xl px-5 py-16 md:px-8">
-            <p className="text-lg text-carbon/75">{t("empty")}</p>
+            <p className="text-lg text-mist/75">{t("empty")}</p>
           </div>
         </section>
       ) : (
@@ -74,17 +74,17 @@ export default async function CasosDeExitoPage({
           </section>
 
           {rest.length > 0 && (
-            <section className="bg-white">
+            <section>
               <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-12 px-5 py-20 md:grid-cols-2 md:px-8 lg:grid-cols-3">
                 {rest.map((item, i) => (
                   <Reveal key={item.id} delay={(i % 3) * 0.07}>
                     <blockquote className="border-l-2 border-turquoise pl-6">
-                      <p className="text-lg leading-relaxed text-carbon">
+                      <p className="text-lg leading-relaxed text-mist/90">
                         “{item.quote}”
                       </p>
                       <footer className="mt-5">
-                        <p className="font-bold text-petrol">{item.name}</p>
-                        <p className="text-sm text-carbon/75">{attribution(item)}</p>
+                        <p className="font-bold text-ivory">{item.name}</p>
+                        <p className="text-sm text-mist/75">{attribution(item)}</p>
                       </footer>
                     </blockquote>
                   </Reveal>
@@ -96,7 +96,6 @@ export default async function CasosDeExitoPage({
       )}
 
       <CtaBand
-        tone="light"
         title={tCtaFinal("title")}
         text={tCtaFinal("text")}
         ctaLabel={tCta("demo")}

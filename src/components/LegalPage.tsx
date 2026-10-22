@@ -15,20 +15,20 @@ export async function LegalPage({
   return (
     <>
       <PageHero title={t(`${doc}.title`)}>
-        <p className="mt-6 text-sm text-carbon/75">{t("updated")}</p>
-        <p className="mt-2 inline-block rounded-full border border-amber/50 bg-amber/10 px-3 py-1 text-xs font-bold text-petrol">
+        <p className="mt-6 text-sm text-mist/75">{t("updated")}</p>
+        <p className="mt-2 inline-block rounded-full border border-amber/50 bg-amber/10 px-3 py-1 text-xs font-bold text-amber">
           {t("draftNotice")}
         </p>
       </PageHero>
 
-      <section className="bg-white">
+      <section>
         <div className="mx-auto max-w-3xl space-y-10 px-5 py-16 md:px-8 lg:py-20">
           {sections.map((section, i) => (
             <Reveal key={section.heading} delay={Math.min(i, 3) * 0.04}>
-              <h2 className="text-xl font-black tracking-tight text-petrol">
+              <h2 className="text-xl font-black tracking-tight text-ivory">
                 {section.heading}
               </h2>
-              <p className="mt-3 max-w-[65ch] leading-relaxed text-carbon">
+              <p className="mt-3 max-w-[65ch] leading-relaxed text-mist/90">
                 {section.body}
               </p>
             </Reveal>
