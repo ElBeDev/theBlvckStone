@@ -16,9 +16,10 @@
   --color-ivory: #f5f8f7;
   --color-black-base: #0b0f10;
 
-  /* The void and its dust. One ink (ivory) at four brightness steps; what
-     sits further back is dimmer and wider spaced. Amber is the one signal. */
-  --void: var(--color-black-base);
+  /* The ground is brand Petróleo, deepening to Negro base at the edges. One
+     ink (ivory) at four brightness steps; what sits further back is dimmer
+     and wider spaced. Amber is the one signal. */
+  --void: var(--color-petrol);
   --ink-0: var(--color-ivory);
   --ink-1: rgb(245 248 247 / 0.74);
   --ink-2: rgb(245 248 247 / 0.5);
@@ -64,6 +65,8 @@ html {
 
 body {
   background: var(--void);
+  background-image: radial-gradient(120% 90% at 50% 30%, transparent 45%, rgb(11 15 16 / 0.7) 100%);
+  background-attachment: fixed;
   color: var(--ink-0);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -181,21 +184,42 @@ a {
   }
 }
 
-/* Photos sit on the void untinted; depth dims them by opacity only. */
+/* Photos are rear planes washed in petrol, the brand's own tint; depth
+   dims them by opacity. */
 .photo-plane {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  background: var(--void);
 }
 .photo-plane img {
   object-fit: cover;
+  filter: saturate(0.35) contrast(1.05);
+}
+.photo-plane::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-petrol);
+  mix-blend-mode: color;
+  opacity: 0.85;
 }
 .photo-plane::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(11 15 16 / 0.35) 0%, rgb(11 15 16 / 0.55) 55%, var(--void) 100%);
+  z-index: 2;
+  background: linear-gradient(180deg, rgb(14 46 48 / 0.3) 0%, rgb(14 46 48 / 0.5) 55%, var(--void) 100%);
+}
+.photo-tint {
+  filter: saturate(0.35) contrast(1.05);
+}
+
+/* The mark and anything that must read as lit carries a soft ivory glow. */
+.glow {
+  filter: drop-shadow(0 0 5px rgb(245 248 247 / 0.55)) drop-shadow(0 0 14px rgb(27 188 180 / 0.25));
 }
 
 @media (prefers-reduced-motion: reduce) {

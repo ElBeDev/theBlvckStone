@@ -38,7 +38,7 @@ export async function ProductCategoryPage({
             {entries.map((entry, i) => (
               <li key={entry.code} id={entry.slug} className="grid scroll-mt-28 gap-8 md:grid-cols-12 md:gap-12">
                 <div className={`relative aspect-[4/3] md:col-span-5 ${i % 2 === 1 ? "md:order-last" : ""}`}>
-                  <Image src={entry.imageUrl} alt="" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover opacity-90" />
+                  <Image src={entry.imageUrl} alt="" fill sizes="(min-width: 768px) 40vw, 100vw" className="photo-tint object-cover opacity-90" />
                 </div>
                 <div className="md:col-span-7">
                   <h2 data-depth={0} className="v-title text-3xl md:text-5xl">

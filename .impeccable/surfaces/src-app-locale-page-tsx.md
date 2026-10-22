@@ -17,7 +17,7 @@ Sin resolver: cifras de proyectos instalados (no fabricar), foto propia del equi
 
 THESIS: una sola voz tipográfica enorme flotando sobre un vacío negro luminoso; lo importante está adelante y grande, lo secundario retrocede en tamaño y luz. Nada encerrado en cajas, tarjetas ni filos. Se niega al hero con foto al lado, a las tarjetas iguales, a la franja de cifras, a las etiquetas diminutas.
 
-OWN-WORLD: fondo Negro base con polvo gris (Piedra) a tres profundidades que deriva lento y se mueve con el scroll; fotos reales a sangre como plano de fondo, oscurecidas, nunca recortadas en marcos; tipografía de display Unbounded negra a 6 rem en desktop sobre líneas de base limpias, cuerpo Archivo a 18 px; marfil como única tinta, Piedra para lo que retrocede, ámbar solo en la acción principal y en la línea que está al frente; sin bordes, sin radios visibles, sin sombras.
+OWN-WORLD: fondo Petróleo de la paleta (viñeta a Negro base en los bordes) con polvo gris (Piedra) a tres profundidades que deriva lento y se mueve con el scroll; fotos reales a sangre como plano de fondo, lavadas en petróleo (el tinte de la marca) y oscurecidas, nunca recortadas en marcos; el logo en contorno con brillo suave; tipografía de display Unbounded negra a 6 rem en desktop sobre líneas de base limpias, cuerpo Archivo a 18 px; marfil como única tinta, Piedra para lo que retrocede, ámbar solo en la acción principal y en la línea que está al frente; sin bordes, sin radios visibles, sin sombras.
 
 STORY: entra y lee una sola frase gigante; entiende que una empresa se hace cargo de toda su planta; recorre cinco palabras enormes que son las líneas; ve números reales a tamaño de cartel; pide la evaluación.
 
