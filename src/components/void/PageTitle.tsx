@@ -1,3 +1,4 @@
+import { CAPS, fit } from "./fit";
 import { PhotoPlane } from "./PhotoPlane";
 
 // Every interior page opens the same way: one giant line, one paragraph,
@@ -17,7 +18,7 @@ export function PageTitle({
     <section className="relative isolate">
       {image && <PhotoPlane src={image} depth={3} priority />}
       <div className="mx-auto max-w-7xl px-5 pb-16 pt-16 md:px-8 md:pb-24 md:pt-24">
-        <h1 data-depth={0} className="v-display max-w-[16ch] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+        <h1 data-depth={0} style={fit(title)} className={`v-display fit max-w-[16ch] ${CAPS.page}`}>
           {title}
         </h1>
         {text && (

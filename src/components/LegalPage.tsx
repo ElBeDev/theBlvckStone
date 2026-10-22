@@ -24,10 +24,10 @@ export async function LegalPage({
             <span data-depth={2} className="v-num text-2xl md:col-span-1">
               {i + 1}
             </span>
-            <h2 data-depth={0} className="v-title text-2xl md:col-span-4 md:text-3xl">
+            <h2 data-depth={0} className="v-title text-2xl md:col-span-5 lg:col-span-4 lg:text-3xl">
               {section.heading}
             </h2>
-            <p className="v-body max-w-[60ch] text-lg text-ink-1 md:col-span-7">{section.body}</p>
+            <p className="v-body max-w-[60ch] text-lg text-ink-1 md:col-span-6 lg:col-span-7">{section.body}</p>
           </li>
         ))}
       </ol>

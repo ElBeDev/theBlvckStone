@@ -3,7 +3,9 @@ import { routing } from "@/i18n/routing";
 import { siteImage } from "@/lib/images";
 import { DepthQueue, type QueueItem } from "@/components/void/DepthQueue";
 import { Line } from "@/components/void/Line";
+import { CAPS, fit } from "@/components/void/fit";
 import { PhotoPlane } from "@/components/void/PhotoPlane";
+import { Process, type Step } from "@/components/void/Process";
 import { Signal } from "@/components/void/Signal";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -24,7 +26,6 @@ export async function generateMetadata({
 }
 
 type NumberItem = { value: string; text: string; basis: string };
-type Step = { title: string; text: string };
 
 export default async function HomePage({
   params,
@@ -49,7 +50,7 @@ export default async function HomePage({
       <section className="relative isolate">
         <PhotoPlane src={siteImage("blvckstone-hero-energy")} alt="" depth={2} priority className="plane-1" />
         <div className="mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-5 pb-16 pt-20 md:px-8 md:pb-24">
-          <h1 data-depth={0} className="v-display max-w-[13ch] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[6rem]">
+          <h1 data-depth={0} style={fit(t("hook"))} className={`v-display fit max-w-[13ch] ${CAPS.hero}`}>
             {t("hook")}
           </h1>
           <div className="mt-10 flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -97,24 +98,7 @@ export default async function HomePage({
       </section>
 
       {/* How the work runs */}
-      <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
-        <Line depth={1} size="md" as="h2">
-          {t("processLead")}
-        </Line>
-        <ol className="mt-16 space-y-14">
-          {steps.map((step, i) => (
-            <li key={step.title} className="grid gap-4 md:grid-cols-12 md:items-baseline">
-              <span data-depth={2} className="v-num text-3xl md:col-span-1">
-                {i + 1}
-              </span>
-              <h3 data-depth={0} className="v-title text-2xl md:col-span-5 md:text-3xl lg:text-4xl">
-                {step.title}
-              </h3>
-              <p className="v-body max-w-[44ch] text-lg text-ink-1 md:col-span-6 md:text-xl">{step.text}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <Process title={t("processLead")} steps={steps} />
 
       {/* Close */}
       <section className="relative isolate">

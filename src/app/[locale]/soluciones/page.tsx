@@ -4,7 +4,7 @@ import { DepthQueue, type QueueItem } from "@/components/void/DepthQueue";
 import { PageTitle } from "@/components/void/PageTitle";
 import { pageMetadata } from "@/lib/metadata";
 
-type Vertical = { title: string; description: string; seed: string };
+type Vertical = { word: string; title: string; description: string; seed: string };
 
 export async function generateMetadata({
   params,
@@ -31,7 +31,7 @@ export default async function SolucionesPage({
     getTranslations("cta"),
   ]);
   const items: QueueItem[] = (tSolutions.raw("items") as Vertical[]).map((v) => ({
-    word: v.title,
+    word: v.word,
     title: v.title,
     text: v.description,
     href: "/contacto",

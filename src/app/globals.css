@@ -91,13 +91,16 @@ a {
   text-decoration-thickness: 1px;
 }
 
-/* Voices */
+/* Voices. A word that still cannot fit breaks rather than runs past the
+   edge (CMS titles can be anything); the sizes below keep that from
+   happening with the site's own copy. */
 .v-display {
   font-family: var(--font-display);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.03em;
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 .v-title {
   font-family: var(--font-display);
@@ -105,6 +108,28 @@ a {
   line-height: 1.05;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+/* Fit. A display line is as large as its breakpoint allows (--cap, from the
+   scale table) but never larger than lets its longest word sit whole inside
+   the container. Unbounded runs up to 0.78em per lowercase letter; --fit is
+   the letter count of the longest word, set by fit() in components/void.
+   main is the size container; the content column is main less its gutters,
+   capped at the 80rem container. */
+main {
+  container-type: inline-size;
+}
+:root {
+  --gutter: 2.5rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --gutter: 4rem;
+  }
+}
+.fit {
+  font-size: min(var(--cap), calc((min(100cqi, 80rem) - var(--gutter)) / (var(--fit) * 0.78)));
 }
 .v-body {
   text-wrap: pretty;
@@ -118,7 +143,7 @@ a {
 }
 
 /* Depth. Every element that matters declares an integer depth; one
-   stylesheet maps it to brightness, letterspacing and drift. The front
+   stylesheet maps it to brightness and letterspacing. The front
    plane (0) never moves while it is read. */
 [data-depth] {
   transition:
@@ -143,8 +168,8 @@ a {
   letter-spacing: 0.03em;
 }
 
-/* Rear planes drift on one shared clock; each step forward halves the rate.
-   Scroll parallax rides the same depth: the further back, the slower. */
+/* Scroll parallax rides depth: the further back the plane, the faster it
+   slides away, so the front reads as still. ScrollClock publishes --sy. */
 .plane-1 {
   transform: translate3d(0, calc(var(--sy) * -0.06px), 0);
 }
@@ -153,23 +178,6 @@ a {
 }
 .plane-3 {
   transform: translate3d(0, calc(var(--sy) * -0.2px), 0);
-}
-.drift-1 {
-  animation: drift 36s ease-in-out infinite alternate;
-}
-.drift-2 {
-  animation: drift 18s ease-in-out infinite alternate;
-}
-.drift-3 {
-  animation: drift 9s ease-in-out infinite alternate;
-}
-@keyframes drift {
-  from {
-    translate: 0 0;
-  }
-  to {
-    translate: 0.6vw -0.8vh;
-  }
 }
 
 /* Photos are rear planes washed in petrol, the brand's own tint; depth
@@ -205,17 +213,94 @@ a {
   filter: saturate(0.35) contrast(1.05);
 }
 
+/* A photo that sits in the page rather than behind it (service entries):
+   same desaturation, a lighter petrol wash so bright skies stay in the
+   night. No frame, no radius. */
+.photo-wash {
+  position: relative;
+  overflow: hidden;
+}
+.photo-wash img {
+  filter: saturate(0.35) contrast(1.05);
+}
+.photo-wash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-petrol);
+  mix-blend-mode: color;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Long-form text (blog posts from the CMS): body at reading measure, the
+   headings in the title voice, links in the signal. */
+.prose-void {
+  max-width: 64ch;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--ink-1);
+  text-wrap: pretty;
+}
+.prose-void > * + * {
+  margin-top: 1.25em;
+}
+.prose-void h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--ink-0);
+  font-size: 1.875rem;
+  margin-top: 2.5em;
+}
+.prose-void h3 {
+  font-weight: 700;
+  color: var(--ink-0);
+  font-size: 1.375rem;
+  margin-top: 2em;
+}
+.prose-void h2 + *,
+.prose-void h3 + * {
+  margin-top: 0.75em;
+}
+.prose-void strong {
+  color: var(--ink-0);
+}
+.prose-void a {
+  color: var(--signal);
+  font-weight: 700;
+  text-decoration: underline;
+}
+.prose-void ul,
+.prose-void ol {
+  padding-left: 1.5em;
+}
+.prose-void ul {
+  list-style: disc;
+}
+.prose-void ol {
+  list-style: decimal;
+}
+.prose-void li + li {
+  margin-top: 0.5em;
+}
+.prose-void li::marker {
+  color: var(--ink-2);
+}
+@media (min-width: 768px) {
+  .prose-void h2 {
+    font-size: 2.25rem;
+  }
+}
+
 /* The mark and anything that must read as lit carries a soft ivory glow. */
 .glow {
   filter: drop-shadow(0 0 5px rgb(245 248 247 / 0.55)) drop-shadow(0 0 14px rgb(27 188 180 / 0.25));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .drift-1,
-  .drift-2,
-  .drift-3 {
-    animation: none;
-  }
   .plane-1,
   .plane-2,
   .plane-3 {

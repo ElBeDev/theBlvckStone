@@ -16,9 +16,18 @@ export type QueueItem = {
 // The five lines as a queue in depth: one word per baseline, the front one
 // bright and still, the rest receding. Pointing at a word pulls it forward
 // and its photo rises from the void behind the stack.
+//
+// The type is sized so the longest word fits whole inside the container:
+// Unbounded black in capitals at the rear tracking runs up to 0.96em per
+// letter, so the size is the container width over (letters x 0.96), capped
+// at 7.5rem.
+const EM_PER_LETTER = 0.96;
+
 export function DepthQueue({ items, cta }: { items: QueueItem[]; cta: string }) {
   const [front, setFront] = useState(0);
   const active = items[front];
+  const longest = Math.max(...items.map((item) => item.word.length));
+  const fit = `min(7.5rem, ${(100 / (longest * EM_PER_LETTER)).toFixed(3)}cqi)`;
 
   return (
     <section className="relative isolate">
@@ -30,7 +39,7 @@ export function DepthQueue({ items, cta }: { items: QueueItem[]; cta: string }) 
             alt=""
             fill
             sizes="100vw"
-            className={`photo-tint transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`photo-tint transition-opacity duration-700 ease-out-expo ${
               i === front ? "opacity-55" : "opacity-0"
             }`}
           />
@@ -38,7 +47,7 @@ export function DepthQueue({ items, cta }: { items: QueueItem[]; cta: string }) 
       </div>
 
       <div className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
-        <ul className="space-y-1 md:space-y-0">
+        <ul className="@container space-y-1 md:space-y-0">
           {items.map((item, i) => {
             const depth = Math.min(3, Math.abs(i - front));
             return (
@@ -50,7 +59,8 @@ export function DepthQueue({ items, cta }: { items: QueueItem[]; cta: string }) 
                   onClick={() => setFront(i)}
                   aria-pressed={i === front}
                   data-depth={depth}
-                  className="v-display block w-full text-left text-[1.75rem] uppercase leading-[1.04] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem]"
+                  style={{ fontSize: fit }}
+                  className="v-display block w-full whitespace-nowrap text-left uppercase leading-[1.04]"
                 >
                   {item.word}
                 </button>

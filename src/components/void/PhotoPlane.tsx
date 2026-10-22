@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-// A photo as a rear plane: full bleed, untinted, dimmed toward the void.
+// A photo as a rear plane: full bleed, washed in petrol, dimmed by depth.
 export function PhotoPlane({
   src,
   alt = "",

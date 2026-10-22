@@ -2,10 +2,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { siteImage } from "@/lib/images";
 import { Line } from "@/components/void/Line";
 import { PageTitle } from "@/components/void/PageTitle";
+import { Process, type Step } from "@/components/void/Process";
 import { Signal } from "@/components/void/Signal";
 import { pageMetadata } from "@/lib/metadata";
 
-type Step = { title: string; description: string };
 type Member = { name: string; role: string };
 
 export async function generateMetadata({
@@ -26,9 +26,12 @@ export default async function NosotrosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [t, tCta] = await Promise.all([getTranslations("pages.nosotros"), getTranslations("cta")]);
+  const [t, tVoid, tCta] = await Promise.all([
+    getTranslations("pages.nosotros"),
+    getTranslations("void"),
+    getTranslations("cta"),
+  ]);
   const story = t.raw("story") as string[];
-  const how = t.raw("how") as Step[];
   const team = t.raw("team") as Member[];
   const certifications = t.raw("certifications") as string[];
 
@@ -44,34 +47,21 @@ export default async function NosotrosPage({
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
+      {/* The same four steps the home page promises */}
+      <Process title={tVoid("processLead")} steps={tVoid.raw("process") as Step[]} />
+
+      {/* Certifications as one line of marks, each kept whole */}
+      <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <Line depth={1} size="md" as="h2">
-          {t("howTitle")}
+          {t("certificationsTitle")}
         </Line>
-        <ol className="mt-14 space-y-12">
-          {how.map((step, i) => (
-            <li key={step.title} className="grid gap-4 md:grid-cols-12 md:items-baseline">
-              <span data-depth={2} className="v-num text-3xl md:col-span-1">
-                {i + 1}
-              </span>
-              <h3 data-depth={0} className="v-title text-2xl md:col-span-5 md:text-3xl lg:text-4xl">
-                {step.title}
-              </h3>
-              <p className="v-body max-w-[44ch] text-lg text-ink-1 md:col-span-6 md:text-xl">{step.description}</p>
+        <ul className="v-display mt-10 flex flex-wrap gap-x-[0.5em] gap-y-1 text-[2rem] sm:text-5xl md:text-6xl lg:text-[4.5rem]">
+          {certifications.map((mark) => (
+            <li key={mark} data-depth={0} className="whitespace-nowrap">
+              {mark}
             </li>
           ))}
-        </ol>
-      </section>
-
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <Line depth={1} size="md" as="h2">
-            {t("certificationsTitle")}
-          </Line>
-        </div>
-        <Line depth={0} size="xl" className="mx-auto mt-10 max-w-7xl px-5 md:px-8">
-          {certifications.join("  ·  ")}
-        </Line>
+        </ul>
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">

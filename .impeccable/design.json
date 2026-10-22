@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T22:30:00-06:00",
+  "title": "Design System: The Blvck Stone",
+  "extensions": {
+    "colorMeta": {
+      "petrol": { "role": "primary", "displayName": "Petróleo", "canonical": "#0e2e30", "tonalRamp": ["#071617", "#0b2224", "#0e2e30", "#174a4d", "#20666a", "#2d8a8f", "#5fb2b5", "#b9e0e1"] },
+      "ivory": { "role": "primary", "displayName": "Marfil", "canonical": "#f5f8f7", "tonalRamp": ["#262a29", "#4a4f4e", "#6f7573", "#959b99", "#babfbe", "#dadfde", "#eef1f0", "#f5f8f7"] },
+      "ivory-74": { "role": "neutral", "displayName": "Marfil 74%", "canonical": "rgb(245 248 247 / 0.74)" },
+      "ivory-50": { "role": "neutral", "displayName": "Marfil 50%", "canonical": "rgb(245 248 247 / 0.5)" },
+      "ivory-30": { "role": "neutral", "displayName": "Marfil 30%", "canonical": "rgb(245 248 247 / 0.3)" },
+      "black-base": { "role": "neutral", "displayName": "Negro base", "canonical": "#0b0f10" },
+      "amber": { "role": "secondary", "displayName": "Ámbar", "canonical": "#ffb43d", "tonalRamp": ["#3d2600", "#664000", "#8f5a00", "#b87500", "#e09400", "#ffb43d", "#ffcb7a", "#ffe6c0"] },
+      "turquoise": { "role": "tertiary", "displayName": "Turquesa", "canonical": "#1bbcb4" },
+      "stone": { "role": "tertiary", "displayName": "Piedra", "canonical": "#6b7a80" },
+      "coral": { "role": "tertiary", "displayName": "Coral", "canonical": "#ff6a4b" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page hooks, the close, commitment lines, queue words. Sized by the Whole Word Rule." },
+      "title": { "displayName": "Title", "purpose": "Service entries, process steps, team names, blog titles, wordmark." },
+      "numeral": { "displayName": "Numeral", "purpose": "Giant figures only; tabular, tighter leading because digits carry no accents." },
+      "lead": { "displayName": "Lead", "purpose": "The paragraph under a hook, 42 to 46ch." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, nav, form, footer. 18px base, 44 to 56ch." }
+    },
+    "shadows": [
+      { "name": "glow", "value": "drop-shadow(0 0 5px rgb(245 248 247 / 0.55)) drop-shadow(0 0 14px rgb(27 188 180 / 0.25))", "purpose": "The mark only; it is drawn as a lit outline. No other element carries a shadow." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Every transition: depth changes (500ms), photo fade in the queue (700ms)." },
+      { "name": "parallax", "value": "translate3d(0, calc(var(--sy) * -0.06px | -0.12px | -0.2px), 0)", "purpose": "Rear photo planes at depth 1 / 2 / 3; hero and close only. Off under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "The one action per view: amber, square, never wraps.",
+      "html": "<a class=\"ds-signal\" href=\"#\">Solicitar evaluación sin costo <svg width=\"24\" height=\"24\" viewBox=\"0 0 256 256\" fill=\"currentColor\"><path d=\"M224.49 136.49l-72 72a12 12 0 0 1-17-17L187 140H40a12 12 0 0 1 0-24h147l-51.49-51.52a12 12 0 0 1 17-17l72 72a12 12 0 0 1-.02 17.01z\"/></svg></a>",
+      "css": ".ds-signal { display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; background: var(--signal, #ffb43d); color: var(--void, #0e2e30); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 1.125rem; padding: 20px 32px; border-radius: 0; text-decoration: none; transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-signal:hover { transform: translateY(-2px); } .ds-signal:focus-visible { outline: 2px solid var(--signal, #ffb43d); outline-offset: 4px; } .ds-signal:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Signal link",
+      "kind": "button",
+      "refersTo": "link-signal",
+      "description": "The secondary path in amber text with the arrow.",
+      "html": "<a class=\"ds-signal-link\" href=\"#\">Ver la línea <svg width=\"22\" height=\"22\" viewBox=\"0 0 256 256\" fill=\"currentColor\"><path d=\"M224.49 136.49l-72 72a12 12 0 0 1-17-17L187 140H40a12 12 0 0 1 0-24h147l-51.49-51.52a12 12 0 0 1 17-17l72 72a12 12 0 0 1-.02 17.01z\"/></svg></a>",
+      "css": ".ds-signal-link { display: inline-flex; align-items: center; gap: 12px; color: var(--signal, #ffb43d); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 1.125rem; text-decoration: none; } .ds-signal-link:hover { text-decoration: underline; text-underline-offset: 0.2em; } .ds-signal-link:focus-visible { outline: 2px solid var(--signal, #ffb43d); outline-offset: 4px; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Label above, value riding a single underline; amber on focus.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Nombre</span><input class=\"ds-field-input\" type=\"text\" placeholder=\"\"></label>",
+      "css": ".ds-field { display: block; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-field-label { display: block; font-size: 1rem; color: var(--ink-1, rgb(245 248 247 / 0.74)); } .ds-field-input { display: block; width: 100%; margin-top: 8px; padding: 12px 0; background: transparent; border: 0; border-bottom: 1px solid var(--ink-3, rgb(245 248 247 / 0.3)); border-radius: 0; color: var(--ink-0, #f5f8f7); font-size: 1.25rem; caret-color: var(--signal, #ffb43d); transition: border-color 200ms; } .ds-field-input:focus { outline: none; border-bottom-color: var(--signal, #ffb43d); } .ds-field-input::placeholder { color: var(--ink-3, rgb(245 248 247 / 0.3)); }"
+    },
+    {
+      "name": "Nav",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Three entries at depth 1, the current one at depth 0, then the language switch and the compact signal.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Productos</a><a href=\"#\" aria-current=\"page\">Soluciones</a><a href=\"#\">Nosotros</a><span class=\"ds-nav-lang\"><b>ES</b><i>/</i><a href=\"#\">EN</a></span><a class=\"ds-nav-signal\" href=\"#\">Solicitar evaluación sin costo</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 28px; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 1rem; } .ds-nav a { color: var(--ink-1, rgb(245 248 247 / 0.74)); text-decoration: none; transition: color 500ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav a:hover, .ds-nav a[aria-current] { color: var(--ink-0, #f5f8f7); } .ds-nav-lang { display: inline-flex; gap: 8px; } .ds-nav-lang b { color: var(--ink-0, #f5f8f7); } .ds-nav-lang i { font-style: normal; color: var(--ink-3, rgb(245 248 247 / 0.3)); } .ds-nav-lang a { color: var(--ink-2, rgb(245 248 247 / 0.5)); } .ds-nav-signal.ds-nav-signal { background: var(--signal, #ffb43d); color: var(--void, #0e2e30); padding: 12px 20px; border-radius: 0; } .ds-nav-signal:hover { transform: translateY(-2px); }"
+    },
+    {
+      "name": "Depth queue",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "The lines of business as a stack of uppercase display words; the pointed one comes to the front.",
+      "html": "<ul class=\"ds-queue\"><li><button data-depth=\"0\">Energía</button></li><li><button data-depth=\"1\">Flotas</button></li><li><button data-depth=\"2\">Financiamiento</button></li><li><button data-depth=\"3\">Construcción</button></li><li><button data-depth=\"3\">Fiscal</button></li></ul>",
+      "css": ".ds-queue { list-style: none; margin: 0; padding: 0; } .ds-queue button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; font-family: Unbounded, Archivo, sans-serif; font-weight: 900; font-size: clamp(1.75rem, 6.5vw, 5rem); line-height: 1.04; letter-spacing: -0.03em; text-transform: uppercase; color: var(--ink-0, #f5f8f7); transition: color 500ms cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 500ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-queue button[data-depth='1'] { color: var(--ink-1, rgb(245 248 247 / 0.74)); letter-spacing: 0.005em; } .ds-queue button[data-depth='2'] { color: var(--ink-2, rgb(245 248 247 / 0.5)); letter-spacing: 0.015em; } .ds-queue button[data-depth='3'] { color: var(--ink-3, rgb(245 248 247 / 0.3)); letter-spacing: 0.03em; } .ds-queue button:hover, .ds-queue button:focus-visible { color: var(--ink-0, #f5f8f7); letter-spacing: -0.03em; outline: none; }"
+    },
+    {
+      "name": "Giant numeral",
+      "kind": "custom",
+      "refersTo": "numeral",
+      "description": "A figure alone on its row, the sentence and basis beneath it.",
+      "html": "<div class=\"ds-num\"><p class=\"ds-num-value\">$75,192</p><p class=\"ds-num-text\">al año por cada van eléctrica frente a una de gasolina.</p><p class=\"ds-num-basis\">3,000 km al mes; 24.9 kWh por 100 km a 3.50 MXN por kWh contra 8 km por litro a 23.68 MXN.</p></div>",
+      "css": ".ds-num { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-num p { margin: 0; } .ds-num-value { font-family: Unbounded, Archivo, sans-serif; font-weight: 900; font-size: clamp(3.5rem, 8vw, 7.5rem); line-height: 0.95; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; color: var(--ink-0, #f5f8f7); } .ds-num-text { margin-top: 24px; max-width: 30ch; font-size: 1.5rem; line-height: 1.375; color: var(--ink-0, #f5f8f7); } .ds-num-basis { margin-top: 20px; max-width: 56ch; font-size: 1rem; color: var(--ink-2, rgb(245 248 247 / 0.5)); }"
+    },
+    {
+      "name": "Photo plane",
+      "kind": "card",
+      "refersTo": "petrol",
+      "description": "A photograph as a rear plane: full bleed, desaturated, washed in petrol, faded to the ground.",
+      "html": "<section class=\"ds-plane\"><div class=\"ds-plane-photo\"></div><h2>Manda tu recibo de CFE.</h2></section>",
+      "css": ".ds-plane { position: relative; isolation: isolate; padding: 96px 32px; background: var(--void, #0e2e30); overflow: hidden; } .ds-plane-photo { position: absolute; inset: 0; z-index: -1; background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22><rect width=%22400%22 height=%22200%22 fill=%22%236b7a80%22/><path d=%22M0 140 L400 60 L400 200 L0 200Z%22 fill=%22%231bbcb4%22/></svg>') center / cover; filter: saturate(0.35) contrast(1.05); opacity: 0.35; } .ds-plane-photo::before { content: ''; position: absolute; inset: 0; background: #0e2e30; mix-blend-mode: color; opacity: 0.85; } .ds-plane-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(14 46 48 / 0.3) 0%, rgb(14 46 48 / 0.5) 55%, var(--void, #0e2e30) 100%); } .ds-plane h2 { margin: 0; font-family: Unbounded, Archivo, sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1; letter-spacing: -0.03em; color: var(--ink-0, #f5f8f7); max-width: 18ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Patio de noche",
+    "overview": "A title screen over a night courtyard. The whole site is one petrol ground (deepening to black at the edges) with a single ivory voice set enormous on it. Hierarchy is depth, not decoration: what the visitor must read first sits at the front, full ivory and large; everything else steps back in brightness and in size. Photographs are not pictures on the page but planes behind it, washed in the brand's own petrol and dimmed by how far back they sit. Nothing is enclosed. There are no cards, borders, radii, shadows, kickers or labels; the only drawn shape is one amber button.\n\nThe audience is a plant or energy director who arrives referred and wants to confirm technical seriousness before taking a visit. The design answers with scale and restraint: numbers from real models at poster size, commitments as plain baselines, five lines of business as five giant words that come forward when pointed at. The tone is an engineer speaking loudly and briefly.",
+    "keyCharacteristics": [
+      "One ground (petrol), one ink (ivory) at four brightness steps, one signal (amber)",
+      "Display type up to 6rem, never smaller than fits its longest word whole",
+      "Depth declared per element (data-depth=\"0..3\") and mapped by one stylesheet",
+      "Photos as full-bleed rear planes, desaturated and washed in petrol",
+      "Nothing enclosed: no borders, radii, shadows or dividers",
+      "One authored motion: a word in the queue comes forward and its photo rises"
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Amber appears on one action per view and on the browser surfaces that confirm interaction (selection, caret, focus). It is never a heading color, a divider or an icon tint.", "section": "colors" },
+      { "name": "The Four Steps Rule", "body": "Every text color is ivory at 100 / 74 / 50 / 30%. No grays, no teal or mint text, no new tints. Depth 3 is reserved for display sizes.", "section": "colors" },
+      { "name": "The Petrol Wash Rule", "body": "Every photograph is desaturated to 35% and covered with petrol in mix-blend-mode: color (85% as a rear plane, 60% as an in-page entry photo). No photo ships in its own colors.", "section": "colors" },
+      { "name": "The Whole Word Rule", "body": "A display line is as large as its breakpoint allows and no larger than lets its longest word sit whole inside the content column. Words never hyphenate and never bleed past the edge; a line wraps instead.", "section": "typography" },
+      { "name": "The Loose Leading Rule", "body": "Display leading is never below 1.0. Spanish accents on ENERGÍA and CONSTRUCCIÓN collided at 0.92; numerals alone may go to 0.95.", "section": "typography" },
+      { "name": "The Own Row Rule", "body": "A giant numeral never shares a row with text. The figure stands alone; its sentence (30ch) and its basis (56ch) sit beneath it.", "section": "typography" },
+      { "name": "The No Label Rule", "body": "No kicker, eyebrow or small-caps label above a heading. The heading carries its own weight; numbering appears only where the sequence is information.", "section": "typography" },
+      { "name": "The Front Plane Rule", "body": "Whatever is being read sits at depth 0 and holds still. Only what is behind it dims, spreads or drifts.", "section": "elevation" },
+      { "name": "The Flat Ground Rule", "body": "No shadow, glow or halo on any element except the mark, which carries a soft ivory and turquoise drop-shadow because it is drawn as a lit outline.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do set every leading line in Unbounded 900 and let it be as large as the breakpoint allows (6rem cap at 1024px and above).",
+      "Do declare depth on anything that matters and let the stylesheet dim it; never pick an ad hoc opacity.",
+      "Do keep every photo behind or beside text desaturated and petrol-washed; dim it further the further back it sits.",
+      "Do keep one amber action per view, square, nowrap, with the arrow.",
+      "Do give a giant numeral its own row and put the sentence and basis beneath it.",
+      "Do verify at 1440, 1024, 768 and 390 with the overflow and overlap scan before shipping."
+    ],
+    "donts": [
+      "Don't draw cards, borders, radii, shadows, dividers or glass.",
+      "Don't put a kicker, eyebrow or small-caps label above a heading.",
+      "Don't use any text color other than ivory at 100 / 74 / 50 / 30%; never gray, teal or mint text.",
+      "Don't set display leading below 1.0 on anything that carries accents.",
+      "Don't let a display word hyphenate or run past the container; shrink the line or wrap it.",
+      "Don't add scroll-reveal, staggered entrances, particles or textures; the queue is the one animation.",
+      "Don't show a photo in its own colors or inside a frame."
+    ]
+  }
+}

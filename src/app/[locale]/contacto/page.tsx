@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { db } from "@/db";
 import { siteSettings } from "@/db/schema";
 import { ContactForm } from "@/components/ContactForm";
+import { CAPS, fit } from "@/components/void/fit";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,19 @@ const DEFAULTS = {
   contact_phone_juan_carlos: "+52 442 809 9488",
   contact_email: "contacto@the-blvckstone.com",
 };
+
+// An address may break after the @, never at the hyphen in the domain.
+function BreakAtAt({ value }: { value: string }) {
+  const at = value.indexOf("@");
+  if (at === -1) return value;
+  return (
+    <>
+      {value.slice(0, at + 1)}
+      <wbr />
+      <span className="whitespace-nowrap">{value.slice(at + 1)}</span>
+    </>
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -44,7 +58,7 @@ export default async function ContactoPage({
 
   return (
     <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 md:px-8 md:pt-24">
-      <h1 data-depth={0} className="v-display max-w-[14ch] text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+      <h1 data-depth={0} style={fit(t("title"))} className={`v-display fit max-w-[14ch] ${CAPS.page}`}>
         {t("title")}
       </h1>
       <p className="v-body mt-8 max-w-[46ch] text-xl leading-snug text-ink-1 md:text-2xl">{t("description")}</p>
@@ -58,14 +72,14 @@ export default async function ContactoPage({
             {contacts.map((item) => (
               <li key={item.label}>
                 <p className="text-base text-ink-2">{item.label}</p>
-                <a href={item.href} data-depth={0} className="v-title mt-1 block text-2xl hover:text-signal md:text-3xl">
-                  {item.value}
+                <a href={item.href} data-depth={0} className="v-title mt-1 block text-2xl hover:text-signal md:text-3xl lg:text-2xl xl:text-3xl">
+                  <BreakAtAt value={item.value} />
                 </a>
               </li>
             ))}
             <li>
               <p className="text-base text-ink-2">{t("officesLabel")}</p>
-              <p data-depth={0} className="v-title mt-1 text-2xl md:text-3xl">{t("offices")}</p>
+              <p data-depth={0} className="v-title mt-1 text-2xl md:text-3xl lg:text-2xl xl:text-3xl">{t("offices")}</p>
               <p className="mt-1 text-lg text-ink-1">{t("logistics")}</p>
             </li>
           </ul>

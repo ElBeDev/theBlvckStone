@@ -21,7 +21,7 @@ OWN-WORLD: fondo Petróleo de la paleta (viñeta a Negro base en los bordes) sin
 
 STORY: entra y lee una sola frase gigante; entiende que una empresa se hace cargo de toda su planta; recorre cinco palabras enormes que son las líneas; ve números reales a tamaño de cartel; pide la evaluación.
 
-FIRST VIEWPORT (1440x900): foto nocturna de infraestructura energética a sangre en el fondo, oscurecida al 70%; polvo derivando encima; gancho en tres líneas de Unbounded a 6 rem ocupando el ancho; debajo, una línea de 20 px y el botón ámbar grande "Solicitar evaluación sin costo"; nav mínima arriba: wordmark, tres entradas, idioma. Nada más.
+FIRST VIEWPORT (1440x900): foto nocturna de infraestructura energética a sangre en el fondo, lavada en petróleo y oscurecida; gancho en tres líneas de Unbounded a 6 rem ocupando el ancho; debajo, una línea de 20 px y el botón ámbar grande "Solicitar evaluación sin costo"; nav mínima arriba: wordmark, tres entradas, idioma. Nada más.
 
 FORM: pantalla de título de cracktro (demoscene), retador líder de la mano "más atrevida", ronda 1. seed:de2f4dd5cdc3a1d7
 

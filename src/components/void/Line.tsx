@@ -1,5 +1,8 @@
-// A giant line riding its baseline, at a declared depth. Lines may run past
-// the screen edges; nothing wraps them in a box.
+import { CAPS, fit } from "./fit";
+
+// A giant line riding its baseline, at a declared depth. Lines stay inside
+// the container and wrap (they once ran past the edges and got clipped),
+// sized so their longest word fits whole; nothing wraps them in a box.
 export function Line({
   children,
   depth = 0,
@@ -7,19 +10,14 @@ export function Line({
   size = "lg",
   className = "",
 }: {
-  children: React.ReactNode;
+  children: string;
   depth?: 0 | 1 | 2 | 3;
   as?: "p" | "h1" | "h2" | "h3" | "li";
   size?: "xl" | "lg" | "md";
   className?: string;
 }) {
-  const sizes = {
-    xl: "text-[2.5rem] sm:text-6xl md:text-7xl lg:text-[6rem]",
-    lg: "text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.5rem]",
-    md: "text-3xl sm:text-4xl md:text-5xl",
-  };
   return (
-    <Tag data-depth={depth} className={`v-display ${sizes[size]} ${className}`}>
+    <Tag data-depth={depth} style={fit(children)} className={`v-display fit ${CAPS[size]} ${className}`}>
       {children}
     </Tag>
   );

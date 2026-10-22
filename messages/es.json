@@ -77,21 +77,25 @@
     "intro": "Del hogar a la planta industrial, dimensionamos la solución al tamaño real de tu consumo.",
     "items": [
       {
+        "word": "Residencial",
         "title": "Residencial",
         "description": "Inversores, BESS y cargadores AC para casas y pequeños comercios.",
         "seed": "blvckstone-residencial"
       },
       {
+        "word": "Comercial",
         "title": "Comercial",
         "description": "Soluciones medianas y DC Multicharger para comercio e industria ligera.",
         "seed": "blvckstone-comercial"
       },
       {
+        "word": "Industrial",
         "title": "Industrial y Utility",
         "description": "Inversores de más de 350 kW y BESS de 261 a 418 kWh.",
         "seed": "blvckstone-industrial"
       },
       {
+        "word": "Flotas",
         "title": "Flotas Empresariales",
         "description": "Camionetas eléctricas y estaciones de carga para operaciones logísticas.",
         "seed": "blvckstone-flotas"
@@ -151,22 +155,8 @@
         "UL",
         "KEMA",
         "ANSI",
-        "IEC"
-      ],
-      "howTitle": "Cómo trabajamos",
-      "how": [
-        {
-          "title": "Diagnóstico",
-          "description": "Analizamos tu consumo, tarifa y objetivos antes de proponer un solo equipo."
-        },
-        {
-          "title": "Ingeniería y financiamiento",
-          "description": "Una propuesta técnico-económica con inversión, ahorro y retorno claros."
-        },
-        {
-          "title": "Instalación y soporte",
-          "description": "Comisionamiento incluido y respuesta a incidencias en menos de 48 horas."
-        }
+        "IEC",
+        "NOM-001-SEDE"
       ],
       "teamTitle": "Equipo directivo",
       "team": [
@@ -183,9 +173,16 @@
       ]
     },
     "casosDeExito": {
-      "title": "Empresas que ya transformaron su energía",
-      "description": "Resultados de clientes que redujeron costos, ganaron independencia energética o electrificaron su flota con nosotros.",
-      "empty": "Estamos documentando nuestros primeros casos de éxito. Vuelve pronto."
+      "title": "Proyectos instalados.",
+      "description": "Estamos documentando los primeros casos con sus números medidos. Ninguno se publica sin la autorización del cliente.",
+      "fieldsLead": "Cada caso va a mostrar:",
+      "fields": [
+        "Recibo de CFE antes.",
+        "Inversión y forma de pago.",
+        "Ahorro mensual medido.",
+        "Retorno real."
+      ],
+      "closeText": "Mientras tanto, te hacemos esa misma cuenta con tu propio recibo."
     },
     "blog": {
       "title": "Blog",

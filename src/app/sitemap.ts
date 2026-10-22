@@ -12,7 +12,6 @@ const paths = [
   "/productos/estrategia-fiscal",
   "/soluciones",
   "/nosotros",
-  "/casos-de-exito",
   "/blog",
   "/contacto",
   "/legal/aviso-de-privacidad",

@@ -8,7 +8,7 @@ import { PageTitle } from "@/components/void/PageTitle";
 import { Signal } from "@/components/void/Signal";
 
 // One business line: its services as a column of big titles, each with its
-// photo sitting plainly on the void and its specs as a running list.
+// photo washed in petrol beside it and its specs as a running list.
 export async function ProductCategoryPage({
   locale,
   category,
@@ -37,17 +37,17 @@ export async function ProductCategoryPage({
           <ol className="space-y-24 md:space-y-32">
             {entries.map((entry, i) => (
               <li key={entry.code} id={entry.slug} className="grid scroll-mt-28 gap-8 md:grid-cols-12 md:gap-12">
-                <div className={`relative aspect-[4/3] md:col-span-5 ${i % 2 === 1 ? "md:order-last" : ""}`}>
-                  <Image src={entry.imageUrl} alt="" fill sizes="(min-width: 768px) 40vw, 100vw" className="photo-tint object-cover opacity-90" />
+                <div className={`photo-wash aspect-[4/3] md:col-span-5 ${i % 2 === 1 ? "md:order-last" : ""}`}>
+                  <Image src={entry.imageUrl} alt="" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover opacity-90" />
                 </div>
                 <div className="md:col-span-7">
-                  <h2 data-depth={0} className="v-title text-3xl md:text-5xl">
+                  <h2 data-depth={0} className="v-title text-3xl md:text-4xl lg:text-5xl">
                     {entry.title}
                   </h2>
                   <p className="v-body mt-6 max-w-[52ch] text-lg text-ink-1 md:text-xl">{entry.description}</p>
                   <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-base">
                     {entry.specs.map((spec) => (
-                      <div key={spec.label + spec.value} className="flex gap-2">
+                      <div key={spec.label + spec.value} className="flex flex-wrap gap-x-2">
                         <dt className="text-ink-2">{spec.label}</dt>
                         <dd className="font-bold text-ink-0">{spec.value}</dd>
                       </div>
@@ -63,10 +63,10 @@ export async function ProductCategoryPage({
           <p className="v-body mt-16 max-w-[60ch] text-base text-ink-2">{t("financingNote")}</p>
         )}
 
-        <div className="mt-24 flex flex-col gap-8 md:mt-32 md:flex-row md:items-end md:justify-between">
+        <div className="mt-24 flex flex-col items-start gap-8 md:mt-32 lg:flex-row lg:items-end lg:justify-between">
           <Link href={`/productos/${next.value}`} className="group">
             <span className="block text-base text-ink-2">{t("nextLine")}</span>
-            <span data-depth={0} className="v-title mt-2 block text-3xl group-hover:text-signal md:text-5xl">
+            <span data-depth={0} className="v-title mt-2 block max-w-[18ch] text-3xl group-hover:text-signal md:text-4xl lg:text-5xl">
               {t(`categories.${next.value}.title`)}
             </span>
           </Link>

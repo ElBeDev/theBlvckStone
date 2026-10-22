@@ -77,21 +77,25 @@
     "intro": "From homes to industrial plants, we size the solution to your real consumption.",
     "items": [
       {
+        "word": "Residential",
         "title": "Residential",
         "description": "Inverters, BESS and AC chargers for homes and small businesses.",
         "seed": "blvckstone-residencial"
       },
       {
+        "word": "Commercial",
         "title": "Commercial",
         "description": "Mid-size solutions and DC Multicharger for retail and light industry.",
         "seed": "blvckstone-comercial"
       },
       {
+        "word": "Industrial",
         "title": "Industrial and Utility",
         "description": "350 kW+ inverters and 261 to 418 kWh BESS.",
         "seed": "blvckstone-industrial"
       },
       {
+        "word": "Fleets",
         "title": "Enterprise Fleets",
         "description": "Electric trucks and charging stations for logistics operations.",
         "seed": "blvckstone-flotas"
@@ -151,22 +155,8 @@
         "UL",
         "KEMA",
         "ANSI",
-        "IEC"
-      ],
-      "howTitle": "How we work",
-      "how": [
-        {
-          "title": "Assessment",
-          "description": "We analyze your consumption, rate and goals before proposing a single piece of equipment."
-        },
-        {
-          "title": "Engineering and financing",
-          "description": "A technical-economic proposal with clear investment, savings and payback."
-        },
-        {
-          "title": "Installation and support",
-          "description": "Commissioning included and incident response in under 48 hours."
-        }
+        "IEC",
+        "NOM-001-SEDE"
       ],
       "teamTitle": "Leadership team",
       "team": [
@@ -183,9 +173,16 @@
       ]
     },
     "casosDeExito": {
-      "title": "Companies that already transformed their energy",
-      "description": "Results from clients who cut costs, gained energy independence or electrified their fleet with us.",
-      "empty": "We are documenting our first success stories. Check back soon."
+      "title": "Installed projects.",
+      "description": "We are documenting the first cases with their measured numbers. None is published without the client's authorization.",
+      "fieldsLead": "Every case will show:",
+      "fields": [
+        "The CFE bill before.",
+        "Investment and payment terms.",
+        "Measured monthly savings.",
+        "Actual payback."
+      ],
+      "closeText": "Until then, we run the same numbers on your own bill."
     },
     "blog": {
       "title": "Blog",
