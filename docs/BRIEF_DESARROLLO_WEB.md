@@ -163,9 +163,10 @@ Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-f
 
 - **Rediseño visual completo (v2.6)** aplicando el skill `design-taste-frontend` (Vercel Labs `skills` CLI) en modo *Preserve* con ejecución tipo overhaul: diales objetivo `VARIANCE 7 / MOTION 6 / DENSITY 4`. Home con 8 secciones de familias de layout distintas (split hero, franja numérica con count-up, bento asimétrico, lista sticky, galería acordeón, cita destacada, filas editoriales, banda CTA); tema oscuro en home y contacto, claro en interiores; menú móvil real; logo mark construido según la descripción del brief; fuente **Archivo** vía `next/font` como stand-in de Helvetica Now Display; animaciones con Motion (scroll-reveal, count-up, entrada del hero) respetando `prefers-reduced-motion`; iconos Phosphor. Copy completo ES/EN sin placeholders (incluye borradores legales marcados como pendientes de revisión legal). Metadata SEO por página (canonical, `hreflang`, Open Graph, imagen OG generada), `sitemap.xml` y `robots.txt`. Verificado con Playwright en desktop y móvil: nav en una línea (73px), cero CTAs con wrap, cero overflow horizontal, cero errores de consola, H1 en máximo 2 líneas, contraste AA en texto secundario.
 - **Imágenes: placeholders curados**, no fotografía de marca. Se usan fotos de Picsum por ID fijo con tratamiento duotono petróleo para que lean como textura de marca. Hay que reemplazarlas por fotografía real antes del lanzamiento; la lista de slots está en "Pendientes".
-- **Contenido de demo cargado** vía `scripts/seed-demo.mjs`: 9 productos (ES+EN, 3 por pilar), 3 posts de blog (ES+EN, con Markdown) y 4 testimonios. **Es contenido inventado para poder mostrar el sitio poblado** — nombres de empresas y personas en los testimonios son ficticios y deben reemplazarse por casos reales autorizados antes de cualquier lanzamiento público. El script queda en el repo para volver a poblar el ambiente si se resetea la base de datos.
+- **Contenido de demo cargado** vía `scripts/seed-demo.mjs`: 9 productos (ES+EN, 3 por pilar), 3 posts de blog (ES+EN, con Markdown) y 4 testimonios. **Es contenido inventado para poder mostrar el sitio poblado** — nombres de empresas y personas en los testimonios son ficticios y deben reemplazarse por casos reales autorizados antes de cualquier lanzamiento público. El script queda en el repo para volver a poblar el ambiente si se resetea la base de datos. *(v2.8: los 9 productos de demo ya se eliminaron y se sustituyeron por el catálogo real; el script conserva solo blog y testimonios.)*
 - **Las páginas públicas ya leen del mini-CMS:** `/productos/energia-limpia|electromovilidad|financiamiento` muestran los productos reales de esa categoría e idioma (o el estado "pendiente" si no hay ninguno todavía); `/blog` y `/blog/[slug]` renderizan los posts reales (con Markdown); `/casos-de-exito` muestra los testimonios reales; `/contacto` toma los teléfonos y el email de `site_settings` en vez de tenerlos escritos en el código. Probado de punta a punta: contenido cargado desde `/admin` aparece de inmediato en el sitio público, en el idioma correcto, sin filtrarse al otro idioma.
 - Se agregó una columna `category` a `products` (energia-limpia / electromovilidad / financiamiento) para poder listar cada producto bajo su pilar correspondiente
+- **Catálogo real de servicios (v2.8, 2026-10-21):** se revisó la carpeta de Drive del proyecto (14 carpetas de proveedores; Soul Tulum y OMEN TULUM excluidas) y se documentó cada proveedor en `docs/empresas/` (solo local, no versionado). Los proveedores son internos: el sitio presenta los servicios como propios, sin marcas del proveedor. El sitio pasa de 3 a **5 líneas de negocio** (se agregan Construcción e Infraestructura Industrial y Estrategia Fiscal y Laboral), con **29 servicios en ES+EN** cargados vía `scripts/seed-services.mjs`, que además borró los 9 productos de demo. El bento de servicios del home ahora tiene 5 celdas (sigue siendo asimétrico), y footer, sitemap y `/admin` reconocen las dos categorías nuevas
 
 **Todavía no está conectado (siguiente tramo):**
 - El home (hero, diferenciadores, estadísticas) y el índice `/productos` siguen usando el copy estático de `messages/es.json` / `en.json` — es contenido de marca fijo, no se planea moverlo al mini-CMS por ahora
@@ -179,10 +180,12 @@ Desde el rediseño v2.6 el sitio público se rige por el skill **`design-taste-f
 Cada ruta existe en `/es/...` (default) y `/en/...`.
 
 - `/` — Home (Hero, Servicios, Diferenciadores, Verticales, Productos destacados, Estadísticas, CTA final)
-- `/productos` — índice de las 3 líneas de negocio
-  - `/productos/energia-limpia` (AUXSOL)
-  - `/productos/electromovilidad` (camionetas + carga)
-  - `/productos/financiamiento`
+- `/productos` — índice de las 5 líneas de negocio
+  - `/productos/energia-limpia` (FV, BESS, utility, diagnóstico energético)
+  - `/productos/electromovilidad` (vans eléctricas, carga, electrolineras, mantenimiento de flotas)
+  - `/productos/financiamiento` (crédito/arrendamiento/PPA, créditos puente, coberturas, inversión)
+  - `/productos/construccion` (cubiertas, naves, recubrimientos, pavimentos, ferroviario, acabados, LEED/EDGE) *(nueva, v2.8)*
+  - `/productos/estrategia-fiscal` (deducción inmediata, productividad, nómina, servicios sindicales) *(nueva, v2.8)*
 - `/soluciones` — verticales: Residencial, Comercial (C&I), Industrial/Utility, Flotas
 - `/nosotros` — Acerca de The Blvck Stone + respaldo de AUX Group
 - `/casos-de-exito` — testimonios y casos de uso reales
@@ -197,6 +200,8 @@ El footer de 4 columnas del brief original (Servicios / Productos / Empresa / Le
 ---
 
 ## 🎯 ESTRATEGIA DE CONTENIDO & SECCIONES
+
+> **Regla vigente desde v2.8 (2026-10-21):** todas las empresas con las que trabaja The Blvck Stone (incluidas las marcas que el brief original mencionaba) son **proveedores internos**. El sitio no muestra marcas, logos, cifras corporativas ni clientes de proveedores; cada servicio se presenta como propio. Donde las secciones de abajo mencionan marcas de fabricantes, es la intención original del brief y ya no aplica. Los reportes por proveedor viven en `docs/empresas/`, que no se versiona porque el repo es público.
 
 > **Mapa brief → implementación (v2.6).** Las secciones de abajo son la intención original del brief; esta tabla dice cómo quedó cada una en el sitio. Donde el skill de diseño obligó a cambiar el patrón (por ejemplo, "3 cards" se convirtió en bento) se anota el motivo.
 
@@ -617,7 +622,7 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **CI en cada PR:** lint, type-check, build
 - **Panel de administración:** `/admin` dentro del propio proyecto Next.js, acceso solo para Karla/Juan Carlos (ver "Panel de administración propio")
 - **Verificación visual:** Playwright está instalado como devDependency (`npx playwright install chromium` la primera vez). Cualquier cambio de diseño se valida con screenshots en 1440×900 y 390×844 haciendo scroll completo antes de capturar, más las mediciones descritas en "Sistema de diseño vigente". `npm run build` y `npm run lint` deben quedar en cero antes de hacer push
-- **Contenido de demo:** `node scripts/seed-demo.mjs` con `DATABASE_URL` cargada repuebla productos, posts y testimonios sin duplicar
+- **Contenido:** `node --env-file=.env.local scripts/seed-services.mjs` carga el catálogo real de servicios; `node --env-file=.env.local scripts/seed-demo.mjs` repuebla posts y testimonios de demo. Ambos sin duplicar
 
 ---
 
@@ -660,6 +665,9 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - [ ] **Revisión legal** de los borradores de Aviso de Privacidad, Términos y Cookies (visibles con etiqueta "Borrador sujeto a revisión legal")
 - [ ] Alta de cuentas de servicio restantes: Resend, GA4/GTM, Hotjar/Clarity (mayoría con tier gratuito para arrancar)
 - [ ] Proveedor de VPS y fecha estimada de migración fuera de Vercel
+- [ ] **Revisión legal y regulatoria del contenido financiero y fiscal** antes del lanzamiento: la inversión a tasa fija (5% mensual) se publica como oferta al público, y el programa de productividad y la deducción inmediata hacen afirmaciones fiscales.
+- [x] ~~Decidir si las marcas del fabricante se siguen mencionando por nombre~~ — resuelto (2026-10-21): **el sitio no usa marcas de proveedores**. La franja de estadísticas ya no muestra cifras corporativas del fabricante sino compromisos propios (5 líneas, 29 servicios, 48 h, 10 años de garantía en inversores, hasta 40% de ahorro con BESS)
+- [ ] Fotos reales para las 29 fichas de servicio (hoy usan placeholders por categoría); el material aprovechable está listado en los reportes locales de `docs/empresas/`
 
 ---
 
@@ -716,6 +724,8 @@ Ver tabla de decisiones en "🏗️ Arquitectura & Stack". Resumen: **Next.js (T
 - **v2.7 (2026-09-05):** Se documenta el sistema de diseño vigente (reglas del skill que ahora gobiernan el sitio, excepciones declaradas, resultado de las auditorías del Paso 4 y cómo repetir la verificación visual), el mapa brief → implementación por sección, y se actualizan stack, tipografía, iconografía y especificaciones técnicas con lo que ya está implementado.
 - **v2.6 (2026-09-05):** Rediseño visual completo del sitio público con el skill `design-taste-frontend` (auditoría, modo Preserve con ejecución overhaul, levers 1 a 5 de la Sección 11.D). Home de 8 secciones con familias de layout distintas, tema por página, menú móvil, logo mark, fuente Archivo vía `next/font`, animaciones con Motion, iconos Phosphor, copy completo ES/EN sin placeholders, borradores legales, metadata SEO por página, sitemap, robots y OG image. Verificación con Playwright (desktop y móvil) y correcciones de contraste AA. `/admin` queda fuera del alcance del skill por decisión explícita (dashboards están fuera de su scope).
 
+- **v2.8 (2026-10-21):** Catálogo real de servicios a partir de la carpeta de Drive. Se agregan las líneas Construcción e Infraestructura Industrial y Estrategia Fiscal y Laboral (rutas, categorías, copy ES/EN, bento de 5 celdas, footer, sitemap). 29 servicios ES+EN en `scripts/seed-services.mjs`; los productos de demo se eliminan y `seed-demo.mjs` queda solo con blog y testimonios. Se retiran del sitio todas las menciones a marcas de proveedores (copy de servicios, Nosotros, footer y franja de estadísticas). Documentación reorganizada en `docs/` (brief, reportes por proveedor en `docs/empresas/`, tracker interno en `docs/interno/`).
+
 **Documento generado:** 2026-09-03
-**Última actualización:** 2026-09-05
-**Versión:** 2.7
+**Última actualización:** 2026-10-21
+**Versión:** 2.8

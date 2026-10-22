@@ -1,6 +1,7 @@
 // Carga contenido de demostración (inventado, no son clientes reales) para
 // poder mostrar el sitio con datos en vez de estados "pendiente". Reemplazar
 // por contenido real antes del lanzamiento público, sobre todo testimonios.
+// Los productos ya no viven aquí: el catálogo real está en seed-services.mjs.
 // Idempotente: se puede volver a correr sin duplicar filas.
 import postgres from "postgres";
 
@@ -11,192 +12,6 @@ if (!DATABASE_URL) {
 }
 
 const sql = postgres(DATABASE_URL, { prepare: false });
-
-const products = [
-  // Energía limpia
-  {
-    slug: "auxsol-bess-100",
-    locale: "es",
-    category: "energia-limpia",
-    title: "AUXSOL BESS 100, almacenamiento comercial",
-    description:
-      "Sistema de almacenamiento de energía de 100 kWh para comercios e industria ligera. Integra baterías LFP de alta densidad con gestión inteligente de carga y descarga.",
-    specs:
-      "Capacidad: 100 kWh\nQuímica: LFP (Litio-Ferrofosfato)\nCiclos de vida: más de 6,000 al 80% DoD\nProtección: IP65\nCertificaciones: UL 9540, IEC 62619\nGarantía: 10 años",
-  },
-  {
-    slug: "auxsol-bess-100",
-    locale: "en",
-    category: "energia-limpia",
-    title: "AUXSOL BESS 100, commercial energy storage",
-    description:
-      "100 kWh energy storage system for commercial and light-industrial use. Combines high-density LFP batteries with smart charge and discharge management.",
-    specs:
-      "Capacity: 100 kWh\nChemistry: LFP (Lithium Iron Phosphate)\nCycle life: over 6,000 at 80% DoD\nProtection: IP65\nCertifications: UL 9540, IEC 62619\nWarranty: 10 years",
-  },
-  {
-    slug: "auxsol-inverter-350kw",
-    locale: "es",
-    category: "energia-limpia",
-    title: "AUXSOL Inversor Utility-Scale 350 kW",
-    description:
-      "Inversor de alta eficiencia para proyectos solares utility-scale y grandes instalaciones industriales, con monitoreo remoto y comisionamiento asistido.",
-    specs:
-      "Potencia nominal: 350 kW\nEficiencia máxima: 99.02%\nEntradas MPPT: 12\nCertificaciones: IEC 62109, ANSI C62.41\nGarantía: 10 años, extensible a 15",
-  },
-  {
-    slug: "auxsol-inverter-350kw",
-    locale: "en",
-    category: "energia-limpia",
-    title: "AUXSOL Utility-Scale Inverter 350 kW",
-    description:
-      "High-efficiency inverter for utility-scale solar projects and large industrial installations, with remote monitoring and assisted commissioning.",
-    specs:
-      "Rated power: 350 kW\nPeak efficiency: 99.02%\nMPPT inputs: 12\nCertifications: IEC 62109, ANSI C62.41\nWarranty: 10 years, extendable to 15",
-  },
-  {
-    slug: "auxsol-panel-550w",
-    locale: "es",
-    category: "energia-limpia",
-    title: "Panel Solar AUXSOL Mono PERC 550 W",
-    description:
-      "Panel monocristalino de alta eficiencia para instalaciones residenciales y comerciales, con marco reforzado para resistir condiciones climáticas extremas.",
-    specs:
-      "Potencia: 550 W\nEficiencia: 21.3%\nCélulas: Monocristalinas PERC (144)\nGarantía de producto: 12 años\nGarantía de rendimiento: 25 años (lineal)",
-  },
-  {
-    slug: "auxsol-panel-550w",
-    locale: "en",
-    category: "energia-limpia",
-    title: "AUXSOL Mono PERC 550 W Solar Panel",
-    description:
-      "High-efficiency monocrystalline panel for residential and commercial installations, with a reinforced frame built for extreme weather.",
-    specs:
-      "Power: 550 W\nEfficiency: 21.3%\nCells: Monocrystalline PERC (144)\nProduct warranty: 12 years\nPerformance warranty: 25 years (linear)",
-  },
-  // Electromovilidad
-  {
-    slug: "bedrock-et5-pickup",
-    locale: "es",
-    category: "electromovilidad",
-    title: "Camioneta Eléctrica Bedrock ET5",
-    description:
-      "Pickup 100% eléctrica de trabajo pesado, diseñada para flotas comerciales que buscan reducir costos operativos sin sacrificar capacidad de carga.",
-    specs:
-      "Autonomía: 320 km (WLTP)\nCapacidad de carga: 1.2 toneladas\nCarga rápida DC: 20 a 80% en 35 min\nGarantía de batería: 8 años o 200,000 km",
-  },
-  {
-    slug: "bedrock-et5-pickup",
-    locale: "en",
-    category: "electromovilidad",
-    title: "Bedrock ET5 Electric Pickup",
-    description:
-      "Heavy-duty 100% electric pickup built for commercial fleets looking to cut operating costs without sacrificing payload.",
-    specs:
-      "Range: 320 km (WLTP)\nPayload: 1.2 tonnes\nDC fast charging: 20 to 80% in 35 min\nBattery warranty: 8 years or 200,000 km",
-  },
-  {
-    slug: "bedrock-van7-cargo",
-    locale: "es",
-    category: "electromovilidad",
-    title: "Van de Carga Eléctrica Bedrock Van 7",
-    description:
-      "Van de carga eléctrica ideal para logística de última milla y distribución urbana, con bajo costo de operación y cero emisiones.",
-    specs:
-      "Autonomía: 280 km (WLTP)\nVolumen de carga: 7 m³\nCarga rápida DC: 20 a 80% en 40 min\nGarantía de batería: 8 años o 160,000 km",
-  },
-  {
-    slug: "bedrock-van7-cargo",
-    locale: "en",
-    category: "electromovilidad",
-    title: "Bedrock Van 7 Electric Cargo Van",
-    description:
-      "Electric cargo van built for last-mile logistics and urban distribution, with low operating costs and zero emissions.",
-    specs:
-      "Range: 280 km (WLTP)\nCargo volume: 7 m³\nDC fast charging: 20 to 80% in 40 min\nBattery warranty: 8 years or 160,000 km",
-  },
-  {
-    slug: "estacion-carga-dc-120kw",
-    locale: "es",
-    category: "electromovilidad",
-    title: "Estación de Carga DC 120 kW",
-    description:
-      "Infraestructura de carga rápida para flotas y corredores logísticos, compatible con los principales estándares de carga del mercado.",
-    specs:
-      "Potencia: 120 kW\nConectores: CCS2, GB/T\nCarga simultánea: 2 vehículos\nComisionamiento remoto incluido",
-  },
-  {
-    slug: "estacion-carga-dc-120kw",
-    locale: "en",
-    category: "electromovilidad",
-    title: "120 kW DC Charging Station",
-    description:
-      "Fast-charging infrastructure for fleets and logistics corridors, compatible with the market's leading charging standards.",
-    specs:
-      "Power: 120 kW\nConnectors: CCS2, GB/T\nSimultaneous charging: 2 vehicles\nRemote commissioning included",
-  },
-  // Financiamiento
-  {
-    slug: "credito-equipamiento-solar",
-    locale: "es",
-    category: "financiamiento",
-    title: "Crédito Equipamiento Solar",
-    description:
-      "Financiamiento diseñado para la adquisición de paneles solares, inversores y sistemas de almacenamiento, con plazos flexibles alineados al ahorro generado.",
-    specs:
-      "Plazos: 12 a 60 meses\nMonto: desde $200,000 MXN\nRequisitos: antigüedad de la empresa, estados financieros\nAprobación preliminar: 5 días hábiles",
-  },
-  {
-    slug: "credito-equipamiento-solar",
-    locale: "en",
-    category: "financiamiento",
-    title: "Solar Equipment Financing",
-    description:
-      "Financing designed for acquiring solar panels, inverters and storage systems, with flexible terms aligned to the savings they generate.",
-    specs:
-      "Terms: 12 to 60 months\nAmount: from $200,000 MXN\nRequirements: company track record, financial statements\nPreliminary approval: 5 business days",
-  },
-  {
-    slug: "arrendamiento-flotas-electricas",
-    locale: "es",
-    category: "financiamiento",
-    title: "Arrendamiento de Flotas Eléctricas",
-    description:
-      "Esquema de arrendamiento puro o financiero para renovar flotas comerciales con vehículos eléctricos, sin comprometer el capital de trabajo.",
-    specs:
-      "Plazos: 24 a 48 meses\nMantenimiento preventivo: opcional\nAplica a: compras de 3 o más unidades",
-  },
-  {
-    slug: "arrendamiento-flotas-electricas",
-    locale: "en",
-    category: "financiamiento",
-    title: "Electric Fleet Leasing",
-    description:
-      "Operating or finance lease structure to renew commercial fleets with electric vehicles, without tying up working capital.",
-    specs:
-      "Terms: 24 to 48 months\nPreventive maintenance: optional\nApplies to: purchases of 3 or more units",
-  },
-  {
-    slug: "linea-capital-de-trabajo",
-    locale: "es",
-    category: "financiamiento",
-    title: "Línea de Capital de Trabajo para Proyectos de Energía",
-    description:
-      "Línea revolvente para cubrir necesidades de capital de trabajo durante la ejecución de proyectos de energía limpia o electromovilidad.",
-    specs:
-      "Monto: hasta $5,000,000 MXN\nDisposición: bajo demanda\nTasa: preferencial para clientes con proyecto AUXSOL activo",
-  },
-  {
-    slug: "linea-capital-de-trabajo",
-    locale: "en",
-    category: "financiamiento",
-    title: "Working Capital Line for Energy Projects",
-    description:
-      "Revolving line of credit to cover working capital needs while executing clean energy or electromobility projects.",
-    specs:
-      "Amount: up to $5,000,000 MXN\nDraw: on demand\nRate: preferential for clients with an active AUXSOL project",
-  },
-];
 
 const posts = [
   {
@@ -367,20 +182,6 @@ const testimonials = [
 ];
 
 async function main() {
-  for (const p of products) {
-    await sql`
-      insert into products (slug, locale, category, title, description, specs)
-      values (${p.slug + "-" + p.locale}, ${p.locale}, ${p.category}, ${p.title}, ${p.description}, ${p.specs})
-      on conflict (slug) do update set
-        locale = excluded.locale,
-        category = excluded.category,
-        title = excluded.title,
-        description = excluded.description,
-        specs = excluded.specs,
-        updated_at = now()
-    `;
-  }
-
   for (const post of posts) {
     await sql`
       insert into posts (slug, locale, title, excerpt, body)
@@ -406,7 +207,7 @@ async function main() {
   }
 
   console.log(
-    `Seeded ${products.length} products, ${posts.length} posts, ${testimonials.length} testimonials.`,
+    `Seeded ${posts.length} posts, ${testimonials.length} testimonials.`,
   );
   await sql.end();
 }

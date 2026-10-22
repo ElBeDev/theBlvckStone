@@ -8,6 +8,8 @@ const paths = [
   "/productos/energia-limpia",
   "/productos/electromovilidad",
   "/productos/financiamiento",
+  "/productos/construccion",
+  "/productos/estrategia-fiscal",
   "/soluciones",
   "/nosotros",
   "/casos-de-exito",

@@ -5,6 +5,8 @@
     "energiaLimpia": "Energía Limpia",
     "electromovilidad": "Electromovilidad",
     "financiamiento": "Financiamiento",
+    "construccion": "Construcción",
+    "estrategiaFiscal": "Estrategia Fiscal",
     "soluciones": "Soluciones",
     "nosotros": "Nosotros",
     "casosDeExito": "Casos de Éxito",
@@ -23,7 +25,7 @@
     "backHome": "Volver al inicio"
   },
   "footer": {
-    "tagline": "Integración estratégica de proyectos industriales. Energía limpia, electromovilidad y financiamiento para empresas en México.",
+    "tagline": "Integración estratégica de proyectos industriales. Energía limpia, electromovilidad, financiamiento, construcción y estrategia fiscal para empresas en México.",
     "servicios": "Servicios",
     "productos": "Productos",
     "empresa": "Empresa",
@@ -41,37 +43,49 @@
     "heroImageAlt": "Infraestructura de energía solar y carga eléctrica"
   },
   "stats": {
-    "title": "Respaldados por AUX Group",
-    "intro": "Un grupo industrial con casi cuatro décadas de manufactura detrás de cada proyecto que entregamos.",
+    "title": "Un solo socio para todo tu proyecto",
+    "intro": "Ingeniería, suministro, construcción y financiamiento con compromisos que puedes medir.",
     "items": [
-      { "value": 39, "suffix": "", "label": "años de historia en el mercado" },
-      { "value": 9.6, "prefix": "$", "suffix": "M", "label": "en activos" },
-      { "value": 300, "prefix": "$", "suffix": "M", "label": "en ingresos (MXN 2025)" },
-      { "value": 6, "suffix": "+", "label": "fábricas operativas" },
-      { "value": 40, "suffix": "K+", "label": "empleados globalmente" }
+      { "value": 5, "suffix": "", "label": "líneas de negocio integradas" },
+      { "value": 29, "suffix": "", "label": "servicios con un solo responsable" },
+      { "value": 48, "suffix": " h", "label": "máximo para resolver incidencias" },
+      { "value": 10, "suffix": "", "label": "años de garantía en inversores" },
+      { "value": 40, "suffix": "%", "label": "de ahorro potencial en tu factura con BESS" }
     ]
   },
   "services": {
-    "eyebrow": "Tres líneas de negocio",
-    "title": "Todo lo que un proyecto energético necesita, en un solo socio",
+    "eyebrow": "Cinco líneas de negocio",
+    "title": "Todo lo que tu proyecto industrial necesita, en un solo socio",
     "items": [
       {
         "title": "Energía Limpia y Almacenamiento",
-        "description": "Generación, almacenamiento y distribución de energía renovable. BESS, inversores utility-scale e infraestructura residencial y comercial con tecnología AUXSOL.",
+        "description": "Generación, almacenamiento y distribución de energía renovable. BESS, inversores utility-scale e infraestructura residencial y comercial con tecnología certificada internacionalmente.",
         "cta": "Explorar soluciones energéticas",
         "href": "/productos/energia-limpia"
       },
       {
         "title": "Vehículos Eléctricos e Infraestructura de Carga",
-        "description": "Camionetas eléctricas de última generación y estaciones de carga AC/DC. Soluciones completas para flotas comerciales.",
+        "description": "Vans eléctricas de carga, estaciones AC/DC y electrolineras como negocio, más mantenimiento y lubricantes para tu flota.",
         "cta": "Ver catálogo de vehículos",
         "href": "/productos/electromovilidad"
       },
       {
         "title": "Financiamiento Empresarial Inteligente",
-        "description": "Crédito, arrendamiento y capital de trabajo diseñados para que el ahorro energético pague el proyecto desde el primer mes.",
+        "description": "Arrendamiento, crédito y PPA para tus proyectos, créditos puente, coberturas de tipo de cambio y combustible, e inversión a tasa fija.",
         "cta": "Consultar opciones de financiamiento",
         "href": "/productos/financiamiento"
+      },
+      {
+        "title": "Construcción e Infraestructura Industrial",
+        "description": "Cubiertas metálicas, naves de membrana, recubrimientos térmicos y anticorrosivos, pavimentos, proyectos ferroviarios y acabados, de la obra negra a la certificación LEED.",
+        "cta": "Ver soluciones de construcción",
+        "href": "/productos/construccion"
+      },
+      {
+        "title": "Estrategia Fiscal y Laboral",
+        "description": "Deducción inmediata de tu inversión en energía, programas de productividad, nómina y servicios sindicales para optimizar tu costo social.",
+        "cta": "Conocer la estrategia fiscal",
+        "href": "/productos/estrategia-fiscal"
       }
     ]
   },
@@ -114,24 +128,34 @@
   "pages": {
     "productos": {
       "title": "Nuestras soluciones",
-      "description": "Energía limpia, electromovilidad y financiamiento en un solo lugar.",
+      "description": "Energía limpia, electromovilidad, financiamiento, construcción industrial y estrategia fiscal en un solo socio.",
       "emptyCategory": "Estamos cargando el catálogo de esta línea. Escríbenos y te enviamos las fichas técnicas hoy mismo.",
       "specsLabel": "Especificaciones",
       "categories": {
         "energia-limpia": {
           "title": "Energía Limpia y Almacenamiento",
-          "description": "Sistemas AUXSOL de generación y almacenamiento para uso residencial, comercial y utility-scale.",
+          "description": "Sistemas de generación y almacenamiento para uso residencial, comercial y utility-scale.",
           "seed": "blvckstone-solar"
         },
         "electromovilidad": {
           "title": "Vehículos Eléctricos e Infraestructura de Carga",
-          "description": "Camionetas y vans eléctricas de trabajo, con la infraestructura de carga para operarlas.",
+          "description": "Vans eléctricas de trabajo, la infraestructura de carga para operarlas y el mantenimiento para mantenerlas en ruta.",
           "seed": "blvckstone-ev"
         },
         "financiamiento": {
-          "title": "Financiamiento Empresarial",
-          "description": "Crédito, arrendamiento y capital de trabajo estructurados alrededor del ahorro que genera tu proyecto.",
+          "title": "Financiamiento, Coberturas e Inversión",
+          "description": "Crédito, arrendamiento, créditos puente, coberturas financieras e inversión, estructurados alrededor de tu proyecto.",
           "seed": "blvckstone-finance"
+        },
+        "construccion": {
+          "title": "Construcción e Infraestructura Industrial",
+          "description": "Cubiertas, naves, recubrimientos, pavimentos, proyectos ferroviarios y acabados para plantas, bodegas y desarrollos.",
+          "seed": "blvckstone-construccion"
+        },
+        "estrategia-fiscal": {
+          "title": "Estrategia Fiscal y Laboral",
+          "description": "Deducción de inversiones en energía, productividad, nómina y servicios sindicales con fundamento legal y trazabilidad.",
+          "seed": "blvckstone-fiscal"
         }
       },
       "financingNote": "El simulador de financiamiento estará disponible cuando se confirmen las tasas y plazos vigentes. Mientras tanto, te preparamos una corrida a la medida."
@@ -146,7 +170,7 @@
       "story": [
         "The Blvck Stone nace para resolver un problema que vimos repetirse en cientos de proyectos: la tecnología existía, pero llegaba sin ingeniería local, sin soporte y sin una estructura financiera que la hiciera viable.",
         "Por eso integramos las tres piezas. Diseñamos la solución técnica a partir de tu curva de carga, la instalamos y comisionamos con equipo propio en México, y la financiamos de forma que el ahorro pague la inversión.",
-        "Detrás de cada proyecto está AUX Group, un grupo industrial con 39 años de historia, más de seis fábricas y 40,000 empleados en el mundo. Esa espalda nos permite garantizar suministro, precio y tiempos que un distribuidor local no puede."
+        "Detrás de cada proyecto hay una red de fabricantes y especialistas que seleccionamos y coordinamos como un solo equipo. Eso nos permite garantizar suministro, precio y tiempos en energía, movilidad, construcción y finanzas, con un solo responsable frente a ti."
       ],
       "certificationsTitle": "Tecnología certificada internacionalmente",
       "certifications": ["UL", "KEMA", "ANSI", "IEC"],

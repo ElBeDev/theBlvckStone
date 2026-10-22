@@ -5,6 +5,8 @@
     "energiaLimpia": "Clean Energy",
     "electromovilidad": "Electromobility",
     "financiamiento": "Financing",
+    "construccion": "Construction",
+    "estrategiaFiscal": "Tax Strategy",
     "soluciones": "Solutions",
     "nosotros": "About",
     "casosDeExito": "Success Stories",
@@ -23,7 +25,7 @@
     "backHome": "Back to home"
   },
   "footer": {
-    "tagline": "Strategic integration of industrial projects. Clean energy, electromobility and financing for companies in Mexico.",
+    "tagline": "Strategic integration of industrial projects. Clean energy, electromobility, financing, construction and tax strategy for companies in Mexico.",
     "servicios": "Services",
     "productos": "Products",
     "empresa": "Company",
@@ -41,37 +43,49 @@
     "heroImageAlt": "Solar energy and EV charging infrastructure"
   },
   "stats": {
-    "title": "Backed by AUX Group",
-    "intro": "An industrial group with almost four decades of manufacturing behind every project we deliver.",
+    "title": "One partner for your whole project",
+    "intro": "Engineering, supply, construction and financing with commitments you can measure.",
     "items": [
-      { "value": 39, "suffix": "", "label": "years in the market" },
-      { "value": 9.6, "prefix": "$", "suffix": "M", "label": "in assets" },
-      { "value": 300, "prefix": "$", "suffix": "M", "label": "in revenue (MXN 2025)" },
-      { "value": 6, "suffix": "+", "label": "operating factories" },
-      { "value": 40, "suffix": "K+", "label": "employees worldwide" }
+      { "value": 5, "suffix": "", "label": "integrated business lines" },
+      { "value": 29, "suffix": "", "label": "services, one point of accountability" },
+      { "value": 48, "suffix": " h", "label": "maximum to resolve incidents" },
+      { "value": 10, "suffix": "", "label": "years of inverter warranty" },
+      { "value": 40, "suffix": "%", "label": "potential savings on your bill with BESS" }
     ]
   },
   "services": {
-    "eyebrow": "Three business lines",
-    "title": "Everything an energy project needs, from a single partner",
+    "eyebrow": "Five business lines",
+    "title": "Everything your industrial project needs, from a single partner",
     "items": [
       {
         "title": "Clean Energy and Storage",
-        "description": "Generation, storage and distribution of renewable energy. BESS, utility-scale inverters and residential and commercial infrastructure with AUXSOL technology.",
+        "description": "Generation, storage and distribution of renewable energy. BESS, utility-scale inverters and residential and commercial infrastructure with internationally certified technology.",
         "cta": "Explore energy solutions",
         "href": "/productos/energia-limpia"
       },
       {
         "title": "Electric Vehicles and Charging Infrastructure",
-        "description": "Next-generation electric trucks and AC/DC charging stations. Complete solutions for commercial fleets.",
+        "description": "Electric cargo vans, AC/DC charging and charging stations as a business, plus maintenance and lubricants for your fleet.",
         "cta": "View vehicle catalog",
         "href": "/productos/electromovilidad"
       },
       {
         "title": "Smart Business Financing",
-        "description": "Credit, leasing and working capital designed so energy savings pay for the project from month one.",
+        "description": "Leasing, credit and PPAs for your projects, bridge loans, currency and fuel hedging, and fixed-rate investment.",
         "cta": "Explore financing options",
         "href": "/productos/financiamiento"
+      },
+      {
+        "title": "Industrial Construction and Infrastructure",
+        "description": "Metal roofing, membrane buildings, thermal and anti-corrosion coatings, pavements, rail projects and finishes, from shell to LEED certification.",
+        "cta": "View construction solutions",
+        "href": "/productos/construccion"
+      },
+      {
+        "title": "Tax and Labor Strategy",
+        "description": "Immediate deduction of your energy investment, productivity programs, payroll and union services to optimize your social security costs.",
+        "cta": "Explore tax strategy",
+        "href": "/productos/estrategia-fiscal"
       }
     ]
   },
@@ -114,24 +128,34 @@
   "pages": {
     "productos": {
       "title": "Our solutions",
-      "description": "Clean energy, electromobility and financing in one place.",
+      "description": "Clean energy, electromobility, financing, industrial construction and tax strategy from a single partner.",
       "emptyCategory": "We are loading this catalog. Write to us and we will send the spec sheets today.",
       "specsLabel": "Specifications",
       "categories": {
         "energia-limpia": {
           "title": "Clean Energy and Storage",
-          "description": "AUXSOL generation and storage systems for residential, commercial and utility-scale use.",
+          "description": "Generation and storage systems for residential, commercial and utility-scale use.",
           "seed": "blvckstone-solar"
         },
         "electromovilidad": {
           "title": "Electric Vehicles and Charging Infrastructure",
-          "description": "Electric work trucks and vans, with the charging infrastructure to run them.",
+          "description": "Electric work vans, the charging infrastructure to run them and the maintenance to keep them on the road.",
           "seed": "blvckstone-ev"
         },
         "financiamiento": {
-          "title": "Business Financing",
-          "description": "Credit, leasing and working capital structured around the savings your project generates.",
+          "title": "Financing, Hedging and Investment",
+          "description": "Credit, leasing, bridge loans, financial hedging and investment, structured around your project.",
           "seed": "blvckstone-finance"
+        },
+        "construccion": {
+          "title": "Industrial Construction and Infrastructure",
+          "description": "Roofing, buildings, coatings, pavements, rail projects and finishes for plants, warehouses and developments.",
+          "seed": "blvckstone-construccion"
+        },
+        "estrategia-fiscal": {
+          "title": "Tax and Labor Strategy",
+          "description": "Energy investment deductions, productivity, payroll and union services with legal grounding and traceability.",
+          "seed": "blvckstone-fiscal"
         }
       },
       "financingNote": "The financing simulator will be available once current rates and terms are confirmed. In the meantime, we prepare a tailored projection for you."
@@ -146,7 +170,7 @@
       "story": [
         "The Blvck Stone was born to solve a problem we saw repeat across hundreds of projects: the technology existed, but it arrived without local engineering, without support and without a financial structure that made it viable.",
         "So we integrated all three. We design the technical solution from your load curve, install and commission it with our own team in Mexico, and finance it so the savings pay for the investment.",
-        "Behind every project is AUX Group, an industrial group with 39 years of history, more than six factories and 40,000 employees worldwide. That backing lets us guarantee supply, pricing and lead times a local distributor cannot."
+        "Behind every project is a network of manufacturers and specialists we select and coordinate as one team. That lets us guarantee supply, pricing and lead times across energy, mobility, construction and finance, with a single point of accountability."
       ],
       "certificationsTitle": "Internationally certified technology",
       "certifications": ["UL", "KEMA", "ANSI", "IEC"],

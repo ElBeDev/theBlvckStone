@@ -14,14 +14,18 @@ export function Footer() {
         { href: "/productos/energia-limpia", label: tNav("energiaLimpia") },
         { href: "/productos/electromovilidad", label: tNav("electromovilidad") },
         { href: "/productos/financiamiento", label: tNav("financiamiento") },
+        { href: "/productos/construccion", label: tNav("construccion") },
+        { href: "/productos/estrategia-fiscal", label: tNav("estrategiaFiscal") },
       ],
     },
     {
       title: tFooter("productos"),
       links: [
-        { href: "/productos/energia-limpia", label: "AUXSOL" },
+        { href: "/productos/energia-limpia", label: "Paneles solares y BESS" },
         { href: "/productos/electromovilidad", label: "Camionetas" },
         { href: "/productos/financiamiento", label: "Financiamiento" },
+        { href: "/productos/construccion", label: "Cubiertas y naves" },
+        { href: "/productos/estrategia-fiscal", label: "Nómina y productividad" },
       ],
     },
     {

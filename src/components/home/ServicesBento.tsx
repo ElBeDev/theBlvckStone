@@ -1,4 +1,11 @@
-import { ArrowUpRight, BatteryCharging, Coins, Truck } from "@phosphor-icons/react/ssr";
+import {
+  ArrowUpRight,
+  BatteryCharging,
+  Buildings,
+  Coins,
+  Scales,
+  Truck,
+} from "@phosphor-icons/react/ssr";
 import { Link } from "@/i18n/navigation";
 import { DuotoneImage, placeholderUrl } from "@/components/DuotoneImage";
 import { Reveal } from "@/components/motion/Reveal";
@@ -10,8 +17,11 @@ type ServiceItem = {
   href: string;
 };
 
-const icons = [BatteryCharging, Truck, Coins];
-const seeds = ["blvckstone-solar-field", "blvckstone-electric-truck"];
+const seeds = [
+  "blvckstone-solar-field",
+  "blvckstone-electric-truck",
+  "blvckstone-industrial-building",
+];
 
 export function ServicesBento({
   eyebrow,
@@ -22,7 +32,7 @@ export function ServicesBento({
   title: string;
   items: ServiceItem[];
 }) {
-  const [featured, second, third] = items;
+  const [featured, second, third, fourth, fifth] = items;
 
   return (
     <section className="bg-petrol text-ivory">
@@ -36,39 +46,32 @@ export function ServicesBento({
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-3">
           <Reveal className="lg:col-span-2 lg:row-span-2 lg:h-full">
             <BentoImageCell
               item={featured}
-              Icon={icons[0]}
+              Icon={BatteryCharging}
               seed={seeds[0]}
               tall
             />
           </Reveal>
           <Reveal delay={0.08}>
-            <BentoImageCell item={second} Icon={icons[1]} seed={seeds[1]} />
+            <BentoImageCell item={second} Icon={Truck} seed={seeds[1]} />
           </Reveal>
           <Reveal delay={0.16}>
-            <Link
-              href={third.href}
-              className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl bg-petrol-soft p-7 transition-transform hover:-translate-y-1"
-            >
-              <Coins size={40} weight="duotone" className="text-amber" />
-              <div>
-                <h3 className="text-xl font-bold leading-snug">{third.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-mist/75">
-                  {third.description}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-amber">
-                  {third.cta}
-                  <ArrowUpRight
-                    size={16}
-                    weight="bold"
-                    className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </span>
-              </div>
-            </Link>
+            <TintedCell item={third} Icon={Coins} accent="amber" />
+          </Reveal>
+          <Reveal
+            delay={0.08}
+            className="lg:col-span-2 lg:col-start-2 lg:row-start-3"
+          >
+            <BentoImageCell item={fourth} Icon={Buildings} seed={seeds[2]} />
+          </Reveal>
+          <Reveal
+            delay={0.16}
+            className="md:col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-3"
+          >
+            <TintedCell item={fifth} Icon={Scales} accent="turquoise" />
           </Reveal>
         </div>
       </div>
@@ -125,6 +128,43 @@ function BentoImageCell({
             />
           </span>
         </div>
+      </div>
+    </Link>
+  );
+}
+
+function TintedCell({
+  item,
+  Icon,
+  accent,
+}: {
+  item: ServiceItem;
+  Icon: typeof BatteryCharging;
+  accent: "amber" | "turquoise";
+}) {
+  const accentText = accent === "amber" ? "text-amber" : "text-turquoise";
+
+  return (
+    <Link
+      href={item.href}
+      className="group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-2xl bg-petrol-soft p-7 transition-transform hover:-translate-y-1"
+    >
+      <Icon size={40} weight="duotone" className={accentText} />
+      <div>
+        <h3 className="text-xl font-bold leading-snug">{item.title}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-mist/75">
+          {item.description}
+        </p>
+        <span
+          className={`mt-5 inline-flex items-center gap-1.5 text-sm font-bold ${accentText}`}
+        >
+          {item.cta}
+          <ArrowUpRight
+            size={16}
+            weight="bold"
+            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </span>
       </div>
     </Link>
   );

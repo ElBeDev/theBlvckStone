@@ -14,7 +14,13 @@ type ServiceItem = {
   href: string;
 };
 
-const seeds = ["blvckstone-solar", "blvckstone-ev", "blvckstone-finance"];
+const seeds = [
+  "blvckstone-solar",
+  "blvckstone-ev",
+  "blvckstone-finance",
+  "blvckstone-construccion",
+  "blvckstone-fiscal",
+];
 
 export async function generateMetadata({
   params,

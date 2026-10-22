@@ -12,6 +12,8 @@ const IMAGE_POOLS: Record<ProductCategory, number[]> = {
   "energia-limpia": [54, 28, 66],
   electromovilidad: [155, 197, 133],
   financiamiento: [180, 60, 20],
+  construccion: [1031, 69, 1081],
+  "estrategia-fiscal": [1, 8, 48],
 };
 
 export async function ProductCategoryPage({
