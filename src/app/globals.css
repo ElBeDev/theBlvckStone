@@ -2,7 +2,7 @@
 
 :root {
   color-scheme: dark;
-  --background: #0a2325;
+  --background: #0e2e30;
   --foreground: #f5f8f7;
 
   /* The Blvck Stone brand palette (from the brand brief, locked) */
@@ -17,9 +17,16 @@
   --color-mist: #e7f2f1;
   --color-ivory: #f5f8f7;
   --color-black-base: #0b0f10;
-  /* Dark-family tints for section rhythm on dark pages */
-  --color-petrol-deep: #0a2325;
-  --color-petrol-soft: #123c3f;
+
+  /* The catalog's ink: one ink (ivory) on petrol newsprint. Secondary text is
+     the same ink thinned, never gray. */
+  --ink: var(--color-ivory);
+  --ink-2: rgb(245 248 247 / 0.72);
+  --ink-3: rgb(245 248 247 / 0.58);
+  --rule: rgb(245 248 247 / 0.16);
+  --rule-strong: rgb(245 248 247 / 0.38);
+  --pen: var(--color-amber);
+  --spot: var(--color-turquoise);
 }
 
 @theme inline {
@@ -29,8 +36,6 @@
   --color-teal: var(--color-teal);
   --color-turquoise: var(--color-turquoise);
   --color-petrol: var(--color-petrol);
-  --color-petrol-deep: var(--color-petrol-deep);
-  --color-petrol-soft: var(--color-petrol-soft);
   --color-mint: var(--color-mint);
   --color-amber: var(--color-amber);
   --color-coral: var(--color-coral);
@@ -40,27 +45,43 @@
   --color-ivory: var(--color-ivory);
   --color-black-base: var(--color-black-base);
 
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-pen: var(--pen);
+  --color-spot: var(--spot);
+
   /* Brand spec is Helvetica Now Display (licensed, files not yet provided).
-     Archivo is the stand-in: a grotesk with the same 300/400/700/900 range.
-     Swap the @font-face here once the licensed files arrive. */
+     Archivo is the stand-in. It ships a width axis (62 to 125), which gives
+     the catalog its two voices from one family: condensed captions and codes,
+     wide display headings. */
   --font-sans: var(--font-archivo), "Helvetica Neue", Helvetica, Arial,
     sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Shape system: interactive = pill, surfaces = 2xl (16px), inputs = lg (8px). */
+/* Shape system: the catalog is printed, so corners are square. Interactive
+   = 2px radius (a die-cut edge), surfaces = 0, inputs = 2px. */
+
+html {
+  scrollbar-color: var(--rule-strong) var(--color-petrol);
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  caret-color: var(--pen);
+  font-variant-numeric: tabular-nums;
 }
 
-/* One dark theme for every page, so navigating never flashes from petrol to
-   white. Instead of a flat fill, a fixed backdrop adds two soft teal glows and
-   a fine grain; sections without their own fill sit on top of it. */
+/* Petrol newsprint: the brand petrol as the sheet, with visible fiber grain
+   (ivory and black-base speckle) and ink wear toward the edges. Fixed so it
+   never scrolls with the page. */
 body::before {
   content: "";
   position: fixed;
@@ -68,77 +89,157 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(60rem 42rem at 88% -8%, rgb(27 188 180 / 0.13), transparent 62%),
-    radial-gradient(48rem 40rem at -12% 38%, rgb(16 118 124 / 0.16), transparent 64%),
-    radial-gradient(70rem 50rem at 50% 115%, rgb(55 230 196 / 0.06), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    radial-gradient(115% 85% at 50% 42%, transparent 50%, rgb(11 15 16 / 0.55) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0.05 0.11 0.05 0 0'/%3E%3C/feComponentTransfer%3E%3CfeColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.97 0 0 0 0 0.97 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0.14 0 0 0'/%3E%3C/feComponentTransfer%3E%3CfeColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.06 0 0 0 0 0.06 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: var(--color-amber);
+  background: var(--pen);
   color: var(--color-petrol);
 }
 
-/* Brand tint: keeps real photo color under a soft petrol wash so every
-   photo reads as part of the brand.
-   Positioning is left to the caller (relative or absolute) so the
-   unlayered rule never overrides a Tailwind position utility. */
+:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+/* Type voices. Width comes from the variable axis; weight stays on
+   font-weight so utilities keep working. */
+.t-cond {
+  font-variation-settings: "wdth" 75;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.t-wide {
+  font-variation-settings: "wdth" 118;
+  letter-spacing: -0.02em;
+}
+.t-display {
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+.t-narrow {
+  font-variation-settings: "wdth" 76;
+  letter-spacing: -0.015em;
+}
+.t-body {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* Hairline rule grid, the catalog's only container. */
+.rule-b {
+  border-bottom: 1px solid var(--rule);
+}
+.rule-t {
+  border-top: 1px solid var(--rule);
+}
+.rule-x {
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+}
+
+/* Cells pack edge to edge. Each cell draws its own right and bottom hairline
+   and the grid draws the top and left, so an unfilled track shows nothing. */
+.cell-grid {
+  display: grid;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.cell-grid > * {
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  min-width: 0;
+}
+
+/* The pen. One authored motion: a biro circle drawn around a marked cell and
+   the route line drawn across the plan. Draw-on from a visible default. */
+.pen-circle {
+  stroke: var(--pen);
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+[data-marked="true"] .pen-circle {
+  opacity: 1;
+  animation: pen-draw 520ms var(--ease-out-expo) forwards;
+}
+.pen-route {
+  stroke: var(--pen);
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 700ms var(--ease-out-expo);
+}
+@keyframes pen-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Struck through by hand: an entry already opened. */
+.pen-strike {
+  position: relative;
+}
+.pen-strike::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 48%;
+  height: 2px;
+  background: var(--pen);
+  transform: rotate(-3deg);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Roof hatch for the plan. */
+.hatch {
+  fill: url(#hatch);
+}
+
+/* Photo treatment: real color under a petrol wash so photos read as part
+   of one printed sheet. */
 .duotone {
   overflow: hidden;
   isolation: isolate;
 }
 .duotone img {
-  filter: saturate(0.9) contrast(1.03);
+  filter: saturate(0.85) contrast(1.04);
 }
 .duotone::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgb(14 46 48 / 0.38) 0%,
-    rgb(16 118 124 / 0.18) 60%,
-    rgb(27 188 180 / 0.12) 100%
-  );
+  background: rgb(14 46 48 / 0.28);
   mix-blend-mode: multiply;
   pointer-events: none;
 }
-.duotone::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgb(14 46 48 / 0) 40%,
-    rgb(14 46 48 / 0.55) 100%
-  );
-  pointer-events: none;
-}
-/* Photos with copy on top: darker scrim so white text stays readable on
-   bright shots (white vans, metal roofs, sky). */
-.duotone-legible::before {
-  background: linear-gradient(
-    180deg,
-    rgb(14 46 48 / 0.45) 0%,
-    rgb(14 46 48 / 0.7) 45%,
-    rgb(14 46 48 / 0.94) 100%
-  );
-}
-
-/* Accordion gallery (verticals): strips grow on hover, CSS only. */
-.accordion-strip {
-  flex: 1 1 0%;
-  transition: flex 600ms var(--ease-out-expo);
-}
-@media (hover: hover) and (min-width: 768px) {
-  .accordion-strip:hover {
-    flex: 2.4 1 0%;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
-  .accordion-strip {
+  [data-marked="true"] .pen-circle {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .pen-route {
     transition: none;
   }
   *,

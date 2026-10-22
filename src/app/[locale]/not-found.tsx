@@ -6,20 +6,15 @@ export default function LocaleNotFound() {
   const tCta = useTranslations("cta");
 
   return (
-    <section>
-      <div className="mx-auto max-w-2xl px-5 py-28 text-center md:px-8">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-turquoise">404</p>
-        <h1 className="mt-4 text-3xl font-black tracking-tighter text-ivory md:text-5xl">
-          {t("title")}
-        </h1>
-        <p className="mt-5 text-lg text-mist/75">{t("description")}</p>
-        <Link
-          href="/"
-          className="mt-9 inline-flex rounded-full bg-amber px-6 py-3.5 text-sm font-bold text-petrol transition-transform hover:-translate-y-0.5"
-        >
+    <div className="mx-auto max-w-7xl px-4 md:px-6">
+      <section className="max-w-3xl py-20 md:py-28">
+        <h1 className="t-display text-4xl font-black text-ink md:text-6xl">{t("title")}</h1>
+        <p className="t-cond mt-5 text-[11px] text-ink-3">404</p>
+        <p className="t-body mt-6 max-w-[52ch] text-lg leading-relaxed text-ink-2">{t("description")}</p>
+        <Link href="/" className="t-cond mt-10 inline-flex border border-rule-strong px-5 py-3 text-[11px] font-bold text-ink transition-colors hover:border-pen hover:text-pen">
           {tCta("backHome")}
         </Link>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

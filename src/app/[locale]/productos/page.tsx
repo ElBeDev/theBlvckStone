@@ -1,26 +1,11 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ssr";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { PageHero } from "@/components/PageHero";
-import { CtaBand } from "@/components/CtaBand";
-import { Reveal } from "@/components/motion/Reveal";
-import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
+import { PRODUCT_CATEGORIES } from "@/lib/product-categories";
+import { getEntries } from "@/lib/entries";
 import { pageMetadata } from "@/lib/metadata";
 
-type ServiceItem = {
-  title: string;
-  description: string;
-  cta: string;
-  href: string;
-};
-
-const seeds = [
-  "blvckstone-solar",
-  "blvckstone-ev",
-  "blvckstone-finance",
-  "blvckstone-construccion",
-  "blvckstone-fiscal",
-];
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -29,14 +14,10 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations("pages.productos");
-  return pageMetadata({
-    locale,
-    path: "/productos",
-    title: t("title"),
-    description: t("description"),
-  });
+  return pageMetadata({ locale, path: "/productos", title: t("title"), description: t("description") });
 }
 
+// The index of lines: five business lines, each with the codes it covers.
 export default async function ProductosPage({
   params,
 }: {
@@ -45,65 +26,48 @@ export default async function ProductosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [tPage, tServices, tCta, tCtaFinal] = await Promise.all([
-    getTranslations("pages.productos"),
-    getTranslations("services"),
-    getTranslations("cta"),
-    getTranslations("ctaFinal"),
-  ]);
-  const services = tServices.raw("items") as ServiceItem[];
+  const [t, tc] = await Promise.all([getTranslations("pages.productos"), getTranslations("catalog")]);
+  const entries = await getEntries(locale);
 
   return (
-    <>
-      <PageHero title={tPage("title")} description={tPage("description")} />
-
-      <section>
-        <div className="mx-auto max-w-7xl px-5 py-4 pb-20 md:px-8">
-          <div className="divide-y divide-white/10">
-            {services.map((service, i) => (
-              <Reveal key={service.href} delay={i * 0.05}>
-                <Link
-                  href={service.href}
-                  className="group grid gap-6 py-10 md:grid-cols-12 md:items-center md:gap-10"
-                >
-                  <DuotoneImage
-                    src={siteImage(seeds[i])}
-                    alt={service.title}
-                    width={900}
-                    height={600}
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    className={`aspect-[3/2] rounded-2xl md:col-span-4 ${
-                      i % 2 === 1 ? "md:order-last" : ""
-                    }`}
-                  />
-                  <div className="md:col-span-8">
-                    <h2 className="text-2xl font-black leading-tight tracking-tight text-ivory transition-colors group-hover:text-turquoise md:text-3xl">
-                      {service.title}
-                    </h2>
-                    <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-mist/75">
-                      {service.description}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-turquoise">
-                      {service.cta}
-                      <ArrowUpRight
-                        size={16}
-                        weight="bold"
-                        className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+    <div className="mx-auto max-w-7xl px-4 md:px-6">
+      <section className="pt-10 md:pt-14">
+        <h1 className="t-display max-w-[16ch] text-4xl font-black text-ink md:text-6xl">{t("title")}</h1>
+        <p className="t-body mt-5 max-w-[56ch] text-base leading-relaxed text-ink-2 md:text-lg">{t("description")}</p>
+        <p className="t-cond mt-4 text-[11px] text-ink-3">{tc("entries", { count: entries.length })}</p>
       </section>
 
-      <CtaBand
-        title={tCtaFinal("title")}
-        text={tCtaFinal("text")}
-        ctaLabel={tCta("demo")}
-      />
-    </>
+      <ol className="mt-10 mb-16 border-t border-rule">
+        {PRODUCT_CATEGORIES.map((cat, i) => {
+          const own = entries.filter((e) => e.category === cat.value);
+          return (
+            <li key={cat.value} className="rule-b">
+              <Link href={`/productos/${cat.value}`} className="group grid gap-4 py-7 md:grid-cols-12 md:gap-8">
+                <span className="t-cond text-xs font-bold text-ink-2 md:col-span-1">{String(i + 1).padStart(2, "0")}</span>
+                <div className="md:col-span-6">
+                  <h2 className="t-wide text-2xl font-black leading-tight text-ink transition-colors group-hover:text-pen md:text-3xl">
+                    {t(`categories.${cat.value}.title`)}
+                  </h2>
+                  <p className="t-body mt-3 max-w-[56ch] text-base leading-relaxed text-ink-2">{t(`categories.${cat.value}.description`)}</p>
+                </div>
+                <div className="md:col-span-5">
+                  <ul className="flex flex-wrap gap-x-3 gap-y-1">
+                    {own.map((e) => (
+                      <li key={e.code} className="t-cond text-[11px] text-ink-3">
+                        <span className="text-ink-2">{e.code}</span> {e.title}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="t-cond mt-4 inline-flex items-center gap-1 text-[11px] font-bold text-ink-2 transition-colors group-hover:text-pen">
+                    {tc("entries", { count: own.length })}
+                    <ArrowRight size={12} weight="bold" />
+                  </span>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
   );
 }

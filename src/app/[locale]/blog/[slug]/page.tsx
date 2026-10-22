@@ -6,7 +6,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { db } from "@/db";
 import { posts } from "@/db/schema";
 import { Link } from "@/i18n/navigation";
-import { DuotoneImage, siteImage } from "@/components/DuotoneImage";
 import { pageMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -34,12 +33,7 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await getPost(slug, locale);
   if (!post) return {};
-  return pageMetadata({
-    locale,
-    path: `/blog/${slug}`,
-    title: post.title,
-    description: post.excerpt ?? post.title,
-  });
+  return pageMetadata({ locale, path: `/blog/${slug}`, title: post.title, description: post.excerpt ?? post.title });
 }
 
 export default async function BlogPostPage({
@@ -55,49 +49,25 @@ export default async function BlogPostPage({
 
   const tNav = await getTranslations("nav");
   const html = await marked.parse(post.body);
+  const dateFormat = new Intl.DateTimeFormat(locale === "es" ? "es-MX" : "en-US", { day: "2-digit", month: "long", year: "numeric" });
 
   return (
-    <article>
-      <div className="mx-auto max-w-7xl px-5 pt-10 md:px-8">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm font-bold text-turquoise transition-colors hover:text-ivory"
-        >
-          <ArrowLeft size={16} weight="bold" />
-          {tNav("blog")}
+    <article className="mx-auto max-w-7xl px-4 md:px-6">
+      <div className="t-cond flex items-center justify-between pt-8 text-[11px]">
+        <Link href="/blog" className="inline-flex items-center gap-1.5 font-bold text-ink-2 transition-colors hover:text-pen">
+          <ArrowLeft size={12} weight="bold" />
+          {tNav("boletin")}
         </Link>
+        <span className="text-ink-3">{dateFormat.format(post.publishedAt)}</span>
       </div>
 
-      <header className="mx-auto max-w-3xl px-5 pt-8 md:px-8">
-        <p className="text-xs font-bold uppercase tracking-wide text-turquoise">
-          {new Date(post.publishedAt).toLocaleDateString(locale, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-        <h1 className="mt-4 text-3xl font-black leading-[1.1] tracking-tighter text-ivory lg:text-[2.2rem]">
-          {post.title}
-        </h1>
-        {post.excerpt && (
-          <p className="mt-6 text-lg leading-relaxed text-mist/75">{post.excerpt}</p>
-        )}
+      <header className="rule-t mt-4 max-w-3xl pt-8">
+        <h1 className="t-display text-3xl font-black text-ink md:text-5xl">{post.title}</h1>
+        {post.excerpt && <p className="t-body mt-6 max-w-[60ch] text-lg leading-relaxed text-ink-2">{post.excerpt}</p>}
       </header>
 
-      <div className="mx-auto max-w-5xl px-5 pt-10 md:px-8">
-        <DuotoneImage
-          src={siteImage(`post-${post.slug}`)}
-          alt={post.title}
-          width={1600}
-          height={900}
-          priority
-          sizes="(min-width: 1024px) 60vw, 100vw"
-          className="aspect-[16/9] w-full rounded-2xl"
-        />
-      </div>
-
       <div
-        className="prose-blvck mx-auto max-w-3xl space-y-5 px-5 pt-12 pb-24 text-lg leading-relaxed text-mist/90 md:px-8 [&_a]:font-bold [&_a]:text-turquoise [&_a]:underline [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:tracking-tight [&_h2]:text-ivory [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ivory [&_li]:ml-6 [&_ol]:list-decimal [&_strong]:text-ivory [&_ul]:list-disc"
+        className="t-body mt-10 mb-20 max-w-[68ch] space-y-5 text-lg leading-relaxed text-ink [&_a]:font-bold [&_a]:text-pen [&_a]:underline [&_h2]:t-wide [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-black [&_h2]:text-ink [&_h3]:mt-8 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_li]:ml-6 [&_ol]:list-decimal [&_strong]:text-ink [&_ul]:list-disc"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </article>
